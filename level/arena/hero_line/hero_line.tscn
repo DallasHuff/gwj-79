@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://5d2tgixtskiy"]
+
+[ext_resource type="Script" uid="uid://ctvi6tc5jlho3" path="res://level/arena/hero_line/hero_line.gd" id="1_p4ka1"]
+
+[node name="HeroLine" type="Node2D"]
+script = ExtResource("1_p4ka1")

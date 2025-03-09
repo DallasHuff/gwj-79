@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=6 format=3 uid="uid://bb5vk5cjocn75"]
+
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/item.gd" id="1_7y65v"]
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/abstracts/effect.gd" id="1_bcx6p"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/data/hero_stats.gd" id="1_y42v0"]
+[ext_resource type="Resource" uid="uid://daitvrn420imw" path="res://heroes/data/resources/murloc/effects/one_damage.tres" id="2_8eivl"]
+[ext_resource type="Texture2D" uid="uid://dwygc3evt85wp" path="res://asset_dump/delainey/Murdoch.png" id="3_gp21n"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_y42v0")
+max_hp = 3
+current_hp = 3
+damage = 4
+effects = Array[ExtResource("1_bcx6p")]([ExtResource("2_8eivl")])
+item_list = Array[ExtResource("1_7y65v")]([])
+hero_name = "Murdoch"
+model = ExtResource("3_gp21n")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

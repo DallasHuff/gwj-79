@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=6 format=3 uid="uid://dabx83soglwev"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/abstracts/effect.gd" id="1_k6jsb"]
+[ext_resource type="Resource" uid="uid://cu6aj7y4lulsm" path="res://heroes/data/resources/void_jelly/effects/buff_back.tres" id="2_d6s4g"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/item.gd" id="2_qap27"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/data/hero_stats.gd" id="3_i1lfm"]
+[ext_resource type="Texture2D" uid="uid://ch8v6waa2xg7d" path="res://asset_dump/delainey/void_jelly.png" id="4_qap27"]
+
+[resource]
+script = ExtResource("3_i1lfm")
+max_hp = 5
+current_hp = 5
+damage = 2
+effects = Array[ExtResource("1_k6jsb")]([ExtResource("2_d6s4g")])
+item_list = Array[ExtResource("2_qap27")]([])
+hero_name = "Void Jelly"
+model = ExtResource("4_qap27")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

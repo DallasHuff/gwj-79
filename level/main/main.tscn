@@ -1,0 +1,39 @@
+[gd_scene load_steps=11 format=3 uid="uid://drmehhc0yi1t3"]
+
+[ext_resource type="Script" uid="uid://c74fdf67vbhy1" path="res://level/main/main.gd" id="1_4mqva"]
+[ext_resource type="PackedScene" uid="uid://dmx2fwumi1ey" path="res://level/arena/arena.tscn" id="2_llmml"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/data/hero_stats.gd" id="3_iuh81"]
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/abstracts/effect.gd" id="4_2qctd"]
+[ext_resource type="Resource" uid="uid://dabx83soglwev" path="res://heroes/data/resources/void_jelly/void_jelly.tres" id="4_iuh81"]
+[ext_resource type="Script" uid="uid://fcr77u101a5h" path="res://effects/abstracts/damage_effect.gd" id="5_3glik"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/item.gd" id="6_mx3v8"]
+[ext_resource type="Texture2D" uid="uid://dwygc3evt85wp" path="res://asset_dump/delainey/Murdoch.png" id="7_ny550"]
+
+[sub_resource type="Resource" id="Resource_d6juo"]
+resource_local_to_scene = true
+script = ExtResource("5_3glik")
+aoe_target_type = 3
+single_target_types = Array[int]([2])
+include_self = false
+damage = 1
+triggers = Array[int]([5])
+metadata/_custom_type_script = "uid://fcr77u101a5h"
+
+[sub_resource type="Resource" id="Resource_cuo13"]
+resource_local_to_scene = true
+script = ExtResource("3_iuh81")
+max_hp = 3
+current_hp = 3
+damage = 4
+effects = Array[ExtResource("4_2qctd")]([SubResource("Resource_d6juo")])
+item_list = Array[ExtResource("6_mx3v8")]([])
+hero_name = "Murdoch"
+model = ExtResource("7_ny550")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_4mqva")
+
+[node name="Arena" parent="." instance=ExtResource("2_llmml")]
+test_friendly_hero_list = Array[ExtResource("3_iuh81")]([SubResource("Resource_cuo13"), SubResource("Resource_cuo13"), ExtResource("4_iuh81"), ExtResource("4_iuh81")])
+test_enemy_hero_list = Array[ExtResource("3_iuh81")]([SubResource("Resource_cuo13"), SubResource("Resource_cuo13"), ExtResource("4_iuh81"), ExtResource("4_iuh81")])

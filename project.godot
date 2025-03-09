@@ -10,6 +10,31 @@ config_version=5
 
 [application]
 
-config/name="Godot Wild Jam 79"
+config/name="Super Auto Things"
+run/main_scene="uid://drmehhc0yi1t3"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+EventsBus="*res://common/autoloads/events_bus.gd"
+EffectQueue="*res://common/autoloads/effect_queue.gd"
+Global="*res://common/autoloads/global.gd"
+Settings="*res://common/autoloads/settings.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
+[file_customization]
+
+folder_colors={
+"res://asset_dump/": "red",
+"res://common/": "teal",
+"res://effects/": "orange",
+"res://heroes/": "blue",
+"res://items/": "yellow",
+"res://level/": "purple",
+"res://player/": "green"
+}
