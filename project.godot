@@ -1,3 +1,11 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
 config_version=5
 
 [application]
@@ -14,6 +22,11 @@ EffectQueue="*res://common/autoloads/effect_queue.gd"
 Global="*res://common/autoloads/global.gd"
 Settings="*res://common/autoloads/settings.gd"
 
+[debug]
+
+file_logging/enable_file_logging=true
+gdscript/warnings/untyped_declaration=2
+
 [display]
 
 window/size/viewport_width=1920
@@ -27,6 +40,7 @@ folder_colors={
 "res://effects/": "orange",
 "res://heroes/": "blue",
 "res://items/": "yellow",
-"res://level/": "purple",
-"res://player/": "green"
+"res://levels/": "purple",
+"res://menus/": "red",
+"res://player/": "teal"
 }

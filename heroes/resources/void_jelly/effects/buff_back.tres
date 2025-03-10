@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BuffEffect" load_steps=2 format=3 uid="uid://cu6aj7y4lulsm"]
+
+[ext_resource type="Script" uid="uid://lc8jysx7dkah" path="res://effects/buff_effect/buff_effect.gd" id="1_dsxgx"]
+
+[resource]
+script = ExtResource("1_dsxgx")
+aoe_target_type = 2
+single_target_types = Array[int]([])
+include_self = false
+health_buff = 1
+attack_buff = 1
+triggers = Array[int]([1])
+metadata/_custom_type_script = "uid://lc8jysx7dkah"

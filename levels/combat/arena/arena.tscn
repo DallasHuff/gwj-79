@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmx2fwumi1ey"]
+
+[ext_resource type="Script" uid="uid://b4243wf3yx74g" path="res://levels/combat/arena/arena.gd" id="1_i5doo"]
+[ext_resource type="PackedScene" uid="uid://5d2tgixtskiy" path="res://levels/combat/hero_line/hero_line.tscn" id="2_13g3s"]
+
+[node name="Arena" type="Node2D" node_paths=PackedStringArray("friendly_line", "enemy_line")]
+script = ExtResource("1_i5doo")
+friendly_line = NodePath("FriendlyHeroLine")
+enemy_line = NodePath("EnemyHeroLine")
+
+[node name="FriendlyHeroLine" parent="." instance=ExtResource("2_13g3s")]
+unique_name_in_owner = true
+position = Vector2(840, 600)
+
+[node name="EnemyHeroLine" parent="." instance=ExtResource("2_13g3s")]
+unique_name_in_owner = true
+position = Vector2(1080, 600)
+friendly = false

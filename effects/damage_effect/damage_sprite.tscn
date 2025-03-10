@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://yoby3frb6sie"]
+
+[ext_resource type="Texture2D" uid="uid://byw6qevtlkxoa" path="res://effects/damage_effect/rocket.png" id="1_i03gm"]
+
+[node name="DamageSprite" type="Sprite2D"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_i03gm")
+
+[node name="NOTE_ICHANGEDSCALEOFABOVESPRITE" type="Node" parent="."]
