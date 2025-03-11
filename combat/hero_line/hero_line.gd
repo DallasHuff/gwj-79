@@ -28,7 +28,7 @@ func setup(stat_list: Array[HeroStats]) -> void:
 			push_error("Was given too many HeroStats for the HeroLine: ", line_info(), " stat_list: ", stat_list)
 			break
 		hero_list[i] = _create_hero(stat, i)
-		hero_list[i].change_position(global_position + positions[i], i)
+		hero_list[i].line_position = i
 		i += 1
 		
 	update_hero_positions()
@@ -59,7 +59,7 @@ func update_hero_positions() -> void:
 			if is_instance_valid(hero_list[j]):
 				hero_list[i] = hero_list[j]
 				hero_list[j] = null
-				hero_list[i].change_position(global_position + positions[i], i)
+				hero_list[i].line_position = i
 				var tween := get_tree().create_tween()
 				tween.tween_property(hero_list[i], "global_position", global_position + positions[i], 0.2)
 				break
@@ -179,6 +179,11 @@ func damage_all(damage: int) -> void:
 			hero_list[i].take_aoe_damage(damage)
 
 
+func get_global_from_line_pos(i: int) -> Vector2:
+	return global_position + positions[i]
+
+
+
 func _on_hero_death(hero: Hero) -> void:
 	for i in range(hero_list.size()):
 		if hero_list[i] == hero:
@@ -189,24 +194,6 @@ func _on_hero_death(hero: Hero) -> void:
 	tween.tween_property(hero, "global_position", death_position, 0.4)
 
 	update_hero_positions()
-
-
-func _is_there_space() -> bool:
-	var is_there_space := false
-	for i in range(hero_list.size()):
-		if not is_instance_valid(hero_list[i]):
-			is_there_space = true
-			break
-
-	return is_there_space
-
-
-func _check_position_valid(pos: int) -> bool:
-	var valid := true
-	if pos < 0 or pos > hero_list.size():
-		push_error("Position not valid: ", pos, " for HeroList: ", line_info())
-		valid = false
-	return valid
 
 
 func line_info() -> String:

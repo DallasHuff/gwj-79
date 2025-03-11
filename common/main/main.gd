@@ -1,8 +1,9 @@
 class_name Main
 extends Node2D
 
-var arena : Arena
 var shop : Shop
+
+@onready var arena : Arena = %Arena
 
 
 func _ready() -> void:

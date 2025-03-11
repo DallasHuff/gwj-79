@@ -9,7 +9,7 @@ var h1 : Hero
 var h2 : Hero
 
 
-func execute(_context: Dictionary) -> void:
+func execute() -> void:
 	var tween := h1.get_tree().create_tween()
 	tween.tween_property(h1, "global_position", h1.global_position + MOVE_UP_AMOUNT, 0.3)
 	tween.parallel().tween_property(h2, "global_position", h2.global_position - MOVE_UP_AMOUNT, 0.3)
