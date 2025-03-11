@@ -1,8 +1,7 @@
-@tool
 class_name Hero
 extends Node2D
 
-signal died
+signal died(hero: Hero)
 
 @export var stats : HeroStats : set = _set_stats
 var hero_name := "empty hero name"
@@ -26,10 +25,6 @@ func _set_stats(value: HeroStats) -> void:
 	stats = value.custom_duplicate()
 	stats.changed.connect(_on_stats_changed)
 
-	for effect: Effect in stats.effects:
-		effect.effect_owner = self
-		effect.owner_line_position = line_position
-
 	sprite.texture = stats.model
 	hero_name = stats.hero_name
 
@@ -42,6 +37,7 @@ func take_damage(dmg: int) -> void:
 
 	for effect: Effect in stats.effects:
 		if Effect.TriggerType.DAMAGE_TAKEN in effect.triggers:
+			effect.context = ContextBuilder.build_default(self)
 			EffectQueue.push_back(effect, 2)
 
 	stats.current_hp = stats.current_hp - dmg
@@ -55,22 +51,93 @@ func take_aoe_damage(dmg: int) -> void:
 	
 
 func get_buffed(health_buff: int, damage_buff: int) -> void:
+	for effect: Effect in stats.effects:
+		if Effect.TriggerType.SELF_BUFFED in effect.triggers:
+			effect.context = ContextBuilder.build_default(self)
+			EffectQueue.push_back(effect, 2)
+
 	stats.max_hp += health_buff
 	stats.current_hp += health_buff
 	stats.damage += damage_buff
 	_on_stats_changed()
 
+	EventsBus.hero_buffed.emit(self)
 
-func change_position(pos: Vector2, line_pos: int) -> void:
-	line_position = line_pos
+
+func battle_start() -> void:
 	for effect: Effect in stats.effects:
-		effect.position = pos
-		effect.owner_line_position = line_pos
+		if Effect.TriggerType.START_OF_BATTLE in effect.triggers:
+			effect.context = ContextBuilder.build_default(self)
+			EffectQueue.push_back(effect, 2)
 
 
 func before_attack() -> void:
 	for effect: Effect in stats.effects:
 		if Effect.TriggerType.BEFORE_ATTACK in effect.triggers:
+			effect.context = ContextBuilder.build_default(self)
+			EffectQueue.push_back(effect, 2)
+
+
+func on_hero_summoned(summoned_hero: Hero) -> void:
+	for effect: Effect in stats.effects:
+		if Effect.TriggerType.SUMMONED in effect.triggers:
+			effect.context = ContextBuilder.build_trigger(self, summoned_hero)
+			EffectQueue.push_back(effect, 2)
+
+
+func on_hero_buffed(hero: Hero) -> void:
+	if hero == self:
+		return
+	if hero.friendly == friendly:
+		for effect: Effect in stats.effects:
+			if Effect.TriggerType.FRIENDLY_BUFFED in effect.triggers:
+				effect.context = ContextBuilder.build_trigger(self, hero)
+				EffectQueue.push_back(effect, 2)
+	else:
+		for effect: Effect in stats.effects:
+			if Effect.TriggerType.ENEMY_BUFFED in effect.triggers:
+				effect.context = ContextBuilder.build_trigger(self, hero)
+				EffectQueue.push_back(effect, 2)
+
+
+func on_hero_death(hero: Hero) -> void:
+	if hero == self:
+		return
+	for effect: Effect in stats.effects:
+		if Effect.TriggerType.ANY_OTHER_DEATH in effect.triggers:
+			effect.context = ContextBuilder.build_trigger(self, hero)
+			EffectQueue.push_back(effect, 2)
+
+	if hero.friendly == friendly:
+		for effect: Effect in stats.effects:
+			if Effect.TriggerType.FRIENDLY_DEATH in effect.triggers:
+				effect.context = ContextBuilder.build_trigger(self, hero)
+				EffectQueue.push_back(effect, 2)
+	else:
+		for effect: Effect in stats.effects:
+			if Effect.TriggerType.ENEMY_DEATH in effect.triggers:
+				effect.context = ContextBuilder.build_trigger(self, hero)
+				EffectQueue.push_back(effect, 2)
+
+
+func on_any_attack() -> void:
+	for effect: Effect in stats.effects:
+		if Effect.TriggerType.AFTER_ANY_ATTACK in effect.triggers:
+			effect.context = ContextBuilder.build_default(self)
+			EffectQueue.push_back(effect, 2)
+
+
+func on_shop_start() -> void:
+	for effect: Effect in stats.effects:
+		if Effect.TriggerType.START_OF_SHOP in effect.triggers:
+			effect.context = ContextBuilder.build_default(self)
+			EffectQueue.push_back(effect, 2)
+
+
+func on_shop_ended() -> void:
+	for effect: Effect in stats.effects:
+		if Effect.TriggerType.END_OF_SHOP in effect.triggers:
+			effect.context = ContextBuilder.build_default(self)
 			EffectQueue.push_back(effect, 2)
 
 
@@ -81,7 +148,8 @@ func _died() -> void:
 	health_label.text = str(stats.current_hp)
 	dying = true
 	for effect: Effect in stats.effects:
-		if Effect.TriggerType.DEATH in effect.triggers:
+		if Effect.TriggerType.SELF_DEATH in effect.triggers:
+			effect.context = ContextBuilder.build_default(self)
 			EffectQueue.push_back(effect, 2)
 
 

@@ -12,14 +12,17 @@ const BUFF_SPRITE := preload("res://effects/buff_effect/buff_sprite.tscn")
 @export var attack_buff : int = 0
 
 
-func execute(context: Dictionary) -> void:
-	if not check_context(context):
+func execute() -> void:
+	if not check_default_context():
 		call_deferred("finish")
 		return
 
-	var targets: Array[Hero] = _get_aoe_target(aoe_target_type, context)
+	var effect_owner: Hero = context[ContextBuilder.ContextKey.EFFECT_OWNER]
+	var position := _get_owner_position()
+
+	var targets: Array[Hero] = _get_aoe_target(aoe_target_type)
 	for target_type: TargetType in single_target_types:
-		targets.append(_get_target(target_type, context))
+		targets.append(_get_target(target_type))
 
 	for target: Hero in targets:
 		if not is_instance_valid(target):
@@ -34,8 +37,9 @@ func execute(context: Dictionary) -> void:
 		tween.tween_property(buff_sprite, "global_position", target.global_position + HEIGHT_ABOVE_HERO, FLIGHT_TIME)
 		tween.tween_callback(buff_sprite.queue_free).set_delay(FLIGHT_TIME)
 		tween.tween_callback(target.get_buffed.bind(attack_buff).bind(health_buff)).set_delay(FLIGHT_TIME)
-		tween.tween_callback(finish).set_delay(FLIGHT_TIME)
 
+	await effect_owner.get_tree().create_timer(FLIGHT_TIME, false).timeout
+	finish()
 
 func get_effect_name() -> String:
 	return "BuffEffect"
