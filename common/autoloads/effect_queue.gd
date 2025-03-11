@@ -33,6 +33,7 @@ func execute_next(context: Dictionary) -> void:
 	else:
 		effect = queue1.pop_front()
 	if is_instance_valid(effect):
+		# print("Executing effect: ", effect.effect_name)
 		effect.execute(context)
 		return
 	push_error("effect wasn't valid")

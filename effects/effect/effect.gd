@@ -54,7 +54,7 @@ enum ContextKey {
 
 @export_category("triggers")
 @export var triggers : Array[TriggerType] = []
-var effect_name : String = "Effect"
+@export var effect_name : String = "Effect"
 var error_str : String = ""
 var effect_owner : Hero
 var owner_line_position : int = 0
