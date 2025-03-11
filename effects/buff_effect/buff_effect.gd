@@ -36,9 +36,6 @@ func execute(context: Dictionary) -> void:
 		tween.tween_callback(target.get_buffed.bind(attack_buff).bind(health_buff)).set_delay(FLIGHT_TIME)
 		tween.tween_callback(finish).set_delay(FLIGHT_TIME)
 
-	# Signals for execution to finish in case no valid targets are found
-	super.execute(context)
-
 
 func get_effect_name() -> String:
 	return "BuffEffect"
