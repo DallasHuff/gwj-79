@@ -1,15 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://drmehhc0yi1t3"]
+[gd_scene load_steps=7 format=3 uid="uid://drmehhc0yi1t3"]
 
 [ext_resource type="Script" uid="uid://c74fdf67vbhy1" path="res://common/main/main.gd" id="1_4mqva"]
 [ext_resource type="PackedScene" uid="uid://dmx2fwumi1ey" path="res://combat/arena/arena.tscn" id="2_llmml"]
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="3_iuh81"]
-[ext_resource type="Resource" uid="uid://bb5vk5cjocn75" path="res://heroes/resources/murloc/murloc.tres" id="4_4eugw"]
+[ext_resource type="Resource" uid="uid://bb5vk5cjocn75" path="res://heroes/resources/murloc/murloc.tres" id="4_5okgu"]
 [ext_resource type="Resource" uid="uid://dabx83soglwev" path="res://heroes/resources/void_jelly/void_jelly.tres" id="4_iuh81"]
+[ext_resource type="Resource" uid="uid://dowcow3idr6uh" path="res://heroes/resources/void_cat/void_cat.tres" id="6_a5lpq"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_4mqva")
 
 [node name="Arena" parent="." instance=ExtResource("2_llmml")]
 unique_name_in_owner = true
-test_friendly_hero_list = Array[ExtResource("3_iuh81")]([ExtResource("4_4eugw"), ExtResource("4_4eugw"), ExtResource("4_iuh81"), ExtResource("4_iuh81")])
-test_enemy_hero_list = Array[ExtResource("3_iuh81")]([ExtResource("4_4eugw"), ExtResource("4_4eugw"), ExtResource("4_iuh81"), ExtResource("4_iuh81")])
+test_friendly_hero_list = Array[ExtResource("3_iuh81")]([ExtResource("4_5okgu"), ExtResource("4_5okgu"), ExtResource("6_a5lpq")])
+test_enemy_hero_list = Array[ExtResource("3_iuh81")]([ExtResource("4_iuh81"), ExtResource("4_iuh81"), ExtResource("6_a5lpq")])

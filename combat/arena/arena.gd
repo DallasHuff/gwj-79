@@ -59,8 +59,8 @@ func do_attack() -> void:
 	# Run effect queue
 	while not EffectQueue.is_empty():
 		var effect: Effect = EffectQueue.front()
+		print("Executing effect: ", effect.get_effect_name())
 		EffectQueue.execute_next()
-		print(effect.get_effect_name())
 		await effect.finished
 		await get_tree().create_timer(1).timeout
 
