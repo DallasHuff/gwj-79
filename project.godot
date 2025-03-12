@@ -21,10 +21,12 @@ EventsBus="*res://common/autoloads/events_bus.gd"
 EffectQueue="*res://common/autoloads/effect_queue.gd"
 Global="*res://common/autoloads/global.gd"
 Settings="*res://common/autoloads/settings.gd"
+ContextBuilder="*res://common/autoloads/context_builder.gd"
 
 [debug]
 
 file_logging/enable_file_logging=true
+gdscript/warnings/unused_signal=0
 gdscript/warnings/untyped_declaration=2
 
 [display]
@@ -36,6 +38,7 @@ window/size/viewport_height=1080
 
 folder_colors={
 "res://asset_dump/": "red",
+"res://combat/": "purple",
 "res://common/": "teal",
 "res://effects/": "orange",
 "res://heroes/": "blue",

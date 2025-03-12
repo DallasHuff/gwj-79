@@ -26,15 +26,15 @@ func push_front(effect: Effect, priority: int) -> void:
 			queue1.push_front(effect)
 
 
-func execute_next(context: Dictionary) -> void:
+func execute_next() -> void:
 	var effect: Effect
 	if not queue2.is_empty():
 		effect = queue2.pop_front()
 	else:
 		effect = queue1.pop_front()
 	if is_instance_valid(effect):
-		# print("Executing effect: ", effect.effect_name)
-		effect.execute(context)
+	# TODO: make effect have a context variable that gets added to it before getting pushed to the stack
+		effect.execute()
 		return
 	push_error("effect wasn't valid")
 

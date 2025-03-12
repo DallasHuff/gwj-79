@@ -13,11 +13,28 @@ const MOVE_BACK_AMOUNT := Vector2(40, 0)
 
 
 func _ready() -> void:
+	EventsBus.hero_summoned.connect(_on_hero_summoned)
+	EventsBus.hero_buffed.connect(_on_hero_buffed)
+	EventsBus.hero_died.connect(_on_hero_died)
+	EventsBus.attack_completed.connect(_on_attack_completed)
+	
+	# TODO: make enemy manager and remove this test stuff
 	friendly_line.setup(test_friendly_hero_list)
 	enemy_line.setup(test_enemy_hero_list)
 
 	await get_tree().create_timer(2).timeout
 
+	start_battle()
+
+
+func start_battle() -> void:
+	for hero: Hero in friendly_line.hero_list:
+		if is_instance_valid(hero):
+			hero.battle_start()
+	for hero: Hero in enemy_line.hero_list:
+		if is_instance_valid(hero):
+			hero.battle_start()
+	
 	do_attack()
 
 
@@ -42,8 +59,8 @@ func do_attack() -> void:
 	# Run effect queue
 	while not EffectQueue.is_empty():
 		var effect: Effect = EffectQueue.front()
-		var context: Dictionary[Effect.ContextKey, Variant] = _build_context(effect)
-		EffectQueue.execute_next(context)
+		print("Executing effect: ", effect.get_effect_name())
+		EffectQueue.execute_next()
 		await effect.finished
 		await get_tree().create_timer(1).timeout
 
@@ -62,22 +79,6 @@ func do_attack() -> void:
 		do_attack()
 
 
-func _build_context(effect: Effect) -> Dictionary[Effect.ContextKey, Variant]:
-	var context : Dictionary[Effect.ContextKey, Variant] = {}
-
-	if effect is AttackEffect:
-		return context
-
-	var hero: Hero = effect.effect_owner
-	if not is_instance_valid(hero):
-		print("Hero doesn't exist so we are not building context")
-		return context
-	context[Effect.ContextKey.SAME_SIDE_HERO_LINE] = friendly_line if hero.friendly else enemy_line
-	context[Effect.ContextKey.OTHER_SIDE_HERO_LINE] = friendly_line if not hero.friendly else enemy_line
-
-	return context
-
-
 func _check_winner() -> HeroLine:
 	if not _check_combat_finished():
 		return null
@@ -90,3 +91,40 @@ func _check_winner() -> HeroLine:
 
 func _check_combat_finished() -> bool:
 	return not friendly_line.has_alive_hero() or not enemy_line.has_alive_hero()
+
+
+
+func _on_hero_summoned(summon: Hero) -> void:
+	for hero: Hero in friendly_line.hero_list:
+		if is_instance_valid(hero):
+			hero.on_hero_summoned(summon)
+	for hero: Hero in enemy_line.hero_list:
+		if is_instance_valid(hero):
+			hero.on_hero_summoned(summon)
+
+
+func _on_hero_buffed(buffed_hero: Hero) -> void:
+	for hero: Hero in friendly_line.hero_list:
+		if is_instance_valid(hero):
+			hero.on_hero_buffed(buffed_hero)
+	for hero: Hero in enemy_line.hero_list:
+		if is_instance_valid(hero):
+			hero.on_hero_buffed(buffed_hero)
+
+
+func _on_hero_died(died_hero: Hero) -> void:
+	for hero: Hero in friendly_line.hero_list:
+		if is_instance_valid(hero):
+			hero.on_hero_death(died_hero)
+	for hero: Hero in enemy_line.hero_list:
+		if is_instance_valid(hero):
+			hero.on_hero_death(died_hero)
+
+
+func _on_attack_completed() -> void:
+	for hero: Hero in friendly_line.hero_list:
+		if is_instance_valid(hero):
+			hero.on_any_attack()
+	for hero: Hero in enemy_line.hero_list:
+		if is_instance_valid(hero):
+			hero.on_any_attack()
