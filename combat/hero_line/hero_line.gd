@@ -39,7 +39,7 @@ func _create_hero(stats: HeroStats, i: int) -> Hero:
 	add_child(new_hero)
 	new_hero.global_position = global_position + positions[i]
 
-	new_hero.stats = stats
+	new_hero.stats = stats.custom_duplicate()
 	if friendly: 
 		new_hero.sprite.flip_h = true
 	new_hero.friendly = friendly
@@ -71,17 +71,21 @@ func summon(pos: int, stats: HeroStats) -> void:
 		push_warning("Tried to summon with invalid position: ", pos)
 		return
 	if is_instance_valid(hero_list[i]):
-		print("Can't move back - hero_list is full ", line_info())
+		print("Can't summon another hero - hero_list is full ", line_info())
 		return
 
+	# Move heroes back from the summon position
 	while i > pos:
 		hero_list[i] = hero_list[i-1]
 		hero_list[i-1] = null
 		i -= 1
+	# Move i up to be the front-most available position
+	while i-1 >= 0 and not is_instance_valid(hero_list[i-1]):
+		i -= 1
 
-	var new_hero: Hero = _create_hero(stats, pos)
-	# TODO: make this function. also probably need to duplicate the stats when making the hero
+	var new_hero: Hero = _create_hero(stats, i)
 	EventsBus.hero_summoned.emit(new_hero)
+	update_hero_positions()
 
 
 func find_hero_position(hero: Hero) -> int:
