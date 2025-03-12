@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dwkg5ckxoo20t"]
+
+[ext_resource type="Texture2D" uid="uid://byw6qevtlkxoa" path="res://effects/damage_effect/rocket.png" id="1_aahw2"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="2_aahw2"]
+
+[resource]
+script = ExtResource("2_aahw2")
+model = ExtResource("1_aahw2")
+metadata/_custom_type_script = "uid://d142wudbd8l8"
