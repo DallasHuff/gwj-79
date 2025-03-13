@@ -5,7 +5,11 @@ enum ContextKey {
 	SAME_SIDE_HERO_LINE,
 	OTHER_SIDE_HERO_LINE,
 	TRIGGER_HERO,
+	PLAYER_STATS,
 }
+
+@onready var player_stats : PlayerStats = load("res://player/player_stats.tres")
+
 
 func build_default(effect_owner: Hero) -> Dictionary[ContextKey, Variant]:
 	var context: Dictionary[ContextKey, Variant] = {}
@@ -21,6 +25,7 @@ func build_default(effect_owner: Hero) -> Dictionary[ContextKey, Variant]:
 	context[ContextKey.EFFECT_OWNER] = effect_owner
 	context[ContextKey.SAME_SIDE_HERO_LINE] = friendly_line if effect_owner.friendly else enemy_line
 	context[ContextKey.OTHER_SIDE_HERO_LINE] = friendly_line if not effect_owner.friendly else enemy_line
+	context[ContextKey.PLAYER_STATS] = player_stats
 
 	return context
 

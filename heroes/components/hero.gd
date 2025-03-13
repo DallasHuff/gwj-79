@@ -35,10 +35,7 @@ func take_damage(dmg: int) -> void:
 	if dmg <= 0:
 		return
 
-	for effect: Effect in stats.effects:
-		if Effect.TriggerType.DAMAGE_TAKEN in effect.triggers:
-			effect.context = ContextBuilder.build_default(self)
-			EffectQueue.push_back(effect, 2)
+	_check_effects_for_trigger(Effect.TriggerType.DAMAGE_TAKEN)
 
 	stats.current_hp = stats.current_hp - dmg
 	if stats.current_hp <= 0:
@@ -51,10 +48,7 @@ func take_aoe_damage(dmg: int) -> void:
 	
 
 func get_buffed(health_buff: int, damage_buff: int) -> void:
-	for effect: Effect in stats.effects:
-		if Effect.TriggerType.SELF_BUFFED in effect.triggers:
-			effect.context = ContextBuilder.build_default(self)
-			EffectQueue.push_back(effect, 2)
+	_check_effects_for_trigger(Effect.TriggerType.SELF_BUFFED)
 
 	stats.max_hp += health_buff
 	stats.current_hp += health_buff
@@ -65,80 +59,66 @@ func get_buffed(health_buff: int, damage_buff: int) -> void:
 
 
 func battle_start() -> void:
-	for effect: Effect in stats.effects:
-		if Effect.TriggerType.START_OF_BATTLE in effect.triggers:
-			effect.context = ContextBuilder.build_default(self)
-			EffectQueue.push_back(effect, 2)
+	_check_effects_for_trigger(Effect.TriggerType.START_OF_BATTLE)
 
 
 func before_attack() -> void:
-	for effect: Effect in stats.effects:
-		if Effect.TriggerType.BEFORE_ATTACK in effect.triggers:
-			effect.context = ContextBuilder.build_default(self)
-			EffectQueue.push_back(effect, 2)
+	_check_effects_for_trigger(Effect.TriggerType.BEFORE_ATTACK)
 
 
 func on_hero_summoned(summoned_hero: Hero) -> void:
-	for effect: Effect in stats.effects:
-		if Effect.TriggerType.SUMMONED in effect.triggers:
-			effect.context = ContextBuilder.build_trigger(self, summoned_hero)
-			EffectQueue.push_back(effect, 2)
+	_check_effects_for_trigger(Effect.TriggerType.SUMMONED, summoned_hero)
 
 
 func on_hero_buffed(hero: Hero) -> void:
 	if hero == self:
 		return
 	if hero.friendly == friendly:
-		for effect: Effect in stats.effects:
-			if Effect.TriggerType.FRIENDLY_BUFFED in effect.triggers:
-				effect.context = ContextBuilder.build_trigger(self, hero)
-				EffectQueue.push_back(effect, 2)
+		_check_effects_for_trigger(Effect.TriggerType.FRIENDLY_BUFFED, hero)
 	else:
-		for effect: Effect in stats.effects:
-			if Effect.TriggerType.ENEMY_BUFFED in effect.triggers:
-				effect.context = ContextBuilder.build_trigger(self, hero)
-				EffectQueue.push_back(effect, 2)
+		_check_effects_for_trigger(Effect.TriggerType.ENEMY_BUFFED, hero)
 
 
 func on_hero_death(hero: Hero) -> void:
 	if hero == self:
 		return
-	for effect: Effect in stats.effects:
-		if Effect.TriggerType.ANY_OTHER_DEATH in effect.triggers:
-			effect.context = ContextBuilder.build_trigger(self, hero)
-			EffectQueue.push_back(effect, 2)
+	_check_effects_for_trigger(Effect.TriggerType.ANY_OTHER_DEATH, hero)
 
 	if hero.friendly == friendly:
-		for effect: Effect in stats.effects:
-			if Effect.TriggerType.FRIENDLY_DEATH in effect.triggers:
-				effect.context = ContextBuilder.build_trigger(self, hero)
-				EffectQueue.push_back(effect, 2)
+		_check_effects_for_trigger(Effect.TriggerType.FRIENDLY_DEATH, hero)
 	else:
-		for effect: Effect in stats.effects:
-			if Effect.TriggerType.ENEMY_DEATH in effect.triggers:
-				effect.context = ContextBuilder.build_trigger(self, hero)
-				EffectQueue.push_back(effect, 2)
+		_check_effects_for_trigger(Effect.TriggerType.ENEMY_DEATH, hero)
 
 
 func on_any_attack() -> void:
-	for effect: Effect in stats.effects:
-		if Effect.TriggerType.AFTER_ANY_ATTACK in effect.triggers:
-			effect.context = ContextBuilder.build_default(self)
-			EffectQueue.push_back(effect, 2)
+	_check_effects_for_trigger(Effect.TriggerType.AFTER_ANY_ATTACK)
 
 
 func on_shop_start() -> void:
-	for effect: Effect in stats.effects:
-		if Effect.TriggerType.START_OF_SHOP in effect.triggers:
-			effect.context = ContextBuilder.build_default(self)
-			EffectQueue.push_back(effect, 2)
+	_check_effects_for_trigger(Effect.TriggerType.START_OF_SHOP)
 
 
 func on_shop_ended() -> void:
+	_check_effects_for_trigger(Effect.TriggerType.END_OF_SHOP)
+
+
+func _check_effects_for_trigger(trigger_type: Effect.TriggerType, trigger_hero: Hero = null) -> void:
 	for effect: Effect in stats.effects:
-		if Effect.TriggerType.END_OF_SHOP in effect.triggers:
-			effect.context = ContextBuilder.build_default(self)
+		if trigger_type in effect.triggers:
+			if is_instance_valid(trigger_hero):
+				effect.context = ContextBuilder.build_trigger(self, trigger_hero)
+			else:
+				effect.context = ContextBuilder.build_default(self)
 			EffectQueue.push_back(effect, 2)
+
+	for item: ItemData in stats.item_list:
+		if is_instance_valid(item.effect) and trigger_type in item.effect.triggers:
+			if is_instance_valid(trigger_hero):
+				item.effect.context = ContextBuilder.build_trigger(self, trigger_hero)
+			else:
+				item.effect.context = ContextBuilder.build_default(self)
+			EffectQueue.push_back(item.effect, 2)
+
 
 
 func _died() -> void:
@@ -147,10 +127,7 @@ func _died() -> void:
 	died.emit(self)
 	health_label.text = str(stats.current_hp)
 	dying = true
-	for effect: Effect in stats.effects:
-		if Effect.TriggerType.SELF_DEATH in effect.triggers:
-			effect.context = ContextBuilder.build_default(self)
-			EffectQueue.push_back(effect, 2)
+	_check_effects_for_trigger(Effect.TriggerType.SELF_DEATH)
 
 
 func _on_stats_changed() -> void:
