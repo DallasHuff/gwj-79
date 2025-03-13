@@ -1,7 +1,9 @@
 class_name ItemData
 extends Resource
 
+@export var effect : Effect
 @export var model : Texture
 
-func effect() -> void:
+
+func apply() -> void:
 	pass

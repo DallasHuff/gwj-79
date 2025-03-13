@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_7e0be"]
 [ext_resource type="Resource" uid="uid://crbyla2x103qq" path="res://heroes/resources/void_cat/effects/void_cat_summon_hydra.tres" id="2_7u1b0"]
-[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/item.gd" id="2_617a5"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="2_617a5"]
 [ext_resource type="Texture2D" uid="uid://cpyjljj5hhnd0" path="res://heroes/resources/void_cat/void_cat.png" id="3_7u1b0"]
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="4_8xcda"]
 
