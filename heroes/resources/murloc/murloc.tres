@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="HeroStats" load_steps=6 format=3 uid="uid://bb5vk5cjocn75"]
 
-[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/item.gd" id="1_7y65v"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="1_7y65v"]
 [ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_bcx6p"]
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="1_y42v0"]
 [ext_resource type="Resource" uid="uid://daitvrn420imw" path="res://heroes/resources/murloc/effects/one_damage.tres" id="2_8eivl"]

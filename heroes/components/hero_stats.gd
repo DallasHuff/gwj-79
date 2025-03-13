@@ -16,7 +16,7 @@ const RARITY_COLORS := {
 @export var damage : int = 1
 @export_category("Effects")
 @export var effects : Array[Effect]
-@export var item_list : Array[Item]
+@export var item_list : Array[ItemData]
 @export_category("Visuals")
 @export var hero_name : String
 @export var model : Texture
@@ -47,9 +47,9 @@ func custom_duplicate() -> HeroStats:
 		new_effects.append(effect.duplicate(true))
 	new_stats.effects = new_effects
 
-	var new_items: Array[Item] = []
-	for item: Item in item_list:
-		new_items.append(item.duplicate(true))
+	var new_items: Array[ItemData] = []
+	for item_data: ItemData in item_list:
+		new_items.append(item_data.duplicate(true))
 	new_stats.item_list = new_items
 	
 	return new_stats
