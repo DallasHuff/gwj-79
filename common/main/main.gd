@@ -16,7 +16,7 @@ var round_number: int = 1
 
 func _ready() -> void:
 	Global.main = self
-	go_to_settings_menu()
+	go_to_arena()
 
 
 func go_to_arena() -> void:
