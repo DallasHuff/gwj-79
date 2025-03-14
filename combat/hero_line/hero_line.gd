@@ -16,12 +16,12 @@ func _ready() -> void:
 		positions.append(Vector2(i * dist_between_heroes, 0))
 
 
-func setup(stat_list: Array[HeroStats]) -> void:
+func setup(stat_list: HeroArray) -> void:
 	if not stat_list:
 		push_error("stat_list is not valid for HeroLine: ", line_info())
 	
 	var i : int = 0
-	for stat: HeroStats in stat_list:
+	for stat: HeroStats in stat_list.heroes:
 		if not is_instance_valid(stat):
 			continue
 		if i >= hero_list.size():

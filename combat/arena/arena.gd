@@ -1,15 +1,13 @@
 class_name Arena
 extends Node2D
 
-signal combat_finished(hero_line: HeroLine)
+signal combat_finished(player_win_flag: bool)
 
 const MOVE_BACK_AMOUNT := Vector2(40, 0)
 
-@export var test_friendly_hero_list : Array[HeroStats]
-@export var test_enemy_hero_list : Array[HeroStats]
-
-@export var friendly_line : HeroLine
-@export var enemy_line : HeroLine
+@onready var friendly_line: HeroLine = %FriendlyHeroLine
+@onready var enemy_line: HeroLine = %EnemyHeroLine
+@onready var enemy_manager: EnemyManager = %EnemyManager
 
 
 func _ready() -> void:
@@ -18,16 +16,16 @@ func _ready() -> void:
 	EventsBus.hero_died.connect(_on_hero_died)
 	EventsBus.attack_completed.connect(_on_attack_completed)
 	
-	# TODO: make enemy manager and remove this test stuff
-	friendly_line.setup(test_friendly_hero_list)
-	enemy_line.setup(test_enemy_hero_list)
-
 	await get_tree().create_timer(2).timeout
 
-	start_battle()
 
+func start_battle(round_number: int, friendly_heroes: HeroArray) -> void:
+	friendly_line.setup(friendly_heroes)
+	enemy_line.setup(enemy_manager.get_list_for_round(round_number))
 
-func start_battle() -> void:
+	# TODO: animate the heroes running in
+	await get_tree().create_timer(1 * Settings.battle_speed).timeout
+
 	for hero: Hero in friendly_line.hero_list:
 		if is_instance_valid(hero):
 			hero.battle_start()
@@ -71,27 +69,26 @@ func do_attack() -> void:
 
 	await get_tree().create_timer(0.3).timeout
 
-	var winner_line: HeroLine = _check_winner()
-	if is_instance_valid(winner_line):
-		combat_finished.emit(winner_line)
-		print("combat finished. winner: ", winner_line.line_info())
+	if _check_combat_finished():
+		_check_winner()
 	else:
 		do_attack()
 
 
-func _check_winner() -> HeroLine:
-	if not _check_combat_finished():
-		return null
+func _check_winner() -> void:
 	# Ties have the friendly line winning so there is always a winner
+	var player_win := true
 	if enemy_line.has_alive_hero():
-		return enemy_line
-	else:
-		return friendly_line
+		player_win = false
+	
+	print("Combat finished. Did the player win?: ", player_win)
+	print(friendly_line.line_info())
+	print(enemy_line.line_info())
+	combat_finished.emit(player_win)
 
 
 func _check_combat_finished() -> bool:
 	return not friendly_line.has_alive_hero() or not enemy_line.has_alive_hero()
-
 
 
 func _on_hero_summoned(summon: Hero) -> void:
