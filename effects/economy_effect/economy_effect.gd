@@ -1,3 +1,4 @@
+class_name EconomyEffect
 extends Effect
 
 @export_category("values")

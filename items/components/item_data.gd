@@ -5,5 +5,5 @@ extends Resource
 @export var model : Texture
 
 
-func apply() -> void:
+func apply(_hero: Hero) -> void:
 	pass
