@@ -35,13 +35,14 @@ func go_to_arena() -> void:
 	arena.start_battle(round_number, friendly_hero_list)
 	arena.combat_finished.connect(_on_arena_combat_finished)
 
-
 func go_to_shop() -> void:
-	player_stats.money += player_stats.income
 	round_number += 1
 	shop = SHOP_SCENE.instantiate()
 	add_child(shop)
-	shop.request_friendly_hero_list.connect(_on_shop_request_heroes) # Race condition if shop requests heroes in _ready()?
+	shop.request_friendly_hero_list.connect(_on_shop_request_heroes)
+	shop.money = player_stats.money
+	shop.next_round_button.pressed.connect(go_to_arena)
+	shop.next_round_button.pressed.connect(shop.queue_free)
 
 
 func go_to_main_menu() -> void:
@@ -70,7 +71,7 @@ func go_to_game_over_screen() -> void:
 
 
 func _on_shop_request_heroes() -> void:
-	print("_on_shop_request_heroes")
+	shop.import_player_party(friendly_hero_list)
 
 
 func _on_arena_combat_finished(player_win_flag: bool) -> void:
