@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://b076010rnvrtp"]
+
+[ext_resource type="Script" uid="uid://c2jx1y3e5aim3" path="res://combat/arena/components/battle_speed_controller/battle_speed_button_group.gd" id="1_4uqnf"]
+[ext_resource type="ButtonGroup" uid="uid://dunvtbn12y25r" path="res://combat/arena/components/battle_speed_controller/battle_speed_button_group.tres" id="2_6yw4s"]
+
+[node name="BattleSpeedButtonGroup" type="MarginContainer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 70
+script = ExtResource("1_4uqnf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="HalfSpeedButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 85
+toggle_mode = true
+button_group = ExtResource("2_6yw4s")
+text = "0.5x"
+
+[node name="NormalSpeedButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 85
+toggle_mode = true
+button_group = ExtResource("2_6yw4s")
+text = "1x"
+
+[node name="DoubleSpeedButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+theme_override_font_sizes/font_size = 85
+toggle_mode = true
+button_group = ExtResource("2_6yw4s")
+text = "2x"
+
+[connection signal="pressed" from="HBoxContainer/HalfSpeedButton" to="." method="_on_half_speed_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/NormalSpeedButton" to="." method="_on_normal_speed_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/DoubleSpeedButton" to="." method="_on_double_speed_button_pressed"]

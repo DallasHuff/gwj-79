@@ -1,15 +1,14 @@
-class_name DamageEffect
+class_name HealEffect
 extends Effect
 
-const DAMAGE_SPRITE := preload("res://effects/damage_effect/damage_sprite.tscn")
+const HEAL_SPRITE := preload("res://effects/heal_effect/heal_sprite.tscn")
 
 @export_category("targets")
 @export var aoe_target_type := AoETargetType.NONE
 @export var single_target_types: Array[TargetType] = []
 @export var include_self := false
 @export_category("values")
-@export var damage: int = 1
-@export var use_effect_owner_damage := false
+@export var heal: int = 1
 
 
 func execute() -> void:
@@ -21,9 +20,6 @@ func execute() -> void:
 
 	var effect_owner: Hero = context[ContextBuilder.ContextKey.EFFECT_OWNER]
 	var position := _get_owner_position()
-
-	if use_effect_owner_damage:
-		damage = effect_owner.stats.damage
 
 	var targets: Array[Hero] = _get_aoe_target(aoe_target_type)
 	for target_type: TargetType in single_target_types:
@@ -37,19 +33,19 @@ func execute() -> void:
 			continue
 		if target.dying:
 			continue
-		print("Damaging target: ", target.name)
-		var dmg_sprite: Node2D = DAMAGE_SPRITE.instantiate()
-		effect_owner.get_tree().root.add_child(dmg_sprite)
-		dmg_sprite.global_position = position + HEIGHT_ABOVE_HERO
+		print("Healing target: ", target.name)
+		var heal_sprite: Node2D = HEAL_SPRITE.instantiate()
+		effect_owner.get_tree().root.add_child(heal_sprite)
+		heal_sprite.global_position = position + HEIGHT_ABOVE_HERO
 
 		var tween := effect_owner.get_tree().create_tween()
-		tween.tween_property(dmg_sprite, "global_position", target.global_position + HEIGHT_ABOVE_HERO, flight_time)
-		tween.tween_callback(dmg_sprite.queue_free).set_delay(flight_time)
-		tween.tween_callback(target.take_damage.bind(effect_owner).bind(damage)).set_delay(flight_time)
+		tween.tween_property(heal_sprite, "global_position", target.global_position + HEIGHT_ABOVE_HERO, flight_time)
+		tween.tween_callback(heal_sprite.queue_free).set_delay(flight_time)
+		tween.tween_callback(target.get_healed.bind(effect_owner).bind(heal)).set_delay(flight_time)
 	
 	await effect_owner.get_tree().create_timer(flight_time, false).timeout
 	finish()
 
 
 func get_effect_name() -> String:
-	return "DamageEffect"
+	return "HealEffect"

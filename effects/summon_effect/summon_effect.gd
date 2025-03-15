@@ -10,8 +10,10 @@ enum SummonPosition {
 	TRIGGER,
 }
 
-@export var summon_hero_stats : HeroStats
-@export var summon_position : SummonPosition = SummonPosition.SELF
+@export var summon_hero_stats: HeroStats
+@export var summon_position: SummonPosition = SummonPosition.SELF
+@export var use_effect_owner_hp := false
+@export var use_effect_owner_attack := false
 
 
 func execute() -> void:
@@ -19,6 +21,12 @@ func execute() -> void:
 	var friendly_line: HeroLine = context[ContextBuilder.ContextKey.SAME_SIDE_HERO_LINE]
 	var other_line: HeroLine = context[ContextBuilder.ContextKey.OTHER_SIDE_HERO_LINE]
 	var target_line: HeroLine = context[ContextBuilder.ContextKey.OTHER_SIDE_HERO_LINE]
+
+	if use_effect_owner_hp:
+		summon_hero_stats.max_hp = effect_owner.stats.max_hp
+		summon_hero_stats.current_hp = summon_hero_stats.max_hp
+	if use_effect_owner_attack:
+		summon_hero_stats.damage = effect_owner.stats.damage
 
 	match summon_position:
 		SummonPosition.SELF:

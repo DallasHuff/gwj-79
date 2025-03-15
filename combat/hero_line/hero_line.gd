@@ -46,6 +46,7 @@ func _create_hero(stats: HeroStats, i: int) -> Hero:
 
 	new_hero.died.connect(_on_hero_death)
 	hero_list[i] = new_hero
+	new_hero.name = "hero" + str(i) + ("friendly" if friendly else "enemy")
 	return new_hero
 
 
