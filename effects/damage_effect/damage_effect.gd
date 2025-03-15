@@ -40,10 +40,13 @@ func execute() -> void:
 		print("Damaging target: ", target.name)
 		var dmg_sprite: Node2D = DAMAGE_SPRITE.instantiate()
 		effect_owner.get_tree().root.add_child(dmg_sprite)
-		dmg_sprite.global_position = position + HEIGHT_ABOVE_HERO
+		dmg_sprite.global_position = position + Vector2(0, HEIGHT_ABOVE_HERO)
 
 		var tween := effect_owner.get_tree().create_tween()
-		tween.tween_property(dmg_sprite, "global_position", target.global_position + HEIGHT_ABOVE_HERO, flight_time)
+		tween.tween_property(dmg_sprite, "global_position:x", target.global_position.x, flight_time)
+		var y_tween := effect_owner.get_tree().create_tween().set_trans(Tween.TRANS_SINE)
+		y_tween.tween_property(dmg_sprite, "global_position:y", target.global_position.y + HEIGHT_ABOVE_HERO + ARC_HEIGHT, flight_time / 2).set_ease(Tween.EASE_OUT)
+		y_tween.tween_property(dmg_sprite, "global_position:y", target.global_position.y + HEIGHT_ABOVE_HERO, flight_time / 2).set_ease(Tween.EASE_IN)
 		tween.tween_callback(dmg_sprite.queue_free).set_delay(flight_time)
 		tween.tween_callback(target.take_damage.bind(effect_owner).bind(damage)).set_delay(flight_time)
 	

@@ -3,7 +3,8 @@ extends Resource
 
 signal finished
 
-const HEIGHT_ABOVE_HERO := Vector2(0, -100)
+const HEIGHT_ABOVE_HERO: float = -100
+const ARC_HEIGHT: float = -150
 
 enum TriggerType {
 	START_OF_BATTLE,
@@ -198,4 +199,4 @@ func _clean_targets_array(targets: Array[Hero]) -> Array[Hero]:
 	for hero: Hero in targets:
 		if is_instance_valid(hero) and hero not in new_targets:
 			new_targets.append(hero)
-	return new_targets
+	return new_targets	

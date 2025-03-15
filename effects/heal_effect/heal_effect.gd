@@ -36,10 +36,13 @@ func execute() -> void:
 		print("Healing target: ", target.name)
 		var heal_sprite: Node2D = HEAL_SPRITE.instantiate()
 		effect_owner.get_tree().root.add_child(heal_sprite)
-		heal_sprite.global_position = position + HEIGHT_ABOVE_HERO
+		heal_sprite.global_position = position + Vector2(0, HEIGHT_ABOVE_HERO)
 
 		var tween := effect_owner.get_tree().create_tween()
-		tween.tween_property(heal_sprite, "global_position", target.global_position + HEIGHT_ABOVE_HERO, flight_time)
+		tween.tween_property(heal_sprite, "global_position:x", target.global_position.x, flight_time)
+		var y_tween := effect_owner.get_tree().create_tween().set_trans(Tween.TRANS_SINE)
+		y_tween.tween_property(heal_sprite, "global_position:y", target.global_position.y + HEIGHT_ABOVE_HERO + ARC_HEIGHT, flight_time / 2).set_ease(Tween.EASE_OUT)
+		y_tween.tween_property(heal_sprite, "global_position:y", target.global_position.y + HEIGHT_ABOVE_HERO, flight_time / 2).set_ease(Tween.EASE_IN)
 		tween.tween_callback(heal_sprite.queue_free).set_delay(flight_time)
 		tween.tween_callback(target.get_healed.bind(effect_owner).bind(heal)).set_delay(flight_time)
 	

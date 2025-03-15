@@ -11,7 +11,7 @@ const SETTINGS_MENU_SCENE: PackedScene = preload("res://menus/settings_menu/sett
 @export var player_stats: PlayerStats
 var shop: Shop
 var arena: Arena
-var round_number: int = 1
+var round_number: int = 0
 
 
 func _ready() -> void:
@@ -20,8 +20,6 @@ func _ready() -> void:
 
 
 func go_to_arena() -> void:
-	for child: Node in get_children():
-		child.queue_free()
 	arena = ARENA_SCENE.instantiate()
 	add_child(arena)
 	arena.exit_button.pressed.connect(go_to_main_menu)
@@ -29,16 +27,14 @@ func go_to_arena() -> void:
 	# TODO: connect this to make a settings menu popup
 	#arena.settings_button.connect()
 	arena.start_battle(round_number, test_friendly_hero_list)
-	round_number += 1
 
 
 func go_to_shop() -> void:
 	player_stats.money += player_stats.income
+	round_number += 1
 
 
 func go_to_main_menu() -> void:
-	for child: Node in get_children():
-		child.queue_free()
 	var menu: MainMenu = MAIN_MENU_SCENE.instantiate()
 	add_child(menu)
 	menu.play_button.pressed.connect(menu.queue_free)
