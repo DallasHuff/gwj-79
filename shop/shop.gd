@@ -26,12 +26,41 @@ var dist_between_heroes : int = 180
 var dist_between_items : int = 100
 var money : int
 
-var hero_costs : Dictionary = {
+var hero_cost : Dictionary = {
 	HERO_STATS.Rarity.COMMON: 1,
 	HERO_STATS.Rarity.UNCOMMON: 2,
 	HERO_STATS.Rarity.RARE: 3,
 	HERO_STATS.Rarity.LEGENDARY: 5
 }
+
+#TEMPORARY - TO BE REPLACED BY DRAG AND DROP
+@onready var bt_buy_hero_1: Button = %BtBuyHero1
+@onready var bt_buy_hero_2: Button = %BtBuyHero2
+@onready var bt_buy_hero_3: Button = %BtBuyHero3
+@onready var bt_buy_hero_4: Button = %BtBuyHero4
+@onready var bt_buy_item_1: Button = %BtBuyItem1
+@onready var bt_buy_item_2: Button = %BtBuyItem2
+@onready var bt_buy_item_3: Button = %BtBuyItem3
+@onready var bt_sell_hero_1: Button = %BtSellHero1
+@onready var bt_sell_hero_2: Button = %BtSellHero2
+@onready var bt_sell_hero_3: Button = %BtSellHero3
+@onready var bt_sell_hero_4: Button = %BtSellHero4
+@onready var bt_sell_hero_5: Button = %BtSellHero5
+
+func _connect_temp_buttons() -> void:
+	bt_buy_hero_1.pressed.connect(func() -> void: buy_hero(0))
+	bt_buy_hero_2.pressed.connect(func() -> void: buy_hero(1))
+	bt_buy_hero_3.pressed.connect(func() -> void: buy_hero(2))
+	bt_buy_hero_4.pressed.connect(func() -> void: buy_hero(3))
+	bt_buy_item_1.pressed.connect(func() -> void: buy_item(0))
+	bt_buy_item_2.pressed.connect(func() -> void: buy_item(1))
+	bt_buy_item_3.pressed.connect(func() -> void: buy_item(2))
+	bt_sell_hero_1.pressed.connect(func() -> void: sell_hero(0))
+	bt_sell_hero_2.pressed.connect(func() -> void: sell_hero(1))
+	bt_sell_hero_3.pressed.connect(func() -> void: sell_hero(2))
+	bt_sell_hero_4.pressed.connect(func() -> void: sell_hero(3))
+	bt_sell_hero_5.pressed.connect(func() -> void: sell_hero(4))
+#TEMPORARY - TO BE REPLACED BY DRAG AND DROP
 
 
 func _ready() -> void:
@@ -42,8 +71,9 @@ func _ready() -> void:
 	
 	reroll_button.pressed.connect(reroll_shop)
 	reroll_shop()
-	_update_money_display()
+	_update_money(0)
 	request_friendly_hero_list.emit()
+	_connect_temp_buttons()
 
 
 func reroll_shop() -> void:
@@ -115,23 +145,46 @@ func create_item(data: ItemData, i: int) -> Item:
 	return new_item
 
 
-func purchase_hero(hero: Hero, dest_pos: int) -> void:
-	# Takes a hero (supplied by drag and drop?)
-	# Subtract money from the player
-	# Hide hero from the shop and make it unclickable? Or queue free, if that doesn't mess up adding the hero to the player's party
-	# Return the purchased hero so drag and drop can pass the hero to hero line
+func buy_hero(shop_slot: int) -> Hero:
+	print("Buying hero from shop slot ", shop_slot)
+	var rtn : Hero
 	
-	
-	# Replace this hero's spot in heroes[] with null
-	# Send hero_purchased signal? (Adds to player's party
-	pass
+	# Get next available position in party (probably not necessary when drag and drop is implemented)
+	var next_pos : int = 0
+	for hero in player_party.hero_list:
+		if hero == null:
+			break
+		next_pos += 1
+
+	if next_pos == 5: # Throw error if there are no open slots
+		push_error("There are no open party slots. Please sell an existing hero before purchasing another.")
+	else: # Proceed with purchase
+		rtn = player_party._create_hero(heroes[shop_slot].stats, next_pos)
+		heroes[shop_slot].queue_free()
+		print("The rarity of the purchased hero is ", heroes[shop_slot].stats.rarity)
+		print("The cost for this rarity is ", hero_cost[heroes[shop_slot].stats.rarity])
+		_update_money(-hero_cost[heroes[shop_slot].stats.rarity])
+	return rtn
 
 
-func purchase_item() -> Item:
+func buy_item(shop_slot: int) -> Item:
+	print("Buying hero from shop slot ", shop_slot)
 	return null
 
 
-func _update_money_display() -> void:
+func sell_hero(party_slot: int) -> void:
+	#Hero sell prices should maybe be adjusted to reflect any items they have (either get items back or automatically sell with hero), number of upgrades to the hero
+	print("Selling hero from party slot ", party_slot)
+
+	print("The rarity of the sold hero is ", player_party.hero_list[party_slot].stats.rarity)
+	print("The cost for this rarity is ", hero_cost[player_party.hero_list[party_slot].stats.rarity])
+	_update_money(hero_cost[player_party.hero_list[party_slot].stats.rarity])
+	player_party.hero_list[party_slot].queue_free()
+
+	
+
+func _update_money(delta: int) -> void:
+	money += delta
 	money_display.text = "$" + str(money)
 
 

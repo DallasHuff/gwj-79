@@ -38,8 +38,8 @@ func go_to_shop(player_win_flag: bool) -> void:
 		round_number += 1
 		shop = SHOP_SCENE.instantiate()
 		shop.connect("request_friendly_hero_list", Callable(self, "_on_shop_request_heroes"))
-		add_child(shop)
 		shop.money = player_stats.money
+		add_child(shop)
 		shop.next_round_button.pressed.connect(go_to_arena) # Any changes to the player roster will not reflect, this loads a fresh arena scene as if just starting the game
 		shop.next_round_button.pressed.connect(shop.queue_free)
 
