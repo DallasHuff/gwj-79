@@ -14,6 +14,6 @@ rarity = 0
 effects = Array[ExtResource("1_vkqvp")]([])
 item_list = Array[ExtResource("2_8dspx")]([])
 hero_name = "Hydra"
-description = ""
+tooltip = "No effect"
 model = ExtResource("3_8dspx")
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

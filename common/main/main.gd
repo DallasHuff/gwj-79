@@ -35,6 +35,7 @@ func go_to_arena() -> void:
 	arena.start_battle(round_number, friendly_hero_list)
 	arena.combat_finished.connect(_on_arena_combat_finished)
 
+
 func go_to_shop() -> void:
 	round_number += 1
 	shop = SHOP_SCENE.instantiate()
@@ -75,6 +76,7 @@ func _on_shop_request_heroes() -> void:
 
 
 func _on_arena_combat_finished(player_win_flag: bool) -> void:
+	arena.queue_free()
 	if player_win_flag == false:
 		player_stats.health -= 1
 	if player_stats.health <= 0:

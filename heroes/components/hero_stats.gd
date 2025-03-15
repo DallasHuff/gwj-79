@@ -20,7 +20,7 @@ const RARITY_COLORS := {
 @export var item_list: Array[ItemData]
 @export_category("Visuals")
 @export var hero_name: String
-@export_multiline var description: String
+@export_multiline var tooltip: String
 @export var model: Texture
 
 
