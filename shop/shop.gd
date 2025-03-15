@@ -7,9 +7,12 @@ const HERO_SCENE := preload("res://heroes/components/hero.tscn")
 const ITEM_SCENE := preload("res://items/components/item.tscn")
 const HERO_STATS := preload("res://heroes/components/hero_stats.gd")
 
-@onready var reroll_button: Button = $RerollButton
+@onready var reroll_button: Button = %RerollButton
+@onready var next_round_button: Button = %NextRoundButton
 @onready var item_container: Node = $ItemContainer
 @onready var hero_container: Node = $HeroContainer
+@onready var player_party: HeroLine = %PlayerParty
+@onready var money_display: RichTextLabel = %MoneyDisplay
 
 @export var hero_pool : Array[HeroStats]
 @export var item_pool : WeightedRandomList
@@ -21,6 +24,7 @@ var hero_positions : Array[Vector2] = []
 var item_positions : Array[Vector2] = []
 var dist_between_heroes : int = 180
 var dist_between_items : int = 100
+var money : int
 
 var hero_costs : Dictionary = {
 	HERO_STATS.Rarity.COMMON: 1,
@@ -39,6 +43,7 @@ func _ready() -> void:
 	reroll_button.pressed.connect(reroll_shop)
 	reroll_shop()
 	_update_money_display()
+	request_friendly_hero_list.emit()
 
 
 func reroll_shop() -> void:
@@ -127,13 +132,14 @@ func purchase_item() -> Item:
 
 
 func _update_money_display() -> void:
-	pass
+	money_display.text = "$" + str(money)
 
 
 # Called from main after the request_friendly_hero_list signal is sent
-func import_player_party() -> void:
-	pass
+func import_player_party(friendly_hero_list: HeroArray) -> void:
+	player_party.setup(friendly_hero_list)
 
 
-func export_player_party() -> void:
-	pass
+func export_player_party() -> HeroArray:
+	# Needs to construct a new HeroArray from shop.hero_line, return it, main.gd sets main.friendly_hero_list equal to the returned value
+	return null
