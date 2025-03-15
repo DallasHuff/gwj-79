@@ -37,7 +37,7 @@ rarity = 0
 effects = Array[ExtResource("3_mmyc1")]([SubResource("Resource_hv745")])
 item_list = Array[ExtResource("8_pafut")]([])
 hero_name = "Murdoch"
-description = "Deals 1 damage to all heroes when this hero gets buffed"
+tooltip = ""
 model = ExtResource("6_yrv44")
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
 

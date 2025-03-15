@@ -14,6 +14,7 @@ var line_position: int = 0
 @onready var sprite: TextureRect = %HeroTexture
 @onready var health_label: Label = %HealthLabel
 @onready var attack_label: Label = %AttackLabel
+@onready var tooltip_component: TooltipComponent = %TooltipComponent
 
 
 func _set_stats(value: HeroStats) -> void:
@@ -28,6 +29,8 @@ func _set_stats(value: HeroStats) -> void:
 
 	sprite.texture = stats.model
 	hero_name = stats.hero_name
+
+	tooltip_component.set_tooltip(stats.tooltip)
 
 	_on_stats_changed()
 
