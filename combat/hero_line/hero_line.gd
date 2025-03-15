@@ -30,7 +30,7 @@ func setup(stat_list: HeroArray) -> void:
 		hero_list[i] = _create_hero(stat, i)
 		hero_list[i].line_position = i
 		i += 1
-		
+	
 	update_hero_positions()
 	
 
@@ -64,6 +64,15 @@ func update_hero_positions() -> void:
 				var tween := get_tree().create_tween()
 				tween.tween_property(hero_list[i], "global_position", global_position + positions[i], 0.2)
 				break
+
+
+func shake_heroes(height_diff: float) -> void:
+	var tween := get_tree().create_tween()
+	for hero: Hero in hero_list:
+		print(position.y)
+		tween.tween_property(hero, "position:y", position.y + height_diff, 1 / Settings.battle_speed)
+		tween.tween_property(hero, "position:y", position.y - height_diff, 1 / Settings.battle_speed)
+
 
 
 func summon(pos: int, stats: HeroStats) -> void:
