@@ -1,8 +1,11 @@
 class_name Shop
 extends Node2D
 
+signal request_friendly_hero_list()
+
 const HERO_SCENE := preload("res://heroes/components/hero.tscn")
 const ITEM_SCENE := preload("res://items/components/item.tscn")
+const HERO_STATS := preload("res://heroes/components/hero_stats.gd")
 
 @onready var reroll_button: Button = $RerollButton
 @onready var item_container: Node = $ItemContainer
@@ -19,6 +22,13 @@ var item_positions : Array[Vector2] = []
 var dist_between_heroes : int = 180
 var dist_between_items : int = 100
 
+var hero_costs : Dictionary = {
+	HERO_STATS.Rarity.COMMON: 1,
+	HERO_STATS.Rarity.UNCOMMON: 2,
+	HERO_STATS.Rarity.RARE: 3,
+	HERO_STATS.Rarity.LEGENDARY: 5
+}
+
 
 func _ready() -> void:
 	for i in range(heroes.size()):
@@ -28,14 +38,15 @@ func _ready() -> void:
 	
 	reroll_button.pressed.connect(reroll_shop)
 	reroll_shop()
+	_update_money_display()
 
 
 func reroll_shop() -> void:
-	heroes.fill(null)
+	heroes.fill(null) # Adjust later if the option to lock a selection is added
 	for hero in hero_container.get_children():
 		hero.queue_free()
 	
-	items.fill(null)
+	items.fill(null) # Adjust later if the option to lock a selection is added
 	for item in item_container.get_children():
 		item.queue_free()
 	
@@ -49,16 +60,16 @@ func add_heroes() -> void:
 		stat_list.append(hero_pool[int(randf_range(0, hero_pool.size()))])
 	
 	if not stat_list:
-			push_error("stat_list is not valid for HeroLine: ", hero_line_info())
+			push_error("stat_list is not valid for HeroLine: ", _heroes_info())
 	var i : int = 0
 	for stat: HeroStats in stat_list:
 		if not is_instance_valid(stat):
 			continue
 		if i >= heroes.size():
-			push_error("Was given too many HeroStats for the HeroLine: ", hero_line_info(), " stat_list: ", stat_list)
+			push_error("Was given too many HeroStats for the HeroLine: ", _heroes_info(), " stat_list: ", stat_list)
 			break
 		heroes[i] = _create_hero(stat, i)
-		heroes[i].change_position(global_position + hero_positions[i], i)
+		set_hero_position(heroes[i], global_position + hero_positions[i])
 		i += 1
 
 
@@ -72,7 +83,11 @@ func _create_hero(stats: HeroStats, i: int) -> Hero:
 	return new_hero
 
 
-func hero_line_info() -> String:
+func set_hero_position(hero: Hero, destination: Vector2) -> void:
+	hero.position = destination
+
+
+func _heroes_info() -> String:
 	var rtn := name
 	for h: Hero in heroes:
 		rtn += (str(h) + " ")
@@ -93,3 +108,32 @@ func create_item(data: ItemData, i: int) -> Item:
 	
 	items[i] = new_item
 	return new_item
+
+
+func purchase_hero(hero: Hero, dest_pos: int) -> void:
+	# Takes a hero (supplied by drag and drop?)
+	# Subtract money from the player
+	# Hide hero from the shop and make it unclickable? Or queue free, if that doesn't mess up adding the hero to the player's party
+	# Return the purchased hero so drag and drop can pass the hero to hero line
+	
+	
+	# Replace this hero's spot in heroes[] with null
+	# Send hero_purchased signal? (Adds to player's party
+	pass
+
+
+func purchase_item() -> Item:
+	return null
+
+
+func _update_money_display() -> void:
+	pass
+
+
+# Called from main after the request_friendly_hero_list signal is sent
+func import_player_party() -> void:
+	pass
+
+
+func export_player_party() -> void:
+	pass

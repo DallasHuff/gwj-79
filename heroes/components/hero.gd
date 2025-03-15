@@ -2,6 +2,7 @@ class_name Hero
 extends Node2D
 
 signal died(hero: Hero)
+signal hero_purchased(hero: Hero)
 
 @export var stats: HeroStats : set = _set_stats
 var hero_name := "empty hero name"
