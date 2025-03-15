@@ -31,14 +31,13 @@ func go_to_arena() -> void:
 
 
 # Called via combat_finished signal from arena
-func go_to_shop(player_win_flag: bool) -> void:
-	if player_win_flag:
-		arena.queue_free()
-		player_stats.money += player_stats.income
-		round_number += 1
-		shop = SHOP_SCENE.instantiate()
-		add_child(shop)
-		shop.connect("request_friendly_hero_list", Callable(self, "_on_shop_request_heroes")) # Race condition if shop requests heroes in _ready()?
+func go_to_shop(_player_win_flag: bool) -> void:
+	arena.queue_free()
+	player_stats.money += player_stats.income
+	round_number += 1
+	shop = SHOP_SCENE.instantiate()
+	add_child(shop)
+	shop.connect("request_friendly_hero_list", Callable(self, "_on_shop_request_heroes")) # Race condition if shop requests heroes in _ready()?
 
 
 func _on_shop_request_heroes() -> void:
