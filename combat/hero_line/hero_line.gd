@@ -31,7 +31,7 @@ func setup(stat_list: HeroArray) -> void:
 		hero_list[i] = _create_hero(stat, i)
 		hero_list[i].line_position = i
 		i += 1
-		
+	
 	update_hero_positions()
 	
 
@@ -66,6 +66,21 @@ func update_hero_positions() -> void:
 				var tween := get_tree().create_tween()
 				tween.tween_property(hero_list[i], "global_position", global_position + positions[i], 0.2)
 				break
+
+
+func make_heroes_run() -> void:
+	var height_diff: float = 50
+	for hero: Hero in hero_list:
+		if not is_instance_valid(hero):
+			continue
+		var random_time_offset := randf_range(0, 0.1)
+
+		var tween := get_tree().create_tween()
+		tween.tween_property(hero, "global_position:y", self.global_position.y + height_diff, (0.3 + random_time_offset) / Settings.battle_speed)
+		tween.tween_property(hero, "global_position:y", self.global_position.y - height_diff, (0.3 + random_time_offset) / Settings.battle_speed)
+		tween.set_loops(4)
+		tween.tween_property(hero, "global_position:y", self.global_position.y, 0.15 / Settings.battle_speed)
+		tween.tween_property(hero, "rotation", 0, 0.15 / Settings.battle_speed)
 
 
 func summon(pos: int, stats: HeroStats) -> void:
