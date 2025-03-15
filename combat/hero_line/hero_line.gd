@@ -203,6 +203,21 @@ func get_global_from_line_pos(i: int) -> Vector2:
 	return global_position + positions[i]
 
 
+func get_back_pos() -> int:
+	var i := hero_list.size()-1
+	var hero: Hero = hero_list[i]
+	while not is_instance_valid(hero) and i >= 0:
+		i -= 1
+		hero = hero_list[i]
+	return i+1
+
+
+func is_line_full() -> bool:
+	for i in range(hero_list.size()):
+		if not is_instance_valid(hero_list[i]):
+			return false
+	return true
+
 
 func _on_hero_death(hero: Hero) -> void:
 	for i in range(hero_list.size()):
