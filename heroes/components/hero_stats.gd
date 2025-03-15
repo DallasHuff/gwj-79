@@ -11,15 +11,17 @@ const RARITY_COLORS := {
 }
 
 @export_category("Combat Stats")
-@export var max_hp : int = 1 : set = _set_max_hp
-@export var current_hp : int = max_hp
-@export var damage : int = 1
+@export var max_hp: int = 1 : set = _set_max_hp
+@export var current_hp: int = max_hp
+@export var damage: int = 1
+@export var rarity := Rarity.COMMON
 @export_category("Effects")
-@export var effects : Array[Effect]
-@export var item_list : Array[ItemData]
+@export var effects: Array[Effect]
+@export var item_list: Array[ItemData]
 @export_category("Visuals")
-@export var hero_name : String
-@export var model : Texture
+@export var hero_name: String
+@export_multiline var description: String
+@export var model: Texture
 
 
 func _set_max_hp(value: int) -> void:

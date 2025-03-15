@@ -7,5 +7,7 @@
 script = ExtResource("1_6psf1")
 summon_hero_stats = ExtResource("2_1b3xy")
 summon_position = 3
+use_effect_owner_hp = false
+use_effect_owner_attack = true
 triggers = Array[int]([4])
 metadata/_custom_type_script = "uid://dwsiqp6snmngd"

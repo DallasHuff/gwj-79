@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="SummonEffect" load_steps=2 format=3 uid="uid://bxeabr6lmfdrq"]
-
-[ext_resource type="Script" uid="uid://dwsiqp6snmngd" path="res://effects/summon_effect/summon_effect.gd" id="1_d8lbt"]
-
-[resource]
-script = ExtResource("1_d8lbt")
-summon_position = 0
-triggers = Array[int]([])
-metadata/_custom_type_script = "uid://dwsiqp6snmngd"

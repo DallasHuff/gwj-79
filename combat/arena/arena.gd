@@ -8,6 +8,8 @@ const MOVE_BACK_AMOUNT := Vector2(40, 0)
 @onready var friendly_line: HeroLine = %FriendlyHeroLine
 @onready var enemy_line: HeroLine = %EnemyHeroLine
 @onready var enemy_manager: EnemyManager = %EnemyManager
+@onready var exit_button: Button = %ExitButton
+@onready var settings_button: Button = %SettingsButton
 
 
 func _ready() -> void:
@@ -15,8 +17,9 @@ func _ready() -> void:
 	EventsBus.hero_buffed.connect(_on_hero_buffed)
 	EventsBus.hero_died.connect(_on_hero_died)
 	EventsBus.attack_completed.connect(_on_attack_completed)
+	EventsBus.hero_healed.connect(_on_hero_healed)
 	
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(2 / Settings.battle_speed).timeout
 
 
 func start_battle(round_number: int, friendly_heroes: HeroArray) -> void:
@@ -24,7 +27,7 @@ func start_battle(round_number: int, friendly_heroes: HeroArray) -> void:
 	enemy_line.setup(enemy_manager.get_list_for_round(round_number))
 
 	# TODO: animate the heroes running in
-	await get_tree().create_timer(1 * Settings.battle_speed).timeout
+	await get_tree().create_timer(1 / Settings.battle_speed).timeout
 
 	for hero: Hero in friendly_line.hero_list:
 		if is_instance_valid(hero):
@@ -50,9 +53,9 @@ func do_attack() -> void:
 
 	# Move Heroes to prep for attack
 	var tween := friendly.get_tree().create_tween()
-	tween.tween_property(friendly, "global_position", friendly.global_position - MOVE_BACK_AMOUNT, 0.2)
-	tween.parallel().tween_property(enemy, "global_position", enemy.global_position + MOVE_BACK_AMOUNT, 0.2)
-	await get_tree().create_timer(0.5).timeout
+	tween.tween_property(friendly, "global_position", friendly.global_position - MOVE_BACK_AMOUNT, 0.2 / Settings.battle_speed)
+	tween.parallel().tween_property(enemy, "global_position", enemy.global_position + MOVE_BACK_AMOUNT, 0.2 / Settings.battle_speed)
+	await get_tree().create_timer(0.5 / Settings.battle_speed).timeout
 
 	# Run effect queue
 	while not EffectQueue.is_empty():
@@ -60,14 +63,14 @@ func do_attack() -> void:
 		print("Executing effect: ", effect.get_effect_name())
 		EffectQueue.execute_next()
 		await effect.finished
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(1 / Settings.battle_speed).timeout
 
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.3 / Settings.battle_speed).timeout
 
 	friendly_line.update_hero_positions()
 	enemy_line.update_hero_positions()
 
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.3 / Settings.battle_speed).timeout
 
 	if _check_combat_finished():
 		_check_winner()
@@ -89,6 +92,15 @@ func _check_winner() -> void:
 
 func _check_combat_finished() -> bool:
 	return not friendly_line.has_alive_hero() or not enemy_line.has_alive_hero()
+
+
+func _on_hero_healed(healed_hero: Hero) -> void:
+	for hero: Hero in friendly_line.hero_list:
+		if is_instance_valid(hero):
+			hero.on_hero_healed(healed_hero)
+	for hero: Hero in enemy_line.hero_list:
+		if is_instance_valid(hero):
+			hero.on_hero_healed(healed_hero)
 
 
 func _on_hero_summoned(summon: Hero) -> void:

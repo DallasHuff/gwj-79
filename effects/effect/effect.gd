@@ -3,7 +3,6 @@ extends Resource
 
 signal finished
 
-const FLIGHT_TIME : float = 0.3
 const HEIGHT_ABOVE_HERO := Vector2(0, -100)
 
 enum TriggerType {
@@ -20,6 +19,10 @@ enum TriggerType {
 	SELF_BUFFED,
 	FRIENDLY_BUFFED,
 	ENEMY_BUFFED,
+	SELF_HEALED,
+	FRIENDLY_HEALED,
+	ENEMY_HEALED,
+	ANY_HEALED,
 	SUMMONED,
 	START_OF_SHOP,#NYI 
 	END_OF_SHOP,#NYI
@@ -44,6 +47,7 @@ enum TargetType {
 	RANDOM_OTHER_SIDE,
 	RANDOM_SAME_SIDE,
 	RANDOM_ALL,
+	TRIGGER_HERO,
 }
 
 enum AoETargetType {
@@ -57,6 +61,7 @@ enum AoETargetType {
 @export var triggers : Array[TriggerType] = []
 var context : Dictionary[ContextBuilder.ContextKey, Variant] = {}
 var finished_flag := false
+var flight_time: float = 0.3
 
 
 func execute() -> void:
@@ -150,6 +155,8 @@ func _get_target(target_type: TargetType) -> Hero:
 		TargetType.RANDOM_ALL:
 			var teams: Array[HeroLine] = [same_team, other_team]
 			return teams[randi() % teams.size()].get_random_hero()
+		TargetType.TRIGGER_HERO:
+			return trigger_hero
 		_:
 			return null
 
@@ -184,3 +191,11 @@ func _get_owner_position() -> Vector2:
 	var effect_owner: Hero = context[ContextBuilder.ContextKey.EFFECT_OWNER]
 	var friendly_line: HeroLine = context[ContextBuilder.ContextKey.SAME_SIDE_HERO_LINE]
 	return friendly_line.get_global_from_line_pos(effect_owner.line_position)
+
+
+func _clean_targets_array(targets: Array[Hero]) -> Array[Hero]:
+	var new_targets: Array[Hero] = []
+	for hero: Hero in targets:
+		if is_instance_valid(hero) and hero not in new_targets:
+			new_targets.append(hero)
+	return new_targets

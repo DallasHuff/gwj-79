@@ -1,14 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://drmehhc0yi1t3"]
+[gd_scene load_steps=10 format=3 uid="uid://drmehhc0yi1t3"]
 
 [ext_resource type="Script" uid="uid://c74fdf67vbhy1" path="res://common/main/main.gd" id="1_4mqva"]
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="3_iuh81"]
 [ext_resource type="Script" uid="uid://cq5o6kamx720a" path="res://combat/hero_array.gd" id="4_gpk2e"]
 [ext_resource type="Resource" uid="uid://dabx83soglwev" path="res://heroes/resources/void_jelly/void_jelly.tres" id="4_iuh81"]
+[ext_resource type="Resource" uid="uid://csfguy4pfjem6" path="res://heroes/resources/tree/tree.tres" id="4_wiimp"]
 [ext_resource type="Resource" uid="uid://bd23w3rpn257i" path="res://player/player_stats.tres" id="5_4eugw"]
+[ext_resource type="Resource" uid="uid://bb5vk5cjocn75" path="res://heroes/resources/murloc/murloc.tres" id="5_6wle4"]
+[ext_resource type="Resource" uid="uid://dowcow3idr6uh" path="res://heroes/resources/void_cat/void_cat.tres" id="6_06hnu"]
 
 [sub_resource type="Resource" id="Resource_4eugw"]
 script = ExtResource("4_gpk2e")
-heroes = Array[ExtResource("3_iuh81")]([ExtResource("4_iuh81"), ExtResource("4_iuh81"), ExtResource("4_iuh81")])
+heroes = Array[ExtResource("3_iuh81")]([ExtResource("4_iuh81"), ExtResource("4_wiimp"), ExtResource("4_iuh81"), ExtResource("5_6wle4"), ExtResource("6_06hnu")])
 metadata/_custom_type_script = "uid://cq5o6kamx720a"
 
 [node name="Main" type="Node2D"]

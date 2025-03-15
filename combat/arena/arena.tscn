@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmx2fwumi1ey"]
+[gd_scene load_steps=7 format=3 uid="uid://dmx2fwumi1ey"]
 
 [ext_resource type="Script" uid="uid://b4243wf3yx74g" path="res://combat/arena/arena.gd" id="1_i5doo"]
 [ext_resource type="PackedScene" uid="uid://5d2tgixtskiy" path="res://combat/hero_line/hero_line.tscn" id="2_13g3s"]
-[ext_resource type="Script" uid="uid://d37m7keo2x8vg" path="res://combat/arena/enemy_manager.gd" id="3_sg87e"]
+[ext_resource type="Script" uid="uid://d37m7keo2x8vg" path="res://combat/arena/components/enemy_manager/enemy_manager.gd" id="3_sg87e"]
 [ext_resource type="Script" uid="uid://cq5o6kamx720a" path="res://combat/hero_array.gd" id="4_1qt8t"]
 [ext_resource type="Resource" uid="uid://xnusq6emvqbh" path="res://combat/enemy_arrays/round_1_enemies/team_1.tres" id="5_kxugw"]
+[ext_resource type="PackedScene" uid="uid://b076010rnvrtp" path="res://combat/arena/components/battle_speed_controller/battle_speed_controller.tscn" id="6_kxugw"]
 
 [node name="Arena" type="Node2D"]
 script = ExtResource("1_i5doo")
@@ -22,3 +23,36 @@ friendly = false
 unique_name_in_owner = true
 script = ExtResource("3_sg87e")
 round_1_list = Array[ExtResource("4_1qt8t")]([ExtResource("5_kxugw")])
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ExitContainer" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 72.0
+offset_bottom = 74.0
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/ExitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 85
+text = "Exit"
+
+[node name="BattleSpeedButtonGroup" parent="CanvasLayer" instance=ExtResource("6_kxugw")]
+
+[node name="SettingsContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -145.0
+offset_bottom = 74.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/SettingsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 85
+text = "Settings"
