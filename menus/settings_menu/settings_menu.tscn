@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dy1u0kyg27oxg"]
+[gd_scene load_steps=4 format=3 uid="uid://dy1u0kyg27oxg"]
 
 [ext_resource type="Script" uid="uid://bgf54nmh6vcxi" path="res://menus/settings_menu/settings_menu.gd" id="1_twvox"]
+[ext_resource type="PackedScene" uid="uid://b076010rnvrtp" path="res://combat/arena/components/battle_speed_controller/battle_speed_controller.tscn" id="2_r2f7a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_twvox"]
 bg_color = Color(2.88785e-06, 0.713771, 0.431613, 1)
@@ -30,9 +31,23 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 100
+text = "Battle Speed"
+
+[node name="BattleSpeedButtonGroup" parent="CanvasLayer/VBoxContainer/HBoxContainer" instance=ExtResource("2_r2f7a")]
+layout_mode = 2
+
 [node name="FullscreenButton" type="CheckButton" parent="CanvasLayer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/outline_size = 30
 theme_override_font_sizes/font_size = 200
 theme_override_styles/disabled = SubResource("StyleBoxFlat_twvox")
 text = "Fullscreen"
@@ -43,6 +58,7 @@ theme_override_constants/separation = 10
 
 [node name="MasterVolumeLabel" type="Label" parent="CanvasLayer/VBoxContainer/MasterVolumeContainer"]
 layout_mode = 2
+theme_override_constants/outline_size = 30
 theme_override_font_sizes/font_size = 200
 text = "Master Volume"
 
@@ -57,6 +73,7 @@ layout_mode = 2
 
 [node name="SFXVolumeLabel" type="Label" parent="CanvasLayer/VBoxContainer/SFXVolumeContainer"]
 layout_mode = 2
+theme_override_constants/outline_size = 30
 theme_override_font_sizes/font_size = 200
 text = "SFX Volume"
 
@@ -71,6 +88,7 @@ layout_mode = 2
 
 [node name="MusicVolumeLabel" type="Label" parent="CanvasLayer/VBoxContainer/MusicVolumeContainer"]
 layout_mode = 2
+theme_override_constants/outline_size = 30
 theme_override_font_sizes/font_size = 200
 text = "Music Volume"
 
@@ -83,8 +101,9 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 200)
 offset_right = 200.0
 offset_bottom = 200.0
+theme_override_constants/outline_size = 30
 theme_override_font_sizes/font_size = 200
-text = "X"
+text = "Back"
 
 [connection signal="toggled" from="CanvasLayer/VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_toggled"]
 [connection signal="value_changed" from="CanvasLayer/VBoxContainer/MasterVolumeContainer/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]

@@ -4,8 +4,7 @@ extends Node2D
 signal combat_finished(player_win_flag: bool)
 
 const MOVE_BACK_AMOUNT := Vector2(40, 0)
-const LINE_POSITION_DIFF := Vector2(1000, 0)
-const HERO_SHAKE_DIFF: float = 50
+const LINE_POSITION_DIFF: float = 1000
 
 @onready var friendly_line: HeroLine = %FriendlyHeroLine
 @onready var enemy_line: HeroLine = %EnemyHeroLine
@@ -20,8 +19,8 @@ func _ready() -> void:
 	EventsBus.hero_died.connect(_on_hero_died)
 	EventsBus.attack_completed.connect(_on_attack_completed)
 	EventsBus.hero_healed.connect(_on_hero_healed)
-	# friendly_line.position = friendly_line.position - LINE_POSITION_DIFF
-	# enemy_line.position = enemy_line.position + LINE_POSITION_DIFF
+	friendly_line.position.x = friendly_line.position.x - LINE_POSITION_DIFF
+	enemy_line.position.x = enemy_line.position.x + LINE_POSITION_DIFF
 
 
 func start_battle(round_number: int, friendly_heroes: HeroArray) -> void:
@@ -31,14 +30,14 @@ func start_battle(round_number: int, friendly_heroes: HeroArray) -> void:
 	await get_tree().create_timer(1 / Settings.battle_speed).timeout
 
 	# Animate the heroes running in
-	# var tween := get_tree().create_tween()
-	# tween.tween_property(friendly_line, "position", friendly_line.position + LINE_POSITION_DIFF, 2 / Settings.battle_speed)
-	# tween.parallel().tween_property(enemy_line, "position", enemy_line.position - LINE_POSITION_DIFF, 2 / Settings.battle_speed)
-	# friendly_line.shake_heroes(HERO_SHAKE_DIFF)
-	# enemy_line.shake_heroes(HERO_SHAKE_DIFF)
+	var tween := get_tree().create_tween()
+	tween.tween_property(friendly_line, "position:x", friendly_line.position.x + LINE_POSITION_DIFF, 3 / Settings.battle_speed)
+	tween.parallel().tween_property(enemy_line, "position:x", enemy_line.position.x - LINE_POSITION_DIFF, 3 / Settings.battle_speed)
+	friendly_line.make_heroes_run()
+	enemy_line.make_heroes_run()
 
-	# await tween.finished
-	await get_tree().create_timer(2 / Settings.battle_speed).timeout
+	await tween.finished
+	await get_tree().create_timer(1 / Settings.battle_speed).timeout
 
 	for hero: Hero in friendly_line.hero_list:
 		if is_instance_valid(hero):
@@ -58,6 +57,7 @@ func do_attack() -> void:
 	var attack_effect := AttackEffect.new()
 	attack_effect.h1 = friendly
 	attack_effect.h2 = enemy
+	attack_effect.context = ContextBuilder.build_default(friendly)
 	EffectQueue.push_back(attack_effect, 1)
 	enemy.before_attack()
 	friendly.before_attack()
@@ -78,8 +78,8 @@ func do_attack() -> void:
 
 	await get_tree().create_timer(0.3 / Settings.battle_speed).timeout
 
-	friendly_line.update_hero_positions()
-	enemy_line.update_hero_positions()
+	# friendly_line.update_hero_positions()
+	# enemy_line.update_hero_positions()
 
 	await get_tree().create_timer(0.3 / Settings.battle_speed).timeout
 
