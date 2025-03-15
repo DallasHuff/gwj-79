@@ -38,6 +38,7 @@ func execute() -> void:
 		if target.dying:
 			continue
 		print("Damaging target: ", target.name)
+		
 		var dmg_sprite: Node2D = DAMAGE_SPRITE.instantiate()
 		effect_owner.get_tree().root.add_child(dmg_sprite)
 		dmg_sprite.global_position = position + Vector2(0, HEIGHT_ABOVE_HERO)

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3bcbu65wg512"]
+
+[ext_resource type="Texture2D" uid="uid://6gw7e35k6cne" path="res://effects/summon_effect/black_circle.png" id="1_5fs5i"]
+
+[node name="SummonSprite" type="Sprite2D"]
+scale = Vector2(0.137931, 0.137931)
+texture = ExtResource("1_5fs5i")

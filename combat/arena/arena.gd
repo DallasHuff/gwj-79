@@ -3,7 +3,7 @@ extends Node2D
 
 signal combat_finished(player_win_flag: bool)
 
-const MOVE_BACK_AMOUNT := Vector2(40, 0)
+const MOVE_BACK_AMOUNT: float = 40
 const LINE_POSITION_DIFF: float = 1000
 
 @onready var friendly_line: HeroLine = %FriendlyHeroLine
@@ -64,9 +64,9 @@ func do_attack() -> void:
 
 	# Move Heroes to prep for attack
 	var tween := friendly.get_tree().create_tween()
-	tween.tween_property(friendly, "global_position", friendly.global_position - MOVE_BACK_AMOUNT, 0.2 / Settings.battle_speed)
-	tween.parallel().tween_property(enemy, "global_position", enemy.global_position + MOVE_BACK_AMOUNT, 0.2 / Settings.battle_speed)
-	await get_tree().create_timer(0.5 / Settings.battle_speed).timeout
+	tween.tween_property(friendly, "global_position:x", friendly.global_position.x - MOVE_BACK_AMOUNT, 0.2 / Settings.battle_speed)
+	tween.parallel().tween_property(enemy, "global_position:x", enemy.global_position.x + MOVE_BACK_AMOUNT, 0.2 / Settings.battle_speed)
+	await tween.finished
 
 	# Run effect queue
 	while not EffectQueue.is_empty():
