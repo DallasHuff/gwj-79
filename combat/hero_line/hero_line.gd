@@ -17,7 +17,6 @@ func _ready() -> void:
 
 
 func setup(stat_list: HeroArray) -> void:
-	print("hero_line.setup")
 	if not stat_list:
 		push_error("stat_list is not valid for HeroLine: ", line_info())
 	
@@ -36,7 +35,6 @@ func setup(stat_list: HeroArray) -> void:
 	
 
 func _create_hero(stats: HeroStats, i: int) -> Hero:
-	print("hero_line._create_hero")
 	var new_hero : Hero = HERO_SCENE.instantiate()
 	add_child(new_hero)
 	new_hero.global_position = global_position + positions[i]
