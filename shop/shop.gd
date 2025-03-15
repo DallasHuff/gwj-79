@@ -24,7 +24,7 @@ var hero_positions : Array[Vector2] = []
 var item_positions : Array[Vector2] = []
 var dist_between_heroes : int = 180
 var dist_between_items : int = 100
-var money : int
+var player_stats : PlayerStats
 
 var hero_cost : Dictionary = {
 	HERO_STATS.Rarity.COMMON: 1,
@@ -87,6 +87,7 @@ func reroll_shop() -> void:
 	
 	add_heroes()
 	add_items()
+	_update_money(-2)
 
 
 func add_heroes() -> void:
@@ -184,8 +185,8 @@ func sell_hero(party_slot: int) -> void:
 	
 
 func _update_money(delta: int) -> void:
-	money += delta
-	money_display.text = "$" + str(money)
+	player_stats.money += delta
+	money_display.text = "$" + str(player_stats.money)
 
 
 # Called from main after the request_friendly_hero_list signal is sent

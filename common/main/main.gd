@@ -37,12 +37,15 @@ func go_to_arena() -> void:
 
 
 func go_to_shop() -> void:
+	arena.queue_free()
+	player_stats.money += player_stats.income
 	round_number += 1
 	shop = SHOP_SCENE.instantiate()
+	shop.connect("request_friendly_hero_list", Callable(self, "_on_shop_request_heroes"))
+	# shop.money = player_stats.money
+	shop.player_stats = player_stats
 	add_child(shop)
-	shop.request_friendly_hero_list.connect(_on_shop_request_heroes)
-	shop.money = player_stats.money
-	shop.next_round_button.pressed.connect(go_to_arena)
+	shop.next_round_button.pressed.connect(go_to_arena) # Any changes to the player roster will not reflect, this loads a fresh arena scene as if just starting the game
 	shop.next_round_button.pressed.connect(shop.queue_free)
 
 
