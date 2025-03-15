@@ -4,6 +4,8 @@ extends Node2D
 signal combat_finished(player_win_flag: bool)
 
 const MOVE_BACK_AMOUNT := Vector2(40, 0)
+const LINE_POSITION_DIFF := Vector2(1000, 0)
+const HERO_SHAKE_DIFF: float = 50
 
 @onready var friendly_line: HeroLine = %FriendlyHeroLine
 @onready var enemy_line: HeroLine = %EnemyHeroLine
@@ -18,16 +20,25 @@ func _ready() -> void:
 	EventsBus.hero_died.connect(_on_hero_died)
 	EventsBus.attack_completed.connect(_on_attack_completed)
 	EventsBus.hero_healed.connect(_on_hero_healed)
-	
-	await get_tree().create_timer(2 / Settings.battle_speed).timeout
+	# friendly_line.position = friendly_line.position - LINE_POSITION_DIFF
+	# enemy_line.position = enemy_line.position + LINE_POSITION_DIFF
 
 
 func start_battle(round_number: int, friendly_heroes: HeroArray) -> void:
 	friendly_line.setup(friendly_heroes)
 	enemy_line.setup(enemy_manager.get_list_for_round(round_number))
 
-	# TODO: animate the heroes running in
 	await get_tree().create_timer(1 / Settings.battle_speed).timeout
+
+	# Animate the heroes running in
+	# var tween := get_tree().create_tween()
+	# tween.tween_property(friendly_line, "position", friendly_line.position + LINE_POSITION_DIFF, 2 / Settings.battle_speed)
+	# tween.parallel().tween_property(enemy_line, "position", enemy_line.position - LINE_POSITION_DIFF, 2 / Settings.battle_speed)
+	# friendly_line.shake_heroes(HERO_SHAKE_DIFF)
+	# enemy_line.shake_heroes(HERO_SHAKE_DIFF)
+
+	# await tween.finished
+	await get_tree().create_timer(2 / Settings.battle_speed).timeout
 
 	for hero: Hero in friendly_line.hero_list:
 		if is_instance_valid(hero):
