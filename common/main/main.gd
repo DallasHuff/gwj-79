@@ -27,11 +27,22 @@ func go_to_arena() -> void:
 	# TODO: connect this to make a settings menu popup
 	#arena.settings_button.connect()
 	arena.start_battle(round_number, test_friendly_hero_list)
+	arena.connect("combat_finished", Callable(self, "go_to_shop"))
 
 
-func go_to_shop() -> void:
-	player_stats.money += player_stats.income
-	round_number += 1
+# Called via combat_finished signal from arena
+func go_to_shop(player_win_flag: bool) -> void:
+	if player_win_flag:
+		arena.queue_free()
+		player_stats.money += player_stats.income
+		round_number += 1
+		shop = SHOP_SCENE.instantiate()
+		add_child(shop)
+		shop.connect("request_friendly_hero_list", Callable(self, "_on_shop_request_heroes")) # Race condition if shop requests heroes in _ready()?
+
+
+func _on_shop_request_heroes() -> void:
+	print("_on_shop_request_heroes")
 
 
 func go_to_main_menu() -> void:
