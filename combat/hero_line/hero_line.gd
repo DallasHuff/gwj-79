@@ -74,11 +74,10 @@ func make_heroes_run() -> void:
 		var random_time_offset := randf_range(0, 0.1)
 
 		var tween := get_tree().create_tween()
-		tween.tween_property(hero, "global_position:y", self.global_position.y + height_diff, (0.3 + random_time_offset) / Settings.battle_speed)
-		tween.tween_property(hero, "global_position:y", self.global_position.y - height_diff, (0.3 + random_time_offset) / Settings.battle_speed)
+		tween.tween_property(hero, "global_position:y", self.global_position.y + height_diff, (0.25 + random_time_offset) / Settings.battle_speed)
+		tween.tween_property(hero, "global_position:y", self.global_position.y - height_diff, (0.25 + random_time_offset) / Settings.battle_speed)
 		tween.set_loops(4)
-		tween.tween_property(hero, "global_position:y", self.global_position.y, 0.15 / Settings.battle_speed)
-		tween.tween_property(hero, "rotation", 0, 0.15 / Settings.battle_speed)
+		tween.tween_property(hero, "global_position:y", self.global_position.y, 0.125 / Settings.battle_speed)
 
 
 func summon(pos: int, stats: HeroStats) -> void:

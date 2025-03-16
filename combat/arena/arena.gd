@@ -46,6 +46,14 @@ func start_battle(round_number: int, friendly_heroes: HeroArray) -> void:
 		if is_instance_valid(hero):
 			hero.battle_start()
 	
+	# Run effect queue for battle_start effects
+	while not EffectQueue.is_empty():
+		var effect: Effect = EffectQueue.front()
+		print("Executing effect: ", effect.get_effect_name())
+		EffectQueue.execute_next()
+		await effect.finished
+		await get_tree().create_timer(1 / Settings.battle_speed).timeout
+
 	do_attack()
 
 
