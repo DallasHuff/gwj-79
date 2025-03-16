@@ -40,8 +40,8 @@ gravity = Vector3(0, 0, 0)
 linear_accel_min = -10.0
 linear_accel_max = 1000.0
 linear_accel_curve = SubResource("CurveTexture_ou4v4")
-scale_min = 0.05
-scale_max = 0.12
+scale_min = 0.1
+scale_max = 0.2
 scale_curve = SubResource("CurveTexture_xckpc")
 
 [node name="SummonParticles" type="GPUParticles2D"]

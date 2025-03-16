@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2x0ofehoo052"]
+[gd_scene load_steps=3 format=3 uid="uid://d2x0ofehoo052"]
 
 [ext_resource type="Script" uid="uid://b6ouvwh8yk8n0" path="res://menus/main_menu/main_menu.gd" id="1_xbn2l"]
+[ext_resource type="Theme" uid="uid://txnhaabb1iib" path="res://themes/default_theme.tres" id="2_1nwmw"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -11,9 +12,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("2_1nwmw")
 script = ExtResource("1_xbn2l")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.101961, 0.121569, 0.2, 1)
 
 [node name="TitleContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 5
@@ -23,12 +34,15 @@ offset_left = -570.5
 offset_right = 570.5
 offset_bottom = 153.0
 grow_horizontal = 2
-theme_override_constants/margin_top = 70
+theme_override_constants/margin_top = 140
 
 [node name="TitleLabel" type="Label" parent="CanvasLayer/TitleContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 200
+theme = ExtResource("2_1nwmw")
+theme_override_colors/font_outline_color = Color(0.38576, 0.00254631, 0.864347, 1)
+theme_override_constants/outline_size = 25
+theme_override_font_sizes/font_size = 85
 text = "OMEGA  non-manual  creatures"
 
 [node name="ButtonsContainer" type="MarginContainer" parent="CanvasLayer"]
@@ -50,15 +64,16 @@ theme_override_constants/separation = 50
 
 [node name="PlayButton" type="Button" parent="CanvasLayer/ButtonsContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 100)
+custom_minimum_size = Vector2(800, 120)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_1nwmw")
 theme_override_font_sizes/font_size = 100
 text = "Start Game"
 
 [node name="SettingsButton" type="Button" parent="CanvasLayer/ButtonsContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 100)
+custom_minimum_size = Vector2(600, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 100
@@ -66,7 +81,7 @@ text = "Settings"
 
 [node name="ExitButton" type="Button" parent="CanvasLayer/ButtonsContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 100)
+custom_minimum_size = Vector2(370, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 100

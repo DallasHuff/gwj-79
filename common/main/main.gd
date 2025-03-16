@@ -29,6 +29,7 @@ func go_to_arena() -> void:
 	add_child(arena)
 	arena.exit_button.pressed.connect(go_to_main_menu)
 	arena.exit_button.pressed.connect(arena.queue_free)
+	arena.exit_button.pressed.connect(EffectQueue.clear)
 	arena.combat_finished.connect(_on_arena_combat_finished)
 	arena.start_battle(round_number, player_stats.heroes)
 
@@ -69,6 +70,7 @@ func go_to_game_over_screen() -> void:
 
 func _on_arena_combat_finished(player_win_flag: bool) -> void:
 	arena.queue_free()
+	EffectQueue.clear()
 	if player_win_flag == false:
 		player_stats.health -= 1
 	if player_stats.health <= 0:
