@@ -5,9 +5,8 @@ const ARENA_SCENE: PackedScene = preload("res://combat/arena/arena.tscn")
 const SHOP_SCENE: PackedScene = preload("res://shop/shop.tscn")
 const MAIN_MENU_SCENE: PackedScene = preload("res://menus/main_menu/main_menu.tscn")
 const SETTINGS_MENU_SCENE: PackedScene = preload("res://menus/settings_menu/settings_menu.tscn")
+const GAME_OVER_SCENE: PackedScene = preload("res://menus/game_over_screen/game_over.tscn")
 
-# TODO: remove this test code when we get the shop setup
-@export var test_friendly_hero_list: HeroArray
 @export var player_stats: PlayerStats
 var shop: Shop
 var arena: Arena
@@ -19,19 +18,28 @@ func _ready() -> void:
 	go_to_main_menu()
 
 
+func new_game_start() -> void:
+	round_number = 0
+	player_stats = PlayerStats.new()
+	go_to_shop()
+
+
 func go_to_arena() -> void:
 	arena = ARENA_SCENE.instantiate()
 	add_child(arena)
 	arena.exit_button.pressed.connect(go_to_main_menu)
 	arena.exit_button.pressed.connect(arena.queue_free)
-	# TODO: connect this to make a settings menu popup
-	#arena.settings_button.connect()
-	arena.start_battle(round_number, test_friendly_hero_list)
+	arena.combat_finished.connect(_on_arena_combat_finished)
+	arena.start_battle(round_number, player_stats.heroes)
 
 
 func go_to_shop() -> void:
 	player_stats.money += player_stats.income
 	round_number += 1
+	shop = SHOP_SCENE.instantiate()
+	shop.player_stats = player_stats
+	add_child(shop)
+	shop.next_round_button.pressed.connect(go_to_arena)
 
 
 func go_to_main_menu() -> void:
@@ -49,3 +57,21 @@ func go_to_settings_menu() -> void:
 	add_child(menu)
 	menu.exit_button.pressed.connect(menu.queue_free)
 	menu.exit_button.pressed.connect(go_to_main_menu)
+
+
+func go_to_game_over_screen() -> void:
+	var game_over: GameOverScreen = GAME_OVER_SCENE.instantiate()
+	add_child(game_over)
+	game_over.game_over_label.text = "Game Over on Round " + str(round_number) + "!!"
+	game_over.play_again_button.pressed.connect(new_game_start)
+	game_over.exit_button.pressed.connect(get_tree().quit)	
+
+
+func _on_arena_combat_finished(player_win_flag: bool) -> void:
+	arena.queue_free()
+	if player_win_flag == false:
+		player_stats.health -= 1
+	if player_stats.health <= 0:
+		go_to_game_over_screen()
+	else:
+		go_to_shop()

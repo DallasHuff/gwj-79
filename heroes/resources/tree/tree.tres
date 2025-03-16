@@ -16,6 +16,6 @@ rarity = 0
 effects = Array[ExtResource("1_y7a32")]([ExtResource("2_0tkv6"), ExtResource("3_q8dqb")])
 item_list = Array[ExtResource("2_ufdoh")]([])
 hero_name = "Treant"
-description = "Whenever damaged, deal 2 damage to the attacker and heal 1 health."
+tooltip = "When damaged, deal 2 damage to the attacker and heal for 1 hp."
 model = ExtResource("3_ufdoh")
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

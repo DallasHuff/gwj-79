@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://doar14eb7nq2"
-path="res://.godot/imported/Murdoch(1).png-585bcf8a61b06731ce2551d2644670c9.ctex"
+uid="uid://dbtm6lke4v1td"
+path="res://.godot/imported/apple.png-4322763b6704f5425a712d7cafaf8ec1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset_dump/delainey/Murdoch(1).png"
-dest_files=["res://.godot/imported/Murdoch(1).png-585bcf8a61b06731ce2551d2644670c9.ctex"]
+source_file="res://effects/buff_effect/apple.png"
+dest_files=["res://.godot/imported/apple.png-4322763b6704f5425a712d7cafaf8ec1.ctex"]
 
 [params]
 

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ca44x3umbf4vj"]
+
+[ext_resource type="Texture2D" uid="uid://r4dj4nbt0t4f" path="res://effects/copy_effect/stars.png" id="1_aer4r"]
+
+[node name="CopyEffectSprite" type="Sprite2D"]
+z_index = 3
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("1_aer4r")

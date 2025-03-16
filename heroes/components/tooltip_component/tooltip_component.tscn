@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://1ewf4vyq4t01"]
+
+[ext_resource type="Script" uid="uid://ckd8bk38d4fxy" path="res://heroes/components/tooltip_component/tooltip_component.gd" id="1_pbiso"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7u3sd"]
+size = Vector2(135, 149)
+
+[node name="TooltipComponent" type="Area2D"]
+script = ExtResource("1_pbiso")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, 1.5)
+shape = SubResource("RectangleShape2D_7u3sd")
+
+[node name="TooltipPanel" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(200, 100)
+offset_left = -104.0
+offset_top = -175.0
+offset_right = 96.0
+offset_bottom = -75.0
+mouse_filter = 2
+
+[node name="TooltipLabel" type="RichTextLabel" parent="TooltipPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Deals 1 damage to all enemies when slain"
+scroll_active = false
+
+[node name="TooltipTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="timeout" from="TooltipTimer" to="." method="_on_tooltip_timer_timeout"]

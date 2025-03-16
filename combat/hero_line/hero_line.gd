@@ -30,7 +30,7 @@ func setup(stat_list: HeroArray) -> void:
 		hero_list[i] = _create_hero(stat, i)
 		hero_list[i].line_position = i
 		i += 1
-		
+	
 	update_hero_positions()
 	
 
@@ -66,6 +66,20 @@ func update_hero_positions() -> void:
 				break
 
 
+func make_heroes_run() -> void:
+	var height_diff: float = 50
+	for hero: Hero in hero_list:
+		if not is_instance_valid(hero):
+			continue
+		var random_time_offset := randf_range(0, 0.1)
+
+		var tween := get_tree().create_tween()
+		tween.tween_property(hero, "global_position:y", self.global_position.y + height_diff, (0.25 + random_time_offset) / Settings.battle_speed)
+		tween.tween_property(hero, "global_position:y", self.global_position.y - height_diff, (0.25 + random_time_offset) / Settings.battle_speed)
+		tween.set_loops(4)
+		tween.tween_property(hero, "global_position:y", self.global_position.y, 0.125 / Settings.battle_speed)
+
+
 func summon(pos: int, stats: HeroStats) -> void:
 	var i := hero_list.size() - 1
 	if pos < 0 or pos > i:
@@ -86,7 +100,6 @@ func summon(pos: int, stats: HeroStats) -> void:
 
 	var new_hero: Hero = _create_hero(stats, i)
 	EventsBus.hero_summoned.emit(new_hero)
-	update_hero_positions()
 
 
 func find_hero_position(hero: Hero) -> int:
@@ -187,6 +200,21 @@ func damage_all(damage: int) -> void:
 func get_global_from_line_pos(i: int) -> Vector2:
 	return global_position + positions[i]
 
+
+func get_back_pos() -> int:
+	var i := hero_list.size()-1
+	var hero: Hero = hero_list[i]
+	while not is_instance_valid(hero) and i >= 0:
+		i -= 1
+		hero = hero_list[i]
+	return i+1
+
+
+func is_line_full() -> bool:
+	for i in range(hero_list.size()):
+		if not is_instance_valid(hero_list[i]):
+			return false
+	return true
 
 
 func _on_hero_death(hero: Hero) -> void:

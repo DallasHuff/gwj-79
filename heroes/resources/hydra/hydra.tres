@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="HeroStats" load_steps=5 format=3 uid="uid://c2yw8lbpo5g78"]
 
 [ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_vkqvp"]
-[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/item.gd" id="2_8dspx"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="2_8dspx"]
 [ext_resource type="Texture2D" uid="uid://cyrkvbfd3ss4i" path="res://heroes/resources/hydra/hydra.png" id="3_8dspx"]
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="3_hln36"]
 
@@ -10,8 +10,10 @@ script = ExtResource("3_hln36")
 max_hp = 1
 current_hp = 1
 damage = 1
+rarity = 0
 effects = Array[ExtResource("1_vkqvp")]([])
 item_list = Array[ExtResource("2_8dspx")]([])
 hero_name = "Hydra"
+tooltip = "No effect"
 model = ExtResource("3_8dspx")
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

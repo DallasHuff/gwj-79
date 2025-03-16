@@ -9,6 +9,9 @@ const HEAL_SPRITE := preload("res://effects/heal_effect/heal_sprite.tscn")
 @export var include_self := false
 @export_category("values")
 @export var heal: int = 1
+@export var use_effect_owner_damage_as_heal := false
+@export var use_effect_owner_current_health_as_heal := false
+@export var use_effect_owner_max_health_as_heal := false
 
 
 func execute() -> void:
@@ -20,6 +23,13 @@ func execute() -> void:
 
 	var effect_owner: Hero = context[ContextBuilder.ContextKey.EFFECT_OWNER]
 	var position := _get_owner_position()
+
+	if use_effect_owner_damage_as_heal:
+		heal = effect_owner.stats.damage
+	elif use_effect_owner_current_health_as_heal:
+		heal = effect_owner.stats.current_hp
+	elif use_effect_owner_max_health_as_heal:
+		heal = effect_owner.stats.max_hp
 
 	var targets: Array[Hero] = _get_aoe_target(aoe_target_type)
 	for target_type: TargetType in single_target_types:
@@ -33,9 +43,9 @@ func execute() -> void:
 			continue
 		if target.dying:
 			continue
-		print("Healing target: ", target.name)
+		print("Doing ", heal, " healing to target: ", target.name)
 		var heal_sprite: Node2D = HEAL_SPRITE.instantiate()
-		effect_owner.get_tree().root.add_child(heal_sprite)
+		effect_owner.add_child(heal_sprite)
 		heal_sprite.global_position = position + Vector2(0, HEIGHT_ABOVE_HERO)
 
 		var tween := effect_owner.get_tree().create_tween()

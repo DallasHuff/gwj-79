@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="HeroArray" load_steps=5 format=3 uid="uid://xnusq6emvqbh"]
+[gd_resource type="Resource" script_class="HeroArray" load_steps=4 format=3 uid="uid://xnusq6emvqbh"]
 
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="1_yy6dx"]
 [ext_resource type="Script" uid="uid://cq5o6kamx720a" path="res://combat/hero_array.gd" id="2_14jv0"]
-[ext_resource type="Resource" uid="uid://csfguy4pfjem6" path="res://heroes/resources/tree/tree.tres" id="2_poqnm"]
-[ext_resource type="Resource" uid="uid://dowcow3idr6uh" path="res://heroes/resources/void_cat/void_cat.tres" id="3_kinje"]
+[ext_resource type="Resource" uid="uid://bb5vk5cjocn75" path="res://heroes/resources/murloc/murloc.tres" id="2_poqnm"]
 
 [resource]
 script = ExtResource("2_14jv0")
-heroes = Array[ExtResource("1_yy6dx")]([ExtResource("2_poqnm"), ExtResource("2_poqnm"), ExtResource("3_kinje")])
+heroes = Array[ExtResource("1_yy6dx")]([ExtResource("2_poqnm")])
 metadata/_custom_type_script = "uid://cq5o6kamx720a"
