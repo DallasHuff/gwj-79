@@ -100,7 +100,6 @@ func summon(pos: int, stats: HeroStats) -> void:
 
 	var new_hero: Hero = _create_hero(stats, i)
 	EventsBus.hero_summoned.emit(new_hero)
-	update_hero_positions()
 
 
 func find_hero_position(hero: Hero) -> int:

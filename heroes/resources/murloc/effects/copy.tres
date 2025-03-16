@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CopyEffect" load_steps=2 format=3 uid="uid://bklnnoxxxkxrn"]
+
+[ext_resource type="Script" uid="uid://xkfno6wtooml" path="res://effects/copy_effect/copy_effect.gd" id="1_c61j3"]
+
+[resource]
+script = ExtResource("1_c61j3")
+single_target_type = 1
+triggers = Array[int]([0])
+metadata/_custom_type_script = "uid://xkfno6wtooml"
