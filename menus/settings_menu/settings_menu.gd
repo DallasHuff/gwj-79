@@ -1,7 +1,7 @@
 class_name SettingsMenu
 extends Control
 
-@onready var fullscreen: CheckButton = %FullscreenButton
+@onready var fullscreen: CheckBox = %FullscreenButton
 @onready var master_volume: HSlider = %MasterVolumeSlider
 @onready var sfx_volume: HSlider = %SFXVolumeSlider
 @onready var music_volume: HSlider = %MusicVolumeSlider

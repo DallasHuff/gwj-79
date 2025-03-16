@@ -89,7 +89,7 @@ func reroll_shop() -> void:
 
 func add_heroes() -> void:
 	var stat_list : Array[HeroStats] = []
-	for i in range(heroes.size()-1):
+	for i in range(heroes.size()):
 		stat_list.append(hero_pool[randi_range(0, hero_pool.size()-1)])
 	
 	var i: int = 0
@@ -177,6 +177,8 @@ func _on_next_round_button_pressed() -> void:
 	var hero_array := HeroArray.new()
 	print(player_party.line_info())
 	for i in range(player_party.hero_list.size()):
+		if not is_instance_valid(player_party.hero_list[i]):
+			continue
 		hero_array.heroes[i] = player_party.hero_list[i].stats
 	player_stats.heroes = hero_array
 	queue_free()

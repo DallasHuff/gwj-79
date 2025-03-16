@@ -43,5 +43,10 @@ func is_empty() -> bool:
 	return queue1.is_empty() and queue2.is_empty()
 
 
+func clear() -> void:
+	queue1.clear()
+	queue2.clear()
+
+
 func print_info() -> void:
 	print("queue1: ", queue1, " queue2: ", queue2)

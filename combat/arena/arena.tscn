@@ -25,6 +25,15 @@ script = ExtResource("3_sg87e")
 round_1_list = Array[ExtResource("4_1qt8t")]([ExtResource("5_kxugw")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.121569, 0.2, 1)
 
 [node name="ExitContainer" type="MarginContainer" parent="CanvasLayer"]
 offset_right = 72.0
@@ -34,6 +43,7 @@ theme_override_constants/margin_top = 75
 
 [node name="ExitButton" type="Button" parent="CanvasLayer/ExitContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 125)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 85
@@ -53,6 +63,7 @@ theme_override_constants/margin_right = 75
 
 [node name="SettingsButton" type="Button" parent="CanvasLayer/SettingsContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 120)
 layout_mode = 2
 theme_override_font_sizes/font_size = 85
 text = "Settings"
