@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=4 format=3 uid="uid://beh2xe1c0g7kg"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_jr1y4"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="2_wa2wh"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="3_bsy2d"]
+
+[resource]
+script = ExtResource("3_bsy2d")
+max_hp = 1
+current_hp = 1
+damage = 5
+rarity = 0
+effects = Array[ExtResource("1_jr1y4")]([])
+item_list = Array[ExtResource("2_wa2wh")]([])
+hero_name = "Ogre"
+description = "Me do damage."
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

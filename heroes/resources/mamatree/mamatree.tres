@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=8 format=3 uid="uid://cqm08ja3ptyyc"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_alfuw"]
+[ext_resource type="Script" uid="uid://lc8jysx7dkah" path="res://effects/buff_effect/buff_effect.gd" id="2_1rhus"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="2_ac7jy"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="3_1rhus"]
+[ext_resource type="Script" uid="uid://fcr77u101a5h" path="res://effects/damage_effect/damage_effect.gd" id="3_06hfn"]
+
+[sub_resource type="Resource" id="Resource_hy6g6"]
+script = ExtResource("2_1rhus")
+aoe_target_type = 2
+single_target_types = Array[int]([])
+include_self = false
+health_buff = 2
+attack_buff = 1
+triggers = Array[int]([12])
+metadata/_custom_type_script = "uid://lc8jysx7dkah"
+
+[sub_resource type="Resource" id="Resource_x7ue7"]
+script = ExtResource("3_06hfn")
+aoe_target_type = 3
+single_target_types = Array[int]([14])
+include_self = false
+damage = 1
+use_effect_owner_damage = true
+triggers = Array[int]([13])
+metadata/_custom_type_script = "uid://fcr77u101a5h"
+
+[resource]
+script = ExtResource("3_1rhus")
+max_hp = 10
+current_hp = 3
+damage = 2
+rarity = 1
+effects = Array[ExtResource("1_alfuw")]([SubResource("Resource_hy6g6"), SubResource("Resource_x7ue7")])
+item_list = Array[ExtResource("2_ac7jy")]([])
+hero_name = "Mama Tree"
+description = "Whenever an enemy is buffed, give your other heroes +1/2. Whenever this hero is healed, deal damage equal to its attack to a random freindly hero."
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

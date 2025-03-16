@@ -1,0 +1,60 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=9 format=3 uid="uid://d3g6qwykldrdu"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_tcice"]
+[ext_resource type="Script" uid="uid://dwsiqp6snmngd" path="res://effects/summon_effect/summon_effect.gd" id="2_cv6sv"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="2_ie2de"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="3_cv6sv"]
+
+[sub_resource type="Resource" id="Resource_efknj"]
+script = ExtResource("3_cv6sv")
+max_hp = 5
+current_hp = 5
+damage = 5
+rarity = 1
+effects = Array[ExtResource("1_tcice")]([])
+item_list = Array[ExtResource("2_ie2de")]([])
+hero_name = "Small Dallas"
+description = ""
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
+
+[sub_resource type="Resource" id="Resource_t7u0v"]
+script = ExtResource("2_cv6sv")
+summon_hero_stats = SubResource("Resource_efknj")
+summon_position = 0
+use_effect_owner_hp = false
+use_effect_owner_attack = false
+triggers = Array[int]([6])
+metadata/_custom_type_script = "uid://dwsiqp6snmngd"
+
+[sub_resource type="Resource" id="Resource_imctj"]
+script = ExtResource("3_cv6sv")
+max_hp = 10
+current_hp = 10
+damage = 10
+rarity = 2
+effects = Array[ExtResource("1_tcice")]([SubResource("Resource_t7u0v")])
+item_list = Array[ExtResource("2_ie2de")]([])
+hero_name = "Medium Dallas"
+description = ""
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
+
+[sub_resource type="Resource" id="Resource_iepka"]
+script = ExtResource("2_cv6sv")
+summon_hero_stats = SubResource("Resource_imctj")
+summon_position = 0
+use_effect_owner_hp = false
+use_effect_owner_attack = false
+triggers = Array[int]([6])
+metadata/_custom_type_script = "uid://dwsiqp6snmngd"
+
+[resource]
+script = ExtResource("3_cv6sv")
+max_hp = 20
+current_hp = 20
+damage = 20
+rarity = 3
+effects = Array[ExtResource("1_tcice")]([SubResource("Resource_iepka")])
+item_list = Array[ExtResource("2_ie2de")]([])
+hero_name = "Dallas"
+description = "When defeated, summon a 10/10 Medium Dallas, who upon his death, summons a 5/5 Small Dallas."
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
