@@ -37,7 +37,7 @@ func execute() -> void:
 			continue
 		if target.dying:
 			continue
-		print("Damaging target: ", target.name)
+		print("Doing ", damage, " damage to target: ", target.name)
 		
 		var dmg_sprite: Node2D = DAMAGE_SPRITE.instantiate()
 		effect_owner.get_tree().root.add_child(dmg_sprite)

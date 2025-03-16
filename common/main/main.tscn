@@ -1,10 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://drmehhc0yi1t3"]
+[gd_scene load_steps=3 format=3 uid="uid://drmehhc0yi1t3"]
 
 [ext_resource type="Script" uid="uid://c74fdf67vbhy1" path="res://common/main/main.gd" id="1_4mqva"]
-[ext_resource type="Resource" uid="uid://ddr8buwxywkmk" path="res://player/friendly_hero_array.tres" id="2_es36h"]
 [ext_resource type="Resource" uid="uid://bd23w3rpn257i" path="res://player/player_stats.tres" id="5_4eugw"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_4mqva")
-friendly_hero_list = ExtResource("2_es36h")
 player_stats = ExtResource("5_4eugw")

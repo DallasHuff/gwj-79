@@ -8,5 +8,5 @@
 
 [resource]
 script = ExtResource("2_nq48o")
-heroes = Array[ExtResource("1_154jj")]([ExtResource("2_8k8tx"), ExtResource("3_unxrk"), ExtResource("4_adp2b")])
+heroes = Array[ExtResource("1_154jj")]([ExtResource("2_8k8tx"), ExtResource("3_unxrk"), ExtResource("4_adp2b"), null, null])
 metadata/_custom_type_script = "uid://cq5o6kamx720a"

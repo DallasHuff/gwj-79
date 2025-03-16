@@ -7,7 +7,6 @@ const MAIN_MENU_SCENE: PackedScene = preload("res://menus/main_menu/main_menu.ts
 const SETTINGS_MENU_SCENE: PackedScene = preload("res://menus/settings_menu/settings_menu.tscn")
 const GAME_OVER_SCENE: PackedScene = preload("res://menus/game_over_screen/game_over.tscn")
 
-@export var friendly_hero_list: HeroArray
 @export var player_stats: PlayerStats
 var shop: Shop
 var arena: Arena
@@ -21,7 +20,7 @@ func _ready() -> void:
 
 func new_game_start() -> void:
 	round_number = 0
-	friendly_hero_list.heroes.fill(null)
+	player_stats = PlayerStats.new()
 	go_to_shop()
 
 
@@ -30,23 +29,17 @@ func go_to_arena() -> void:
 	add_child(arena)
 	arena.exit_button.pressed.connect(go_to_main_menu)
 	arena.exit_button.pressed.connect(arena.queue_free)
-	# TODO: connect this to make a settings menu popup
-	#arena.settings_button.connect()
-	arena.start_battle(round_number, friendly_hero_list)
 	arena.combat_finished.connect(_on_arena_combat_finished)
+	arena.start_battle(round_number, player_stats.heroes)
 
 
 func go_to_shop() -> void:
-	arena.queue_free()
 	player_stats.money += player_stats.income
 	round_number += 1
 	shop = SHOP_SCENE.instantiate()
-	shop.connect("request_friendly_hero_list", Callable(self, "_on_shop_request_heroes"))
-	# shop.money = player_stats.money
 	shop.player_stats = player_stats
 	add_child(shop)
-	shop.next_round_button.pressed.connect(go_to_arena) # Any changes to the player roster will not reflect, this loads a fresh arena scene as if just starting the game
-	shop.next_round_button.pressed.connect(shop.queue_free)
+	shop.next_round_button.pressed.connect(go_to_arena)
 
 
 func go_to_main_menu() -> void:
@@ -71,11 +64,7 @@ func go_to_game_over_screen() -> void:
 	add_child(game_over)
 	game_over.game_over_label.text = "Game Over on Round " + str(round_number) + "!!"
 	game_over.play_again_button.pressed.connect(new_game_start)
-	game_over.exit_button.pressed.connect(get_tree().quit)
-
-
-func _on_shop_request_heroes() -> void:
-	shop.import_player_party(friendly_hero_list)
+	game_over.exit_button.pressed.connect(get_tree().quit)	
 
 
 func _on_arena_combat_finished(player_win_flag: bool) -> void:
