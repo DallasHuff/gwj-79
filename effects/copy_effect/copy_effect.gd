@@ -41,3 +41,7 @@ func execute() -> void:
 	y_tween.tween_property(copy_sprite, "global_position:y", target.global_position.y + HEIGHT_ABOVE_HERO, flight_time / 2).set_ease(Tween.EASE_IN)
 	tween.tween_callback(copy_sprite.queue_free).set_delay(flight_time)
 	tween.tween_callback(finish)
+
+
+func get_effect_name() -> String:
+	return "CopyEffect"

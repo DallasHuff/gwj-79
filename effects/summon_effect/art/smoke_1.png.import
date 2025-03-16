@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1021niugw21x"
-path="res://.godot/imported/void_jelly.png-7a817bab612180c1a414b27d834a5a7f.ctex"
+uid="uid://b7ehieow1mw5v"
+path="res://.godot/imported/smoke_1.png-e86b533cffe7202b4e8eb71c9b32217e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://heroes/resources/void_jelly/void_jelly.png"
-dest_files=["res://.godot/imported/void_jelly.png-7a817bab612180c1a414b27d834a5a7f.ctex"]
+source_file="res://effects/summon_effect/art/smoke_1.png"
+dest_files=["res://.godot/imported/smoke_1.png-e86b533cffe7202b4e8eb71c9b32217e.ctex"]
 
 [params]
 

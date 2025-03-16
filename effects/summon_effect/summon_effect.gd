@@ -1,7 +1,8 @@
 class_name SummonEffect
 extends Effect
 
-const SUMMON_SPRITE := preload("res://effects/summon_effect/summon_sprite.tscn")
+const SUMMON_SPRITE := preload("res://effects/summon_effect/art/summon_sprite.tscn")
+const SUMMON_PARTICLES := preload("res://effects/summon_effect/art/summon_particles.tscn")
 
 enum SummonPosition {
 	SELF,
@@ -57,7 +58,7 @@ func execute() -> void:
 		
 	# Animate the sprite
 	var position := _get_owner_position()
-	var summon_sprite: Sprite2D = SUMMON_SPRITE.instantiate()
+	var summon_sprite: Node2D = SUMMON_SPRITE.instantiate()
 	friendly_line.add_child(summon_sprite)
 	summon_sprite.global_position = position + Vector2(0, HEIGHT_ABOVE_HERO)
 
@@ -66,12 +67,20 @@ func execute() -> void:
 	var y_tween := effect_owner.get_tree().create_tween()
 	y_tween.tween_property(summon_sprite, "global_position:y", target_line.get_global_from_line_pos(summon_hero_pos).y + HEIGHT_ABOVE_HERO + ARC_HEIGHT, flight_time / 2).set_ease(Tween.EASE_OUT)
 	y_tween.tween_property(summon_sprite, "global_position:y", target_line.get_global_from_line_pos(summon_hero_pos).y, flight_time / 2).set_ease(Tween.EASE_IN)
-	tween.tween_callback(summon_sprite.queue_free).set_delay(flight_time)
+	tween.tween_callback(summon_sprite.queue_free)
+	tween.tween_callback(_make_summon_particles.bind(summon_hero_pos).bind(target_line))
 
 	await tween.finished
 
 	target_line.summon(summon_hero_pos, summon_hero_stats)
 	finish()
+
+
+func _make_summon_particles(target_line: HeroLine, summon_hero_pos: int) -> void:
+	var particles: Node2D = SUMMON_PARTICLES.instantiate()
+	target_line.add_child(particles)
+	particles.global_position = target_line.get_global_from_line_pos(summon_hero_pos)
+	particles.emitting = true
 
 
 func get_effect_name() -> String:

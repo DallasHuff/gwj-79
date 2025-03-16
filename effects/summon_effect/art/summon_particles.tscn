@@ -1,0 +1,56 @@
+[gd_scene load_steps=11 format=3 uid="uid://dy043qkl8umtc"]
+
+[ext_resource type="Texture2D" uid="uid://bc5a5h8oqrq8t" path="res://effects/summon_effect/art/smoke_3.png" id="1_qbpvf"]
+[ext_resource type="Script" uid="uid://exx5qy0hrqp2" path="res://effects/summon_effect/art/summon_particles.gd" id="2_ou4v4"]
+
+[sub_resource type="Curve" id="Curve_fkvpf"]
+_data = [Vector2(0, 0.505618), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_aa7n3"]
+_data = [Vector2(0, 0.561798), 0.0, 0.0, 0, 0, Vector2(0.663507, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_2cfxg"]
+curve_x = SubResource("Curve_fkvpf")
+curve_y = SubResource("Curve_aa7n3")
+
+[sub_resource type="Curve" id="Curve_qbpvf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_ou4v4"]
+curve = SubResource("Curve_qbpvf")
+
+[sub_resource type="Curve" id="Curve_ou4v4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.113744, 0.629214), 0.0, 0.0, 0, 0, Vector2(0.995261, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xckpc"]
+curve = SubResource("Curve_ou4v4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_he0dp"]
+particle_flag_disable_z = true
+angular_velocity_min = -30.0
+angular_velocity_max = 30.0
+directional_velocity_min = -50.0
+directional_velocity_max = 50.0
+directional_velocity_curve = SubResource("CurveXYZTexture_2cfxg")
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -10.0
+linear_accel_max = 1000.0
+linear_accel_curve = SubResource("CurveTexture_ou4v4")
+scale_min = 0.05
+scale_max = 0.12
+scale_curve = SubResource("CurveTexture_xckpc")
+
+[node name="SummonParticles" type="GPUParticles2D"]
+z_index = 10
+emitting = false
+texture = ExtResource("1_qbpvf")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_he0dp")
+script = ExtResource("2_ou4v4")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

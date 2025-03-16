@@ -1,7 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://dunugqq3s07qg"]
 
-[ext_resource type="Texture2D" uid="uid://bmj67qrgopuct" path="res://effects/buff_effect/hamburger.png" id="1_v1sem"]
+[ext_resource type="Texture2D" uid="uid://dbtm6lke4v1td" path="res://effects/buff_effect/apple.png" id="1_1w6jt"]
 
-[node name="BuffSprite" type="Sprite2D"]
-scale = Vector2(0.199713, 0.21875)
-texture = ExtResource("1_v1sem")
+[node name="Node2D" type="Node2D"]
+
+[node name="BuffSprite" type="Sprite2D" parent="."]
+z_index = 3
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("1_1w6jt")

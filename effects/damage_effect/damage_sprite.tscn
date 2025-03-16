@@ -1,9 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://yoby3frb6sie"]
 
-[ext_resource type="Texture2D" uid="uid://byw6qevtlkxoa" path="res://effects/damage_effect/rocket.png" id="1_i03gm"]
+[ext_resource type="Texture2D" uid="uid://b0fw4143da65m" path="res://effects/damage_effect/shuriken.png" id="1_oavdj"]
 
-[node name="DamageSprite" type="Sprite2D"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_i03gm")
+[node name="Node2D" type="Node2D"]
 
-[node name="NOTE_ICHANGEDSCALEOFABOVESPRITE" type="Node" parent="."]
+[node name="DamageSprite" type="Sprite2D" parent="."]
+z_index = 3
+scale = Vector2(0.045, 0.045)
+texture = ExtResource("1_oavdj")
