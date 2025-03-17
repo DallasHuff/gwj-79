@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b076010rnvrtp" path="res://combat/arena/components/battle_speed_controller/battle_speed_controller.tscn" id="6_kxugw"]
 
 [node name="Arena" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_i5doo")
 
 [node name="FriendlyHeroLine" parent="." instance=ExtResource("2_13g3s")]
@@ -49,7 +50,31 @@ size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 85
 text = "Exit"
 
-[node name="BattleSpeedButtonGroup" parent="CanvasLayer" instance=ExtResource("6_kxugw")]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -332.0
+offset_right = 332.0
+offset_bottom = 145.0
+grow_horizontal = 2
+theme_override_constants/separation = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 70
+
+[node name="PauseButton" type="Button" parent="CanvasLayer/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+process_mode = 3
+custom_minimum_size = Vector2(155, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "ii"
+
+[node name="BattleSpeedButtonGroup" parent="CanvasLayer/HBoxContainer" instance=ExtResource("6_kxugw")]
+layout_mode = 2
 
 [node name="SettingsContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 1
@@ -63,7 +88,10 @@ theme_override_constants/margin_right = 75
 
 [node name="SettingsButton" type="Button" parent="CanvasLayer/SettingsContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(500, 120)
+custom_minimum_size = Vector2(420, 120)
 layout_mode = 2
-theme_override_font_sizes/font_size = 85
+theme_override_font_sizes/font_size = 70
 text = "Settings"
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/MarginContainer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="toggled" from="CanvasLayer/HBoxContainer/MarginContainer/PauseButton" to="." method="_on_pause_button_toggled"]

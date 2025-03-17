@@ -1,4 +1,4 @@
-class_name SettingsMenu
+class_name ArenaSettingsMenu
 extends Control
 
 @onready var fullscreen: CheckBox = %FullscreenButton

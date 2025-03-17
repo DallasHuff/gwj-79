@@ -1,17 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://bl5hk0oi4y4a"]
 
 [ext_resource type="Script" uid="uid://kq1fxfuwrqut" path="res://heroes/components/hero.gd" id="1_bhrjw"]
+[ext_resource type="Theme" uid="uid://txnhaabb1iib" path="res://themes/default_theme.tres" id="2_rbim2"]
 [ext_resource type="Texture2D" uid="uid://dwygc3evt85wp" path="res://heroes/resources/murloc/murloc.png" id="3_c4el2"]
 [ext_resource type="PackedScene" uid="uid://1ewf4vyq4t01" path="res://heroes/components/tooltip_component/tooltip_component.tscn" id="3_rjlwa"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_c4el2"]
-specular_color = Color(1, 0, 0, 1)
-
-[sub_resource type="CurveTexture" id="CurveTexture_ugt60"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_t1gkh"]
-normal_texture = SubResource("CurveTexture_ugt60")
-specular_color = Color(1, 0, 1, 1)
+[ext_resource type="Texture2D" uid="uid://d0360qs32cyw3" path="res://heroes/components/general_art/swords_crossed.png" id="3_rwnei"]
+[ext_resource type="Texture2D" uid="uid://cwkkax5nhtycj" path="res://heroes/components/general_art/heart.png" id="4_rbim2"]
 
 [node name="Hero" type="Node2D"]
 script = ExtResource("1_bhrjw")
@@ -48,17 +42,38 @@ texture = ExtResource("3_c4el2")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="HealthTexture" type="TextureRect" parent="Control"]
-modulate = Color(1, 0, 0, 1)
-layout_mode = 0
-offset_left = 24.0
-offset_top = 33.0
-offset_right = 73.0
-offset_bottom = 77.0
-mouse_filter = 2
-texture = SubResource("CanvasTexture_c4el2")
+[node name="MarginContainer2" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -50.0
+offset_right = 110.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 50
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/HealthTexture"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+
+[node name="AttackTexture" type="TextureRect" parent="Control/MarginContainer2/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_rwnei")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer2/HBoxContainer/MarginContainer/AttackTexture"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,25 +83,26 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 4
 
-[node name="HealthLabel" type="Label" parent="Control/HealthTexture/MarginContainer"]
+[node name="AttackLabel" type="Label" parent="Control/MarginContainer2/HBoxContainer/MarginContainer/AttackTexture/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 0
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 1
 
-[node name="AttackTexture" type="TextureRect" parent="Control"]
-layout_mode = 0
-offset_left = -76.0
-offset_top = 32.0
-offset_right = -30.0
-offset_bottom = 76.0
-mouse_filter = 2
-texture = SubResource("CanvasTexture_t1gkh")
+[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer2/HBoxContainer"]
+layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/AttackTexture"]
+[node name="HealthTexture" type="TextureRect" parent="Control/MarginContainer2/HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_rbim2")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer2/HBoxContainer/MarginContainer2/HealthTexture"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -96,11 +112,13 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 4
 
-[node name="AttackLabel" type="Label" parent="Control/AttackTexture/MarginContainer"]
+[node name="HealthLabel" type="Label" parent="Control/MarginContainer2/HBoxContainer/MarginContainer2/HealthTexture/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 0
+theme = ExtResource("2_rbim2")
+theme_override_colors/font_color = Color(0, 0.827451, 0.988235, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.827451, 0.988235, 1)
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 1
