@@ -1,15 +1,10 @@
 class_name Shop
 extends Node2D
 
+signal next_round_requested
+
 const HERO_SCENE := preload("res://heroes/components/hero.tscn")
 const ITEM_SCENE := preload("res://items/components/item.tscn")
-
-@onready var reroll_button: Button = %RerollButton
-@onready var next_round_button: Button = %NextRoundButton
-@onready var item_container: Node = %ItemContainer
-@onready var hero_container: Node = %HeroContainer
-@onready var player_party: HeroLine = %PlayerParty
-@onready var money_display: RichTextLabel = %MoneyDisplay
 
 @export var hero_pool: Array[HeroStats]
 @export var item_pool: WeightedRandomList
@@ -22,6 +17,7 @@ var item_positions: Array[Vector2] = []
 var dist_between_heroes: int = 180
 var dist_between_items: int = 100
 var player_stats: PlayerStats
+var round_number: int = 0
 
 var hero_cost: Dictionary[HeroStats.Rarity, int] = {
 	HeroStats.Rarity.COMMON: 1,
@@ -29,6 +25,14 @@ var hero_cost: Dictionary[HeroStats.Rarity, int] = {
 	HeroStats.Rarity.RARE: 3,
 	HeroStats.Rarity.LEGENDARY: 5
 }
+
+@onready var reroll_button: Button = %RerollButton
+@onready var next_round_button: Button = %NextRoundButton
+@onready var item_container: Node = %ItemContainer
+@onready var hero_container: Node = %HeroContainer
+@onready var player_party: HeroLine = %PlayerParty
+@onready var money_display: RichTextLabel = %MoneyDisplay
+@onready var round_counter: RichTextLabel = %RoundCounter
 
 #TEMPORARY - TO BE REPLACED BY DRAG AND DROP
 @onready var bt_buy_hero_1: Button = %BtBuyHero1
@@ -66,6 +70,8 @@ func _ready() -> void:
 	for i in range(items.size()):
 		item_positions.append(Vector2(i * dist_between_items, 0) + item_offset)
 	
+	round_counter.text = "Round: " + str(round_number)
+
 	reroll_button.pressed.connect(reroll_shop)
 	reroll_shop()
 	_update_money(0)
@@ -177,6 +183,8 @@ func _update_money(delta: int) -> void:
 
 
 func _on_next_round_button_pressed() -> void:
+	if not player_party.has_alive_hero():
+		return
 	var hero_array := HeroArray.new()
 	print(player_party.line_info())
 	for i in range(player_party.hero_list.size()):
@@ -184,7 +192,7 @@ func _on_next_round_button_pressed() -> void:
 			continue
 		hero_array.heroes[i] = player_party.hero_list[i].stats
 	player_stats.heroes = hero_array
-	queue_free()
+	next_round_requested.emit()
 
 
 func _heroes_info() -> String:

@@ -14,3 +14,11 @@ func get_random_rarity_for_level() -> HeroStats.Rarity:
 
 	# return available_rarities[rng.rand_weighted(weights)]
 	return HeroStats.Rarity.COMMON
+
+
+func setup_for_new_game() -> void:
+	level = 1
+	money = 10
+	income = 5
+	health = 3
+	heroes = HeroArray.new()
