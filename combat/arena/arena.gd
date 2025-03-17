@@ -12,6 +12,9 @@ const LINE_POSITION_DIFF: float = 1000
 @onready var exit_button: Button = %ExitButton
 @onready var settings_button: Button = %SettingsButton
 @onready var pause_button: Button = %PauseButton
+@onready var round_label: Label = %RoundLabel
+@onready var player_health_label: Label = %PlayerHealthLabel
+@onready var money_label: Label = %MoneyLabel
 
 
 func _ready() -> void:
@@ -20,13 +23,17 @@ func _ready() -> void:
 	EventsBus.hero_died.connect(_on_hero_died)
 	EventsBus.attack_completed.connect(_on_attack_completed)
 	EventsBus.hero_healed.connect(_on_hero_healed)
+	EventsBus.player_stats_changed.connect(_on_player_stats_changed)
+
 	friendly_line.position.x = friendly_line.position.x - LINE_POSITION_DIFF
 	enemy_line.position.x = enemy_line.position.x + LINE_POSITION_DIFF
 
 
-func start_battle(round_number: int, friendly_heroes: HeroArray) -> void:
-	friendly_line.setup(friendly_heroes)
-	enemy_line.setup(enemy_manager.get_list_for_round(round_number))
+func start_battle(player_stats: PlayerStats) -> void:
+	_on_player_stats_changed(player_stats)
+
+	friendly_line.setup(player_stats.heroes)
+	enemy_line.setup(enemy_manager.get_list_for_round(player_stats.round))
 
 	await get_tree().create_timer(1 / Settings.battle_speed, false).timeout
 
@@ -161,3 +168,9 @@ func _on_attack_completed() -> void:
 
 func _on_pause_button_pressed() -> void:
 	EventsBus.pause_button_pressed.emit()
+
+
+func _on_player_stats_changed(player_stats: PlayerStats) -> void:
+	round_label.text = "Round: " + str(player_stats.round)
+	player_health_label.text = str(player_stats.health)
+	money_label.text = str(player_stats.money)
