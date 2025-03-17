@@ -20,6 +20,12 @@ enum SummonPosition {
 
 
 func execute() -> void:
+	if not check_default_context():
+		call_deferred("finish")
+		return
+
+	flight_time = flight_time / Settings.battle_speed
+
 	var effect_owner: Hero = context[ContextBuilder.ContextKey.EFFECT_OWNER]
 	var friendly_line: HeroLine = context[ContextBuilder.ContextKey.SAME_SIDE_HERO_LINE]
 	var other_line: HeroLine = context[ContextBuilder.ContextKey.OTHER_SIDE_HERO_LINE]
@@ -59,7 +65,7 @@ func execute() -> void:
 	# Animate the sprite
 	var position := _get_owner_position()
 	var summon_sprite: Node2D = SUMMON_SPRITE.instantiate()
-	friendly_line.add_child(summon_sprite)
+	effect_owner.add_child(summon_sprite)
 	summon_sprite.global_position = position + Vector2(0, HEIGHT_ABOVE_HERO)
 
 	var tween := effect_owner.get_tree().create_tween()

@@ -4,5 +4,6 @@
 [ext_resource type="Resource" uid="uid://bd23w3rpn257i" path="res://player/player_stats.tres" id="5_4eugw"]
 
 [node name="Main" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_4mqva")
 player_stats = ExtResource("5_4eugw")

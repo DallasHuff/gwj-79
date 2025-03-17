@@ -40,7 +40,7 @@ func execute() -> void:
 		print("Doing ", damage, " damage to target: ", target.name)
 		
 		var dmg_sprite: Node2D = DAMAGE_SPRITE.instantiate()
-		effect_owner.get_tree().root.add_child(dmg_sprite)
+		effect_owner.add_child(dmg_sprite)
 		dmg_sprite.global_position = position + Vector2(0, HEIGHT_ABOVE_HERO)
 
 		var tween := effect_owner.get_tree().create_tween()
@@ -51,7 +51,6 @@ func execute() -> void:
 		tween.tween_callback(dmg_sprite.queue_free).set_delay(flight_time)
 		tween.tween_callback(target.take_damage.bind(effect_owner).bind(damage))
 	
-	await effect_owner.get_tree().create_timer(flight_time, false).timeout
 	finish()
 
 

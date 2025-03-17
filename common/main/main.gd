@@ -6,16 +6,20 @@ const SHOP_SCENE: PackedScene = preload("res://shop/shop.tscn")
 const MAIN_MENU_SCENE: PackedScene = preload("res://menus/main_menu/main_menu.tscn")
 const SETTINGS_MENU_SCENE: PackedScene = preload("res://menus/settings_menu/settings_menu.tscn")
 const GAME_OVER_SCENE: PackedScene = preload("res://menus/game_over_screen/game_over.tscn")
+const ARENA_SETTINGS_SCENE: PackedScene = preload("res://menus/arena_settings_menu/arena_settings_menu.tscn")
 
 @export var player_stats: PlayerStats
 var shop: Shop
 var arena: Arena
+var arena_settings_menu: ArenaSettingsMenu
 var round_number: int = 0
 
 
 func _ready() -> void:
 	Global.main = self
 	go_to_main_menu()
+	
+	EventsBus.pause_button_pressed.connect(_on_pause_button_pressed)
 
 
 func new_game_start() -> void:
@@ -30,6 +34,7 @@ func go_to_arena() -> void:
 	arena.exit_button.pressed.connect(go_to_main_menu)
 	arena.exit_button.pressed.connect(arena.queue_free)
 	arena.exit_button.pressed.connect(EffectQueue.clear)
+	arena.settings_button.pressed.connect(_on_arena_settings_button_pressed)
 	arena.combat_finished.connect(_on_arena_combat_finished)
 	arena.start_battle(round_number, player_stats.heroes)
 
@@ -77,3 +82,21 @@ func _on_arena_combat_finished(player_win_flag: bool) -> void:
 		go_to_game_over_screen()
 	else:
 		go_to_shop()
+
+
+func _on_arena_settings_button_pressed() -> void:
+	arena_settings_menu = ARENA_SETTINGS_SCENE.instantiate()
+	add_child(arena_settings_menu)
+	arena_settings_menu.exit_button.pressed.connect(_on_arena_settings_exit_button_pressed.bind(arena_settings_menu))
+	arena.get_tree().paused = true
+
+
+func _on_arena_settings_exit_button_pressed(scene: ArenaSettingsMenu) -> void:
+	scene.queue_free()
+	arena.get_tree().paused = false
+
+
+func _on_pause_button_pressed() -> void:
+	if is_instance_valid(arena_settings_menu):
+		return
+	get_tree().paused = not get_tree().paused
