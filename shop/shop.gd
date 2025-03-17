@@ -72,6 +72,9 @@ func _ready() -> void:
 	_connect_temp_buttons()
 	player_party.setup(player_stats.heroes)
 
+	# TODO: give this money an animation or something so players can see their income adding to the money
+	player_stats.money += player_stats.income
+
 
 func reroll_shop() -> void:
 	heroes.fill(null) # Adjust later if the option to lock a selection is added
