@@ -85,3 +85,19 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 100
 text = "Exit"
+
+[node name="CreditsContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_bottom = 75
+
+[node name="CreditsButton" type="Button" parent="CanvasLayer/CreditsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(315, 100)
+layout_mode = 2
+text = "Credits"

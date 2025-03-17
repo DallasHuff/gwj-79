@@ -1,0 +1,122 @@
+[gd_scene load_steps=2 format=3 uid="uid://61h8d1quh0k8"]
+
+[ext_resource type="Script" uid="uid://qkqtqd31qav4" path="res://menus/credits_screen/credits_screen.gd" id="1_wgkvi"]
+
+[node name="CreditsScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wgkvi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.121569, 0.2, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 1780.0
+offset_bottom = 836.0
+theme_override_constants/margin_left = 225
+theme_override_constants/margin_top = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="DallasContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/DallasContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "dallas"
+
+[node name="Dash" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/DallasContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = " - "
+
+[node name="RolesLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/DallasContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "lead programmer
+ui design"
+
+[node name="KyleContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/KyleContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Kyle"
+
+[node name="Dash" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/KyleContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = " - "
+
+[node name="RolesLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/KyleContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "sound design lead
+programmer"
+
+[node name="DelaineyContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/DelaineyContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Delainey"
+
+[node name="Dash" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/DelaineyContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = " - "
+
+[node name="RolesLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/DelaineyContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "2D Artist"
+
+[node name="MunearContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/MunearContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Munear"
+
+[node name="Dash" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/MunearContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = " - "
+
+[node name="RolesLabel" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/MunearContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "hero designer"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+
+[node name="BackButton" type="Button" parent="CanvasLayer/MarginContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 150)
+layout_mode = 2
+text = "Back"

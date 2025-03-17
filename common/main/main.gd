@@ -7,6 +7,7 @@ const MAIN_MENU_SCENE: PackedScene = preload("res://menus/main_menu/main_menu.ts
 const SETTINGS_MENU_SCENE: PackedScene = preload("res://menus/settings_menu/settings_menu.tscn")
 const GAME_OVER_SCENE: PackedScene = preload("res://menus/game_over_screen/game_over.tscn")
 const ARENA_SETTINGS_SCENE: PackedScene = preload("res://menus/arena_settings_menu/arena_settings_menu.tscn")
+const CREDITS_SCENE: PackedScene = preload("res://menus/credits_screen/credits_screen.tscn")
 
 @export var player_stats: PlayerStats
 var shop: Shop
@@ -24,7 +25,8 @@ func _ready() -> void:
 
 func new_game_start() -> void:
 	round_number = 0
-	player_stats = PlayerStats.new()
+	# TODO: set up play stats init
+	# player_stats = PlayerStats.new()
 	go_to_shop()
 
 
@@ -40,7 +42,6 @@ func go_to_arena() -> void:
 
 
 func go_to_shop() -> void:
-	player_stats.money += player_stats.income
 	round_number += 1
 	shop = SHOP_SCENE.instantiate()
 	shop.player_stats = player_stats
@@ -52,10 +53,11 @@ func go_to_main_menu() -> void:
 	var menu: MainMenu = MAIN_MENU_SCENE.instantiate()
 	add_child(menu)
 	menu.play_button.pressed.connect(menu.queue_free)
-	menu.play_button.pressed.connect(go_to_arena)
+	menu.play_button.pressed.connect(new_game_start)
 	menu.settings_button.pressed.connect(menu.queue_free)
 	menu.settings_button.pressed.connect(go_to_settings_menu)
 	menu.exit_button.pressed.connect(get_tree().quit)
+	menu.credits_button.pressed.connect(go_to_credits_screen)
 
 
 func go_to_settings_menu() -> void:
@@ -71,6 +73,12 @@ func go_to_game_over_screen() -> void:
 	game_over.game_over_label.text = "Game Over on Round " + str(round_number) + "!!"
 	game_over.play_again_button.pressed.connect(new_game_start)
 	game_over.exit_button.pressed.connect(get_tree().quit)	
+
+
+func go_to_credits_screen() -> void:
+	var credits: CreditsScreen = CREDITS_SCENE.instantiate()
+	add_child(credits)
+	credits.back_button.pressed.connect(credits.queue_free)
 
 
 func _on_arena_combat_finished(player_win_flag: bool) -> void:
