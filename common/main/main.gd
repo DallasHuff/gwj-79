@@ -25,8 +25,7 @@ func _ready() -> void:
 
 func new_game_start() -> void:
 	round_number = 0
-	# TODO: set up play stats init
-	# player_stats = PlayerStats.new()
+	player_stats.setup_for_new_game()
 	go_to_shop()
 
 
@@ -45,8 +44,10 @@ func go_to_shop() -> void:
 	round_number += 1
 	shop = SHOP_SCENE.instantiate()
 	shop.player_stats = player_stats
+	shop.round_number = round_number
 	add_child(shop)
-	shop.next_round_button.pressed.connect(go_to_arena)
+	shop.next_round_requested.connect(shop.queue_free)
+	shop.next_round_requested.connect(go_to_arena)
 
 
 func go_to_main_menu() -> void:
