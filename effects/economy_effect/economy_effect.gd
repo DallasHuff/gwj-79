@@ -31,3 +31,4 @@ func _add_values() -> void:
 	var player_stats: PlayerStats = context[ContextBuilder.ContextKey.PLAYER_STATS]
 	player_stats.money += money_change_amount
 	player_stats.income += income_change_amount
+	EventsBus.player_stats_changed.emit(player_stats)

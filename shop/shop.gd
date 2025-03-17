@@ -17,7 +17,6 @@ var item_positions: Array[Vector2] = []
 var dist_between_heroes: int = 180
 var dist_between_items: int = 100
 var player_stats: PlayerStats
-var round_number: int = 0
 
 var hero_cost: Dictionary[HeroStats.Rarity, int] = {
 	HeroStats.Rarity.COMMON: 1,
@@ -70,13 +69,14 @@ func _ready() -> void:
 	for i in range(items.size()):
 		item_positions.append(Vector2(i * dist_between_items, 0) + item_offset)
 	
-	round_counter.text = "Round: " + str(round_number)
+	round_counter.text = "Round: " + str(player_stats.round)
 
 	reroll_button.pressed.connect(reroll_shop)
 	reroll_shop()
 	_update_money(0)
 	_connect_temp_buttons()
 	player_party.setup(player_stats.heroes)
+	_on_shop_entered()
 
 	# TODO: give this money an animation or something so players can see their income adding to the money
 	player_stats.money += player_stats.income
@@ -185,6 +185,19 @@ func _update_money(delta: int) -> void:
 func _on_next_round_button_pressed() -> void:
 	if not player_party.has_alive_hero():
 		return
+	
+	for hero: Hero in player_party.hero_list:
+		if is_instance_valid(hero):
+			hero.on_shop_ended(player_party)
+
+	# Run effect queue for shop-ended effects
+	while not EffectQueue.is_empty():
+		var effect: Effect = EffectQueue.front()
+		print("Executing effect: ", effect.get_effect_name())
+		EffectQueue.execute_next()
+		await effect.finished
+		await get_tree().create_timer(0.5 / Settings.battle_speed, false).timeout
+
 	var hero_array := HeroArray.new()
 	print(player_party.line_info())
 	for i in range(player_party.hero_list.size()):
@@ -193,6 +206,21 @@ func _on_next_round_button_pressed() -> void:
 		hero_array.heroes[i] = player_party.hero_list[i].stats
 	player_stats.heroes = hero_array
 	next_round_requested.emit()
+
+
+func _on_shop_entered() -> void:
+	for hero: Hero in player_party.hero_list:
+		if is_instance_valid(hero):
+			hero.on_shop_start(player_party)
+	
+	# Run effect queue for shop-entered effects
+	while not EffectQueue.is_empty():
+		var effect: Effect = EffectQueue.front()
+		print("Executing effect: ", effect.get_effect_name())
+		EffectQueue.execute_next()
+		await effect.finished
+		await get_tree().create_timer(0.5 / Settings.battle_speed, false).timeout
+
 
 
 func _heroes_info() -> String:

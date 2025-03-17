@@ -13,7 +13,6 @@ const CREDITS_SCENE: PackedScene = preload("res://menus/credits_screen/credits_s
 var shop: Shop
 var arena: Arena
 var arena_settings_menu: ArenaSettingsMenu
-var round_number: int = 0
 
 
 func _ready() -> void:
@@ -24,7 +23,6 @@ func _ready() -> void:
 
 
 func new_game_start() -> void:
-	round_number = 0
 	player_stats.setup_for_new_game()
 	go_to_shop()
 
@@ -37,14 +35,13 @@ func go_to_arena() -> void:
 	arena.exit_button.pressed.connect(EffectQueue.clear)
 	arena.settings_button.pressed.connect(_on_arena_settings_button_pressed)
 	arena.combat_finished.connect(_on_arena_combat_finished)
-	arena.start_battle(round_number, player_stats.heroes)
+	arena.start_battle(player_stats)
 
 
 func go_to_shop() -> void:
-	round_number += 1
+	player_stats.round += 1
 	shop = SHOP_SCENE.instantiate()
 	shop.player_stats = player_stats
-	shop.round_number = round_number
 	add_child(shop)
 	shop.next_round_requested.connect(shop.queue_free)
 	shop.next_round_requested.connect(go_to_arena)
@@ -71,7 +68,7 @@ func go_to_settings_menu() -> void:
 func go_to_game_over_screen() -> void:
 	var game_over: GameOverScreen = GAME_OVER_SCENE.instantiate()
 	add_child(game_over)
-	game_over.game_over_label.text = "Game Over on Round " + str(round_number) + "!!"
+	game_over.game_over_label.text = "Game Over on Round " + str(player_stats.round) + "!!"
 	game_over.play_again_button.pressed.connect(new_game_start)
 	game_over.exit_button.pressed.connect(get_tree().quit)	
 

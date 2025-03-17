@@ -117,12 +117,29 @@ func on_any_attack() -> void:
 	_check_effects_for_trigger(Effect.TriggerType.AFTER_ANY_ATTACK)
 
 
-func on_shop_start() -> void:
-	_check_effects_for_trigger(Effect.TriggerType.START_OF_SHOP)
+func on_shop_start(player_party: HeroLine) -> void:
+	for effect: Effect in stats.effects:
+		if Effect.TriggerType.START_OF_SHOP in effect.triggers:
+			effect.context = ContextBuilder.build_from_shop(self, player_party)
+			EffectQueue.push_back(effect, 2)
+
+	for item: ItemData in stats.item_list:
+		if is_instance_valid(item.effect) and Effect.TriggerType.START_OF_SHOP in item.effect.triggers:
+			item.effect.context = ContextBuilder.build_from_shop(self, player_party)
+			EffectQueue.push_back(item.effect, 2)
 
 
-func on_shop_ended() -> void:
-	_check_effects_for_trigger(Effect.TriggerType.END_OF_SHOP)
+func on_shop_ended(player_party: HeroLine) -> void:
+	for effect: Effect in stats.effects:
+		if Effect.TriggerType.END_OF_SHOP in effect.triggers:
+			effect.context = ContextBuilder.build_from_shop(self, player_party)
+			EffectQueue.push_back(effect, 2)
+
+	for item: ItemData in stats.item_list:
+		if is_instance_valid(item.effect) and Effect.TriggerType.END_OF_SHOP in item.effect.triggers:
+			item.effect.context = ContextBuilder.build_from_shop(self, player_party)
+			EffectQueue.push_back(item.effect, 2)
+
 
 
 func _check_effects_for_trigger(trigger_type: Effect.TriggerType, trigger_hero: Hero = null) -> void:
