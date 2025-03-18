@@ -83,6 +83,10 @@ func on_hero_summoned(summoned_hero: Hero) -> void:
 	_check_effects_for_trigger(Effect.TriggerType.SUMMONED, summoned_hero)
 
 
+func on_killed_enemy() -> void:
+	_check_effects_for_trigger(Effect.TriggerType.KILLED_ENEMY)
+
+
 func on_hero_buffed(hero: Hero) -> void:
 	if hero == self:
 		return
@@ -141,7 +145,6 @@ func on_shop_ended(player_party: HeroLine) -> void:
 			EffectQueue.push_back(item.effect, 2)
 
 
-
 func _check_effects_for_trigger(trigger_type: Effect.TriggerType, trigger_hero: Hero = null) -> void:
 	for effect: Effect in stats.effects:
 		if trigger_type in effect.triggers:
@@ -165,6 +168,7 @@ func _died() -> void:
 	if dying:
 		return
 	died.emit(self)
+	EventsBus.hero_died.emit(self)
 	health_label.text = str(stats.current_hp)
 	dying = true
 	_check_effects_for_trigger(Effect.TriggerType.SELF_DEATH)

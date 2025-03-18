@@ -33,19 +33,19 @@ func start_battle(player_stats: PlayerStats) -> void:
 	_on_player_stats_changed(player_stats)
 
 	friendly_line.setup(player_stats.heroes)
-	enemy_line.setup(enemy_manager.get_list_for_round(player_stats.round))
-
-	await get_tree().create_timer(1 / Settings.battle_speed, false).timeout
+	enemy_line.setup(enemy_manager.get_list_for_round(player_stats.round_number))
 
 	# Animate the heroes running in
 	var tween := get_tree().create_tween()
-	tween.tween_property(friendly_line, "position:x", friendly_line.position.x + LINE_POSITION_DIFF, 3 / Settings.battle_speed)
-	tween.parallel().tween_property(enemy_line, "position:x", enemy_line.position.x - LINE_POSITION_DIFF, 3 / Settings.battle_speed)
+	tween.tween_property(friendly_line, "position:x", friendly_line.position.x + LINE_POSITION_DIFF, 2.7 / Settings.battle_speed)
+	tween.parallel().tween_property(enemy_line, "position:x", enemy_line.position.x - LINE_POSITION_DIFF, 2.7 / Settings.battle_speed)
 	friendly_line.make_heroes_run()
 	enemy_line.make_heroes_run()
 
 	await tween.finished
-	await get_tree().create_timer(1 / Settings.battle_speed, false).timeout
+	friendly_line.update_hero_positions()
+	enemy_line.update_hero_positions()
+	await get_tree().create_timer(0.7 / Settings.battle_speed, false).timeout
 
 	for hero: Hero in friendly_line.hero_list:
 		if is_instance_valid(hero):
@@ -60,7 +60,7 @@ func start_battle(player_stats: PlayerStats) -> void:
 		print("Executing effect: ", effect.get_effect_name())
 		EffectQueue.execute_next()
 		await effect.finished
-		await get_tree().create_timer(1 / Settings.battle_speed, false).timeout
+		await get_tree().create_timer(0.5 / Settings.battle_speed, false).timeout
 
 	do_attack()
 
@@ -91,13 +91,11 @@ func do_attack() -> void:
 		EffectQueue.execute_next()
 		await effect.finished
 		await get_tree().create_timer(0.5 / Settings.battle_speed, false).timeout
-
-	await get_tree().create_timer(0.3 / Settings.battle_speed, false).timeout
-
-	# friendly_line.update_hero_positions()
-	# enemy_line.update_hero_positions()
-
-	await get_tree().create_timer(0.3 / Settings.battle_speed, false).timeout
+		if effect is AttackEffect:
+			if effect.h1.dying and not effect.h2.dying:
+				effect.h2.on_killed_enemy()
+			elif effect.h2.dying and not effect.h1.dying:
+				effect.h1.on_killed_enemy()			
 
 	if _check_combat_finished():
 		_check_winner()
@@ -171,6 +169,6 @@ func _on_pause_button_pressed() -> void:
 
 
 func _on_player_stats_changed(player_stats: PlayerStats) -> void:
-	round_label.text = "Round: " + str(player_stats.round)
+	round_label.text = "Round: " + str(player_stats.round_number)
 	player_health_label.text = str(player_stats.health)
 	money_label.text = str(player_stats.money)

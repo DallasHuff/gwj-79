@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://i8bo5xiuf6s3"
-path="res://.godot/imported/three_headed_hydra.png-69961b7337260bf6be93d7d12019fb1d.ctex"
+uid="uid://ca36fvnnsbtip"
+path="res://.godot/imported/fox_cat.png-671632b1325cdafae2efce4bd5e6a2b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://heroes/resources/hydra/three_headed_hydra.png"
-dest_files=["res://.godot/imported/three_headed_hydra.png-69961b7337260bf6be93d7d12019fb1d.ctex"]
+source_file="res://heroes/resources/fox_cat/fox_cat.png"
+dest_files=["res://.godot/imported/fox_cat.png-671632b1325cdafae2efce4bd5e6a2b0.ctex"]
 
 [params]
 

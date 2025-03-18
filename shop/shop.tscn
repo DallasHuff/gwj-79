@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://dabx83soglwev" path="res://heroes/resources/void_jelly/void_jelly.tres" id="5_xad5q"]
 [ext_resource type="Resource" uid="uid://dwkg5ckxoo20t" path="res://items/testitem1.tres" id="6_bv5vx"]
 [ext_resource type="Resource" uid="uid://crvwxum2jiasx" path="res://items/testitem2.tres" id="7_mmyc1"]
-[ext_resource type="Resource" uid="uid://c2yw8lbpo5g78" path="res://heroes/resources/hydra/hydra.tres" id="7_pafut"]
+[ext_resource type="Resource" uid="uid://c2yw8lbpo5g78" path="res://heroes/resources/3_hydra/hydra.tres" id="7_pafut"]
 [ext_resource type="Script" uid="uid://cruwimt38nwr7" path="res://shop/weighted_random_list.gd" id="8_orod7"]
 [ext_resource type="Texture2D" uid="uid://7366032lwnci" path="res://shop/coin.png" id="12_cd0xb"]
 [ext_resource type="PackedScene" uid="uid://5d2tgixtskiy" path="res://combat/hero_line/hero_line.tscn" id="12_orod7"]
@@ -248,3 +248,4 @@ unique_name_in_owner = true
 position = Vector2(1183, 203)
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer5/NextRoundButton" to="." method="_on_next_round_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/RerollButton" to="." method="_on_reroll_button_pressed"]

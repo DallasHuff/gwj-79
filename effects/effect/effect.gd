@@ -12,7 +12,7 @@ enum TriggerType {
 	HERO_ONE_IN_FRONT_ATTACKS,
 	AFTER_ANY_ATTACK,
 	DAMAGE_TAKEN,
-	KILLED_ENEMY,#NYI 
+	KILLED_ENEMY,
 	SELF_DEATH,
 	ANY_OTHER_DEATH,
 	FRIENDLY_DEATH,
@@ -25,8 +25,8 @@ enum TriggerType {
 	ENEMY_HEALED,
 	ANY_HEALED,
 	SUMMONED,
-	START_OF_SHOP,#NYI 
-	END_OF_SHOP,#NYI
+	START_OF_SHOP,
+	END_OF_SHOP,
 	BOUGHT,
 	EFFECT_TRIGGERED,
 }
@@ -45,6 +45,14 @@ enum TargetType {
 	ENEMY_BUFFED,
 	FRONT_OTHER_SIDE,
 	BACK_OTHER_SIDE,
+	LOWEST_HP_OTHER_SIDE,
+	LOWEST_HP_SAME_SIDE,
+	HIGHEST_HP_OTHER_SIDE,
+	HIGHEST_HP_SAME_SIDE,
+	LOWEST_ATK_OTHER_SIDE,
+	LOWEST_ATK_SAME_SIDE,
+	HIGHEST_ATK_OTHER_SIDE,
+	HIGHEST_ATK_SAME_SIDE,
 	RANDOM_OTHER_SIDE,
 	RANDOM_SAME_SIDE,
 	RANDOM_ALL,
@@ -102,6 +110,9 @@ func is_finished() -> bool:
 
 func finish() -> void:
 	finished_flag = true
+	if context.has(ContextBuilder.ContextKey.EFFECT_OWNER):
+		if context[ContextBuilder.ContextKey.EFFECT_OWNER].friendly:
+			EventsBus.player_effect_finished.emit(self)
 	call_deferred("emit_signal", "finished")
 
 
@@ -149,6 +160,18 @@ func _get_target(target_type: TargetType) -> Hero:
 			return other_team.front()
 		TargetType.BACK_OTHER_SIDE:
 			return other_team.back()
+		TargetType.HIGHEST_HP_OTHER_SIDE:
+			return other_team.get_highest_hp_hero()
+		TargetType.HIGHEST_HP_SAME_SIDE:
+			return same_team.get_highest_hp_hero()
+		TargetType.LOWEST_ATK_OTHER_SIDE:
+			return other_team.get_lowest_atk_hero()
+		TargetType.LOWEST_ATK_SAME_SIDE:
+			return same_team.get_lowest_atk_hero()
+		TargetType.HIGHEST_ATK_OTHER_SIDE:
+			return other_team.get_highest_atk_hero()
+		TargetType.HIGHEST_ATK_SAME_SIDE:
+			return same_team.get_highest_atk_hero()
 		TargetType.RANDOM_OTHER_SIDE:
 			return other_team.get_random_hero()
 		TargetType.RANDOM_SAME_SIDE:

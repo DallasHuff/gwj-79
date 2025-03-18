@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5gp3j7cjnfqq"]
+[gd_scene load_steps=4 format=3 uid="uid://c5gp3j7cjnfqq"]
 
 [ext_resource type="Script" uid="uid://bp8f4bavfcq4m" path="res://menus/game_over_screen/game_over.gd" id="1_m1d5o"]
+[ext_resource type="Texture2D" uid="uid://7366032lwnci" path="res://shop/coin.png" id="2_8gnok"]
+[ext_resource type="Texture2D" uid="uid://cwkkax5nhtycj" path="res://heroes/components/general_art/heart.png" id="3_kscuv"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -13,6 +15,14 @@ script = ExtResource("1_m1d5o")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.121569, 0.2, 1)
+
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 5
 anchor_left = 0.5
@@ -23,39 +33,127 @@ offset_bottom = 153.0
 grow_horizontal = 2
 theme_override_constants/margin_top = 200
 
-[node name="GameOverLabel" type="Label" parent="CanvasLayer/MarginContainer"]
+[node name="GameResult" type="Label" parent="CanvasLayer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 200
-text = "Game over on round 0!!"
+text = "Game won on round 0!!"
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
+[node name="StatsMargin" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 14
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -10.0
-offset_right = 20.0
-offset_bottom = 10.0
+offset_top = -102.0
+offset_bottom = 102.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_top = 200
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/StatsMargin"]
 layout_mode = 2
 theme_override_constants/separation = 100
 
-[node name="PlayAgainButton" type="Button" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
+[node name="StatsHBox1" type="HBoxContainer" parent="CanvasLayer/StatsMargin/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 100
+
+[node name="MoneyContainer" type="HBoxContainer" parent="CanvasLayer/StatsMargin/VBoxContainer/StatsHBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoneyIcon" type="TextureRect" parent="CanvasLayer/StatsMargin/VBoxContainer/StatsHBox1/MoneyContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_8gnok")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MoneyLabel" type="Label" parent="CanvasLayer/StatsMargin/VBoxContainer/StatsHBox1/MoneyContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "50"
+
+[node name="HPContainer" type="HBoxContainer" parent="CanvasLayer/StatsMargin/VBoxContainer/StatsHBox1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HealthIcon" type="TextureRect" parent="CanvasLayer/StatsMargin/VBoxContainer/StatsHBox1/HPContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("3_kscuv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer/StatsMargin/VBoxContainer/StatsHBox1/HPContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "3"
+
+[node name="RoundsLabel" type="Label" parent="CanvasLayer/StatsMargin/VBoxContainer/StatsHBox1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 50
+text = "Rounds won: 0"
+
+[node name="StatsHBox2" type="HBoxContainer" parent="CanvasLayer/StatsMargin/VBoxContainer"]
+layout_mode = 2
+
+[node name="RerollLabel" type="Label" parent="CanvasLayer/StatsMargin/VBoxContainer/StatsHBox2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+text = "times rerolled:"
+
+[node name="UnitsSlainLabel" type="Label" parent="CanvasLayer/StatsMargin/VBoxContainer/StatsHBox2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+text = "units slain:"
+
+[node name="EffectsTriggeredLabel" type="Label" parent="CanvasLayer/StatsMargin/VBoxContainer/StatsHBox2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+text = "effects triggered:"
+
+[node name="ButtonsMargin" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -530.0
+offset_top = -167.0
+offset_right = 530.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 100
+
+[node name="ButtonsHBoxContainer" type="HBoxContainer" parent="CanvasLayer/ButtonsMargin"]
+layout_mode = 2
+theme_override_constants/separation = 200
+
+[node name="PlayAgainButton" type="Button" parent="CanvasLayer/ButtonsMargin/ButtonsHBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(420, 120)
+layout_mode = 2
 text = "Play Again"
 
-[node name="ExitButton" type="Button" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="CanvasLayer/ButtonsMargin/ButtonsHBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 100
 text = "Exit Game"
+
+[connection signal="pressed" from="CanvasLayer/ButtonsMargin/ButtonsHBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonsMargin/ButtonsHBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
