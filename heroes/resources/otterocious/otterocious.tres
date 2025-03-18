@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=7 format=3 uid="uid://b0q0e28c4fdsw"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_0yfar"]
+[ext_resource type="Script" uid="uid://exkip3sg0x71" path="res://effects/heal_effect/heal_effect.gd" id="2_8fw6y"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="2_jnyyp"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="3_8fw6y"]
+[ext_resource type="Texture2D" uid="uid://doecphniiostj" path="res://heroes/resources/otterocious/otter.png" id="4_8fw6y"]
+
+[sub_resource type="Resource" id="Resource_3hkeb"]
+script = ExtResource("2_8fw6y")
+aoe_target_type = 0
+single_target_types = Array[int]([0])
+include_self = true
+heal = 10
+use_effect_owner_damage_as_heal = false
+use_effect_owner_current_health_as_heal = false
+use_effect_owner_max_health_as_heal = false
+triggers = Array[int]([5])
+metadata/_custom_type_script = "uid://exkip3sg0x71"
+
+[resource]
+script = ExtResource("3_8fw6y")
+max_hp = 10
+current_hp = 5
+damage = 10
+rarity = 2
+effects = Array[ExtResource("1_0yfar")]([SubResource("Resource_3hkeb")])
+item_list = Array[ExtResource("2_jnyyp")]([])
+hero_name = "Otterocious"
+tooltip = ""
+model = ExtResource("4_8fw6y")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
