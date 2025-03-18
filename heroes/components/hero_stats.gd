@@ -25,7 +25,7 @@ const RARITY_COLORS := {
 
 
 func _set_max_hp(value: int) -> void:
-	max_hp = clampi(value, 1, 100)
+	max_hp = clampi(value, 1, 99)
 	changed.emit()
 
 
@@ -35,7 +35,7 @@ func _set_current_hp(value: int) -> void:
 
 
 func _set_damage(value: int) -> void:
-	damage = clampi(value, 1, 100)
+	damage = clampi(value, 1, 99)
 	changed.emit()
 
 

@@ -186,7 +186,7 @@ func get_hero_at(pos: int) -> Hero:
 
 func has_alive_hero() -> bool:
 	for hero: Hero in hero_list:
-		if is_instance_valid(hero):
+		if is_instance_valid(hero) and not hero.dying:
 			return true
 	return false
 

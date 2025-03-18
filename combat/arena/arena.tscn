@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmx2fwumi1ey"]
+[gd_scene load_steps=9 format=3 uid="uid://dmx2fwumi1ey"]
 
 [ext_resource type="Script" uid="uid://b4243wf3yx74g" path="res://combat/arena/arena.gd" id="1_i5doo"]
 [ext_resource type="PackedScene" uid="uid://5d2tgixtskiy" path="res://combat/hero_line/hero_line.tscn" id="2_13g3s"]
@@ -6,17 +6,20 @@
 [ext_resource type="Script" uid="uid://cq5o6kamx720a" path="res://combat/hero_array.gd" id="4_1qt8t"]
 [ext_resource type="Resource" uid="uid://xnusq6emvqbh" path="res://combat/enemy_arrays/round_1_enemies/team_1.tres" id="5_kxugw"]
 [ext_resource type="PackedScene" uid="uid://b076010rnvrtp" path="res://combat/arena/components/battle_speed_controller/battle_speed_controller.tscn" id="6_kxugw"]
+[ext_resource type="Texture2D" uid="uid://cwkkax5nhtycj" path="res://heroes/components/general_art/heart.png" id="7_amu2l"]
+[ext_resource type="Texture2D" uid="uid://7366032lwnci" path="res://shop/coin.png" id="7_yln67"]
 
 [node name="Arena" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_i5doo")
 
 [node name="FriendlyHeroLine" parent="." instance=ExtResource("2_13g3s")]
 unique_name_in_owner = true
-position = Vector2(840, 600)
+position = Vector2(840, 700)
 
 [node name="EnemyHeroLine" parent="." instance=ExtResource("2_13g3s")]
 unique_name_in_owner = true
-position = Vector2(1080, 600)
+position = Vector2(1080, 700)
 friendly = false
 
 [node name="EnemyManager" type="Node" parent="."]
@@ -25,6 +28,15 @@ script = ExtResource("3_sg87e")
 round_1_list = Array[ExtResource("4_1qt8t")]([ExtResource("5_kxugw")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.121569, 0.2, 1)
 
 [node name="ExitContainer" type="MarginContainer" parent="CanvasLayer"]
 offset_right = 72.0
@@ -34,12 +46,37 @@ theme_override_constants/margin_top = 75
 
 [node name="ExitButton" type="Button" parent="CanvasLayer/ExitContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 125)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 85
 text = "Exit"
 
-[node name="BattleSpeedButtonGroup" parent="CanvasLayer" instance=ExtResource("6_kxugw")]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -332.0
+offset_right = 332.0
+offset_bottom = 145.0
+grow_horizontal = 2
+theme_override_constants/separation = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 70
+
+[node name="PauseButton" type="Button" parent="CanvasLayer/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+process_mode = 3
+custom_minimum_size = Vector2(155, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "ii"
+
+[node name="BattleSpeedButtonGroup" parent="CanvasLayer/HBoxContainer" instance=ExtResource("6_kxugw")]
+layout_mode = 2
 
 [node name="SettingsContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 1
@@ -53,6 +90,75 @@ theme_override_constants/margin_right = 75
 
 [node name="SettingsButton" type="Button" parent="CanvasLayer/SettingsContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(420, 120)
 layout_mode = 2
-theme_override_font_sizes/font_size = 85
+theme_override_font_sizes/font_size = 70
 text = "Settings"
+
+[node name="StatsContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 302.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 250
+
+[node name="RoundMargin" type="MarginContainer" parent="CanvasLayer/StatsContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 80
+
+[node name="RoundLabel" type="Label" parent="CanvasLayer/StatsContainer/RoundMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 50
+text = "Round:"
+
+[node name="HealthMargin" type="MarginContainer" parent="CanvasLayer/StatsContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/StatsContainer/HealthMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HealthIcon" type="TextureRect" parent="CanvasLayer/StatsContainer/HealthMargin/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("7_amu2l")
+expand_mode = 1
+
+[node name="PlayerHealthLabel" type="Label" parent="CanvasLayer/StatsContainer/HealthMargin/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 50
+text = "0"
+vertical_alignment = 2
+
+[node name="MoneyMargin" type="MarginContainer" parent="CanvasLayer/StatsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 80
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/StatsContainer/MoneyMargin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MoneyIcon" type="TextureRect" parent="CanvasLayer/StatsContainer/MoneyMargin/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+texture = ExtResource("7_yln67")
+expand_mode = 1
+
+[node name="MoneyLabel" type="Label" parent="CanvasLayer/StatsContainer/MoneyMargin/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 50
+text = "0"
+vertical_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/MarginContainer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="toggled" from="CanvasLayer/HBoxContainer/MarginContainer/PauseButton" to="." method="_on_pause_button_toggled"]

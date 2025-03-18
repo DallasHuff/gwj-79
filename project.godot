@@ -15,6 +15,10 @@ run/main_scene="uid://drmehhc0yi1t3"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://themes/default_bus_layout.tres"
+
 [autoload]
 
 EventsBus="*res://common/autoloads/events_bus.gd"
@@ -33,7 +37,7 @@ gdscript/warnings/untyped_declaration=2
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [file_customization]
 
@@ -47,12 +51,14 @@ folder_colors={
 "res://levels/": "purple",
 "res://menus/": "red",
 "res://player/": "teal",
-"res://shop/": "orange"
+"res://shop/": "orange",
+"res://themes/": "blue"
 }
 
 [gui]
 
-theme/custom_font="uid://c2xuepu72hb4a"
+theme/custom="uid://txnhaabb1iib"
+theme/custom_font="uid://c3tp4okifds2g"
 
 [rendering]
 

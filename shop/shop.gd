@@ -1,15 +1,10 @@
 class_name Shop
 extends Node2D
 
+signal next_round_requested
+
 const HERO_SCENE := preload("res://heroes/components/hero.tscn")
 const ITEM_SCENE := preload("res://items/components/item.tscn")
-
-@onready var reroll_button: Button = %RerollButton
-@onready var next_round_button: Button = %NextRoundButton
-@onready var item_container: Node = %ItemContainer
-@onready var hero_container: Node = %HeroContainer
-@onready var player_party: HeroLine = %PlayerParty
-@onready var money_display: RichTextLabel = %MoneyDisplay
 
 @export var hero_pool: Array[HeroStats]
 @export var item_pool: WeightedRandomList
@@ -29,6 +24,14 @@ var hero_cost: Dictionary[HeroStats.Rarity, int] = {
 	HeroStats.Rarity.RARE: 3,
 	HeroStats.Rarity.LEGENDARY: 5
 }
+
+@onready var reroll_button: Button = %RerollButton
+@onready var next_round_button: Button = %NextRoundButton
+@onready var item_container: Node = %ItemContainer
+@onready var hero_container: Node = %HeroContainer
+@onready var player_party: HeroLine = %PlayerParty
+@onready var money_display: RichTextLabel = %MoneyDisplay
+@onready var round_counter: RichTextLabel = %RoundCounter
 
 #TEMPORARY - TO BE REPLACED BY DRAG AND DROP
 @onready var bt_buy_hero_1: Button = %BtBuyHero1
@@ -66,11 +69,17 @@ func _ready() -> void:
 	for i in range(items.size()):
 		item_positions.append(Vector2(i * dist_between_items, 0) + item_offset)
 	
+	round_counter.text = "Round: " + str(player_stats.round)
+
 	reroll_button.pressed.connect(reroll_shop)
 	reroll_shop()
 	_update_money(0)
 	_connect_temp_buttons()
 	player_party.setup(player_stats.heroes)
+	_on_shop_entered()
+
+	# TODO: give this money an animation or something so players can see their income adding to the money
+	player_stats.money += player_stats.income
 
 
 func reroll_shop() -> void:
@@ -89,7 +98,7 @@ func reroll_shop() -> void:
 
 func add_heroes() -> void:
 	var stat_list : Array[HeroStats] = []
-	for i in range(heroes.size()-1):
+	for i in range(heroes.size()):
 		stat_list.append(hero_pool[randi_range(0, hero_pool.size()-1)])
 	
 	var i: int = 0
@@ -174,12 +183,44 @@ func _update_money(delta: int) -> void:
 
 
 func _on_next_round_button_pressed() -> void:
+	if not player_party.has_alive_hero():
+		return
+	
+	for hero: Hero in player_party.hero_list:
+		if is_instance_valid(hero):
+			hero.on_shop_ended(player_party)
+
+	# Run effect queue for shop-ended effects
+	while not EffectQueue.is_empty():
+		var effect: Effect = EffectQueue.front()
+		print("Executing effect: ", effect.get_effect_name())
+		EffectQueue.execute_next()
+		await effect.finished
+		await get_tree().create_timer(0.5 / Settings.battle_speed, false).timeout
+
 	var hero_array := HeroArray.new()
 	print(player_party.line_info())
 	for i in range(player_party.hero_list.size()):
+		if not is_instance_valid(player_party.hero_list[i]):
+			continue
 		hero_array.heroes[i] = player_party.hero_list[i].stats
 	player_stats.heroes = hero_array
-	queue_free()
+	next_round_requested.emit()
+
+
+func _on_shop_entered() -> void:
+	for hero: Hero in player_party.hero_list:
+		if is_instance_valid(hero):
+			hero.on_shop_start(player_party)
+	
+	# Run effect queue for shop-entered effects
+	while not EffectQueue.is_empty():
+		var effect: Effect = EffectQueue.front()
+		print("Executing effect: ", effect.get_effect_name())
+		EffectQueue.execute_next()
+		await effect.finished
+		await get_tree().create_timer(0.5 / Settings.battle_speed, false).timeout
+
 
 
 func _heroes_info() -> String:
