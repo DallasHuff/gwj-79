@@ -1,18 +1,40 @@
-[gd_resource type="Resource" script_class="HeroStats" load_steps=6 format=3 uid="uid://dowcow3idr6uh"]
+[gd_resource type="Resource" script_class="HeroStats" load_steps=8 format=3 uid="uid://dowcow3idr6uh"]
 
 [ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_7e0be"]
-[ext_resource type="Resource" uid="uid://crbyla2x103qq" path="res://heroes/resources/void_cat/effects/summon_unit_with_my_attack.tres" id="2_7u1b0"]
+[ext_resource type="Script" uid="uid://dwsiqp6snmngd" path="res://effects/summon_effect/summon_effect.gd" id="2_7u1b0"]
 [ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="2_617a5"]
 [ext_resource type="Texture2D" uid="uid://cpyjljj5hhnd0" path="res://heroes/resources/void_cat/void_cat.png" id="3_7u1b0"]
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="4_8xcda"]
 
+[sub_resource type="Resource" id="Resource_8xcda"]
+script = ExtResource("4_8xcda")
+max_hp = 1
+current_hp = 1
+damage = 1
+rarity = 1
+effects = Array[ExtResource("1_7e0be")]([])
+item_list = Array[ExtResource("2_617a5")]([])
+hero_name = "Void Kitten"
+tooltip = ""
+model = ExtResource("3_7u1b0")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
+
+[sub_resource type="Resource" id="Resource_mpvjl"]
+script = ExtResource("2_7u1b0")
+summon_hero_stats = SubResource("Resource_8xcda")
+summon_position = 3
+use_effect_owner_hp = false
+use_effect_owner_attack = true
+triggers = Array[int]([4])
+metadata/_custom_type_script = "uid://dwsiqp6snmngd"
+
 [resource]
 script = ExtResource("4_8xcda")
-max_hp = 10
-current_hp = 10
+max_hp = 5
+current_hp = 5
 damage = 5
-rarity = 0
-effects = Array[ExtResource("1_7e0be")]([ExtResource("2_7u1b0")])
+rarity = 1
+effects = Array[ExtResource("1_7e0be")]([SubResource("Resource_mpvjl")])
 item_list = Array[ExtResource("2_617a5")]([])
 hero_name = "Void Cat"
 tooltip = "When damaged, summons a 1hp hero with the attack of this unit."

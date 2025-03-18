@@ -21,5 +21,5 @@ rarity = 1
 effects = Array[ExtResource("1_0isye")]([SubResource("Resource_8nmka")])
 item_list = Array[ExtResource("2_2e7yi")]([])
 hero_name = "Greedy Cleric"
-description = "Whenever any hero is healed, increase your income by 1."
+tooltip = ""
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

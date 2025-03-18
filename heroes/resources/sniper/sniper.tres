@@ -24,5 +24,5 @@ rarity = 3
 effects = Array[ExtResource("1_34fkb")]([SubResource("Resource_n8884")])
 item_list = Array[ExtResource("2_vitqu")]([])
 hero_name = "Sniper"
-description = "Randomly deal damage equal to your attack to two enemies."
+tooltip = ""
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

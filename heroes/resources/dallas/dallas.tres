@@ -14,7 +14,7 @@ rarity = 1
 effects = Array[ExtResource("1_tcice")]([])
 item_list = Array[ExtResource("2_ie2de")]([])
 hero_name = "Small Dallas"
-description = ""
+tooltip = ""
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
 
 [sub_resource type="Resource" id="Resource_t7u0v"]
@@ -35,7 +35,7 @@ rarity = 2
 effects = Array[ExtResource("1_tcice")]([SubResource("Resource_t7u0v")])
 item_list = Array[ExtResource("2_ie2de")]([])
 hero_name = "Medium Dallas"
-description = ""
+tooltip = ""
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
 
 [sub_resource type="Resource" id="Resource_iepka"]
@@ -56,5 +56,5 @@ rarity = 3
 effects = Array[ExtResource("1_tcice")]([SubResource("Resource_iepka")])
 item_list = Array[ExtResource("2_ie2de")]([])
 hero_name = "Dallas"
-description = "When defeated, summon a 10/10 Medium Dallas, who upon his death, summons a 5/5 Small Dallas."
+tooltip = ""
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

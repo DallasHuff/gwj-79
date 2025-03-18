@@ -21,5 +21,5 @@ rarity = 3
 effects = Array[ExtResource("1_n5sei")]([SubResource("Resource_5ac8o")])
 item_list = Array[ExtResource("2_ro41r")]([])
 hero_name = "Munear"
-description = "After each friendly hero dies, gain 3 gold."
+tooltip = ""
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

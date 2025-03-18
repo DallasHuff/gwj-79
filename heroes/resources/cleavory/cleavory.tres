@@ -24,5 +24,5 @@ rarity = 2
 effects = Array[ExtResource("1_4al6x")]([SubResource("Resource_7ewtj")])
 item_list = Array[ExtResource("2_7q2nt")]([])
 hero_name = "SplashAttack"
-description = "After attacking, deal 2 damage to all enemy heros."
+tooltip = ""
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

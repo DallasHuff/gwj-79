@@ -1,11 +1,9 @@
-[gd_resource type="Resource" script_class="SummonEffect" load_steps=3 format=3 uid="uid://crbyla2x103qq"]
+[gd_resource type="Resource" script_class="SummonEffect" load_steps=2 format=3 uid="uid://crbyla2x103qq"]
 
 [ext_resource type="Script" uid="uid://dwsiqp6snmngd" path="res://effects/summon_effect/summon_effect.gd" id="1_6psf1"]
-[ext_resource type="Resource" uid="uid://c2yw8lbpo5g78" path="res://heroes/resources/hydra/hydra.tres" id="2_1b3xy"]
 
 [resource]
 script = ExtResource("1_6psf1")
-summon_hero_stats = ExtResource("2_1b3xy")
 summon_position = 3
 use_effect_owner_hp = false
 use_effect_owner_attack = true
