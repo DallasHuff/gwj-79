@@ -64,36 +64,29 @@ func _connect_temp_buttons() -> void:
 
 
 func _ready() -> void:
+	EventsBus.hero_summoned.connect(_on_hero_summoned)
+	EventsBus.hero_buffed.connect(_on_hero_buffed)
+	EventsBus.hero_died.connect(_on_hero_died)
+	EventsBus.hero_healed.connect(_on_hero_healed)
+
 	for i in range(heroes.size()):
 		hero_positions.append(Vector2(i * dist_between_heroes, 0) + hero_offset)
 	for i in range(items.size()):
 		item_positions.append(Vector2(i * dist_between_items, 0) + item_offset)
 	
-	round_counter.text = "Round: " + str(player_stats.round)
+	round_counter.text = "Round: " + str(player_stats.round_number)
 
-	reroll_button.pressed.connect(reroll_shop)
-	reroll_shop()
-	_update_money(0)
+	_on_reroll_button_pressed()
+	# Have to subtract one here because the initial shop entry will add 1 reroll even though the player didn't press the button
+	player_stats.times_rerolled -= 1
 	_connect_temp_buttons()
 	player_party.setup(player_stats.heroes)
 	_on_shop_entered()
 
 	# TODO: give this money an animation or something so players can see their income adding to the money
 	player_stats.money += player_stats.income
+	_update_money(0)
 
-
-func reroll_shop() -> void:
-	heroes.fill(null) # Adjust later if the option to lock a selection is added
-	for hero in hero_container.get_children():
-		hero.queue_free()
-	
-	items.fill(null) # Adjust later if the option to lock a selection is added
-	for item in item_container.get_children():
-		item.queue_free()
-	
-	add_heroes()
-	add_items()
-	_update_money(-2)
 
 
 func add_heroes() -> void:
@@ -167,6 +160,21 @@ func create_item(data: ItemData, i: int) -> Item:
 	return new_item
 
 
+func _on_reroll_button_pressed() -> void:
+	player_stats.times_rerolled += 1
+	heroes.fill(null) # Adjust later if the option to lock a selection is added
+	for hero in hero_container.get_children():
+		hero.queue_free()
+	
+	items.fill(null) # Adjust later if the option to lock a selection is added
+	for item in item_container.get_children():
+		item.queue_free()
+	
+	add_heroes()
+	add_items()
+	_update_money(-2)
+
+
 func _create_hero(stats: HeroStats, i: int) -> Hero:
 	var new_hero : Hero = HERO_SCENE.instantiate()
 	hero_container.add_child(new_hero)
@@ -222,9 +230,35 @@ func _on_shop_entered() -> void:
 		await get_tree().create_timer(0.5 / Settings.battle_speed, false).timeout
 
 
+func _on_hero_healed(healed_hero: Hero) -> void:
+	for hero: Hero in player_party.hero_list:
+		if is_instance_valid(hero):
+			hero.on_hero_healed(healed_hero)
+
+
+func _on_hero_summoned(summon: Hero) -> void:
+	for hero: Hero in player_party.hero_list:
+		if is_instance_valid(hero):
+			hero.on_hero_summoned(summon)
+
+
+func _on_hero_buffed(buffed_hero: Hero) -> void:
+	for hero: Hero in player_party.hero_list:
+		if is_instance_valid(hero):
+			hero.on_hero_buffed(buffed_hero)
+
+
+func _on_hero_died(died_hero: Hero) -> void:
+	for hero: Hero in player_party.hero_list:
+		if is_instance_valid(hero):
+			hero.on_hero_death(died_hero)
+
 
 func _heroes_info() -> String:
 	var rtn := name
 	for h: Hero in heroes:
 		rtn += (str(h) + " ")
 	return rtn
+
+
+

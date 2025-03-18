@@ -184,6 +184,46 @@ func get_hero_at(pos: int) -> Hero:
 	return hero
 
 
+func get_lowest_hp_hero() -> Hero:
+	var lowest: int = 99
+	var rtn_hero: Hero = null
+	for hero: Hero in hero_list:
+		if is_instance_valid(hero) and hero.stats.current_hp < lowest:
+			lowest = hero.stats.current_hp
+			rtn_hero = hero
+	return rtn_hero
+
+
+func get_highest_hp_hero() -> Hero:
+	var highest: int = 0
+	var rtn_hero: Hero = null
+	for hero: Hero in hero_list:
+		if is_instance_valid(hero) and hero.stats.current_hp > highest:
+			highest = hero.stats.current_hp
+			rtn_hero = hero
+	return rtn_hero
+
+
+func get_lowest_atk_hero() -> Hero:
+	var lowest: int = 99
+	var rtn_hero: Hero = null
+	for hero: Hero in hero_list:
+		if is_instance_valid(hero) and hero.stats.damage < lowest:
+			lowest = hero.stats.damage
+			rtn_hero = hero
+	return rtn_hero
+
+
+func get_highest_atk_hero() -> Hero:
+	var highest: int = 0
+	var rtn_hero: Hero = null
+	for hero: Hero in hero_list:
+		if is_instance_valid(hero) and hero.stats.damage > highest:
+			highest = hero.stats.damage
+			rtn_hero = hero
+	return rtn_hero
+
+
 func has_alive_hero() -> bool:
 	for hero: Hero in hero_list:
 		if is_instance_valid(hero) and not hero.dying:

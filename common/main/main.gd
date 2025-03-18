@@ -20,6 +20,8 @@ func _ready() -> void:
 	go_to_main_menu()
 	
 	EventsBus.pause_button_pressed.connect(_on_pause_button_pressed)
+	EventsBus.player_effect_finished.connect(_on_player_effect_finished)
+	EventsBus.hero_died.connect(_on_hero_died)
 
 
 func new_game_start() -> void:
@@ -39,7 +41,7 @@ func go_to_arena() -> void:
 
 
 func go_to_shop() -> void:
-	player_stats.round += 1
+	player_stats.round_number += 1
 	shop = SHOP_SCENE.instantiate()
 	shop.player_stats = player_stats
 	add_child(shop)
@@ -67,10 +69,10 @@ func go_to_settings_menu() -> void:
 
 func go_to_game_over_screen() -> void:
 	var game_over: GameOverScreen = GAME_OVER_SCENE.instantiate()
+	game_over.player_stats = player_stats
 	add_child(game_over)
-	game_over.game_over_label.text = "Game Over on Round " + str(player_stats.round) + "!!"
 	game_over.play_again_button.pressed.connect(new_game_start)
-	game_over.exit_button.pressed.connect(get_tree().quit)	
+	game_over.exit_button.pressed.connect(get_tree().quit)
 
 
 func go_to_credits_screen() -> void:
@@ -84,9 +86,10 @@ func _on_arena_combat_finished(player_win_flag: bool) -> void:
 	EffectQueue.clear()
 	if player_win_flag == false:
 		player_stats.health -= 1
-	if player_stats.health <= 0:
+	if player_stats.health <= 0 or player_stats.rounds_required_to_win <= player_stats.rounds_won:
 		go_to_game_over_screen()
 	else:
+		player_stats.rounds_won += 1
 		go_to_shop()
 
 
@@ -106,3 +109,14 @@ func _on_pause_button_pressed() -> void:
 	if is_instance_valid(arena_settings_menu):
 		return
 	get_tree().paused = not get_tree().paused
+
+
+func _on_player_effect_finished(eff: Effect) -> void:
+	if eff is AttackEffect:
+		return
+	player_stats.effects_triggered += 1
+
+
+func _on_hero_died(hero: Hero) -> void:
+	if not hero.friendly:
+		player_stats.units_slain += 1

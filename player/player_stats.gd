@@ -5,8 +5,14 @@ extends Resource
 @export var money: int = 100
 @export var income: int = 5
 @export var health: int = 3
-@export var round: int = 0
+@export var round_number: int = 0
 @export var heroes: HeroArray
+var rounds_required_to_win: int = 5
+var rounds_won: int = 0
+var times_rerolled: int = 0
+var units_slain: int = 0
+var effects_triggered: int = 0
+
 
 func get_random_rarity_for_level() -> HeroStats.Rarity:
 	# var rng := RandomNumberGenerator.new()
@@ -22,5 +28,9 @@ func setup_for_new_game() -> void:
 	money = 10
 	income = 5
 	health = 3
-	round = 0
+	round_number = 0
+	rounds_won = 0
+	times_rerolled = 0
+	units_slain = 0
+	effects_triggered = 0
 	heroes = HeroArray.new()
