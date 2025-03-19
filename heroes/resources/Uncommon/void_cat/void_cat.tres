@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=8 format=3 uid="uid://dowcow3idr6uh"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_d3brf"]
+[ext_resource type="Script" uid="uid://dwsiqp6snmngd" path="res://effects/summon_effect/summon_effect.gd" id="2_7til5"]
+[ext_resource type="Resource" uid="uid://c7dbthjpc70vy" path="res://heroes/resources/Common/fox_cat/fox_cat.tres" id="3_7til5"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="3_068lv"]
+[ext_resource type="Texture2D" uid="uid://cpyjljj5hhnd0" path="res://heroes/resources/Uncommon/void_cat/void_cat.png" id="4_l4asq"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="5_bgw87"]
+
+[sub_resource type="Resource" id="Resource_mpvjl"]
+script = ExtResource("2_7til5")
+summon_hero_stats = ExtResource("3_7til5")
+summon_position = 3
+use_effect_owner_hp = false
+use_effect_owner_attack = false
+triggers = Array[int]([5])
+metadata/_custom_type_script = "uid://dwsiqp6snmngd"
+
+[resource]
+script = ExtResource("5_bgw87")
+max_hp = 5
+current_hp = 5
+damage = 5
+rarity = 1
+effects = Array[ExtResource("1_d3brf")]([SubResource("Resource_mpvjl")])
+item_list = Array[ExtResource("3_068lv")]([])
+hero_name = "Void Cat"
+tooltip = "When you kill an enemy, summon a Fox Cat at the back of your side."
+model = ExtResource("4_l4asq")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

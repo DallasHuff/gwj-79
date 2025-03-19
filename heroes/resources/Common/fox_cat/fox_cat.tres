@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=5 format=3 uid="uid://c7dbthjpc70vy"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_sddx3"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="2_i1n1c"]
+[ext_resource type="Texture2D" uid="uid://ca36fvnnsbtip" path="res://heroes/resources/Common/fox_cat/fox_cat.png" id="3_i1n1c"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="3_k2h4m"]
+
+[resource]
+script = ExtResource("3_k2h4m")
+max_hp = 2
+current_hp = 2
+damage = 3
+rarity = 0
+effects = Array[ExtResource("1_sddx3")]([])
+item_list = Array[ExtResource("2_i1n1c")]([])
+hero_name = "Fox Cat"
+tooltip = "She's foxy but also a cat :)"
+model = ExtResource("3_i1n1c")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

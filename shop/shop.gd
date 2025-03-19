@@ -259,6 +259,3 @@ func _heroes_info() -> String:
 	for h: Hero in heroes:
 		rtn += (str(h) + " ")
 	return rtn
-
-
-

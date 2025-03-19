@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="HeroArray" load_steps=5 format=3 uid="uid://d4fi0ghc3ie3w"]
 
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="1_wosi7"]
-[ext_resource type="Resource" uid="uid://dabx83soglwev" path="res://heroes/resources/void_jelly/void_jelly.tres" id="2_3aika"]
+[ext_resource type="Resource" uid="uid://dabx83soglwev" path="res://heroes/resources/Common/void_jelly/void_jelly.tres" id="2_3aika"]
 [ext_resource type="Script" uid="uid://cq5o6kamx720a" path="res://combat/hero_array.gd" id="2_m3ppg"]
 [ext_resource type="Resource" uid="uid://dfmclsjupq0xu" path="res://heroes/resources/knight/knight.tres" id="3_j0a3c"]
 
