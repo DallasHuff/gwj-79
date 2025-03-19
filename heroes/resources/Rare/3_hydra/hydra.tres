@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=10 format=3 uid="uid://c2yw8lbpo5g78"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_rjdxk"]
+[ext_resource type="Script" uid="uid://dwsiqp6snmngd" path="res://effects/summon_effect/summon_effect.gd" id="2_ic8hd"]
+[ext_resource type="Resource" uid="uid://ctik5gapejhch" path="res://heroes/resources/Common/1_hydra/single_hydra.tres" id="3_i2rlv"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="4_x17w2"]
+[ext_resource type="Texture2D" uid="uid://i8bo5xiuf6s3" path="res://heroes/resources/Rare/3_hydra/three_headed_hydra.png" id="5_2x761"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="6_1xqhq"]
+
+[sub_resource type="Resource" id="Resource_g21wn"]
+script = ExtResource("2_ic8hd")
+summon_hero_stats = ExtResource("3_i2rlv")
+summon_position = 0
+use_effect_owner_hp = false
+use_effect_owner_attack = false
+triggers = Array[int]([6])
+metadata/_custom_type_script = "uid://dwsiqp6snmngd"
+
+[sub_resource type="Resource" id="Resource_0pbhj"]
+script = ExtResource("2_ic8hd")
+summon_hero_stats = ExtResource("3_i2rlv")
+summon_position = 1
+use_effect_owner_hp = false
+use_effect_owner_attack = false
+triggers = Array[int]([6])
+metadata/_custom_type_script = "uid://dwsiqp6snmngd"
+
+[sub_resource type="Resource" id="Resource_6y21x"]
+script = ExtResource("2_ic8hd")
+summon_hero_stats = ExtResource("3_i2rlv")
+summon_position = 0
+use_effect_owner_hp = false
+use_effect_owner_attack = false
+triggers = Array[int]([6])
+metadata/_custom_type_script = "uid://dwsiqp6snmngd"
+
+[resource]
+script = ExtResource("6_1xqhq")
+max_hp = 3
+current_hp = 3
+damage = 9
+rarity = 2
+effects = Array[ExtResource("1_rjdxk")]([SubResource("Resource_g21wn"), SubResource("Resource_0pbhj"), SubResource("Resource_6y21x")])
+item_list = Array[ExtResource("4_x17w2")]([])
+hero_name = "Hydra"
+tooltip = "When defeated, spawn 3 single-head hydras."
+model = ExtResource("5_2x761")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

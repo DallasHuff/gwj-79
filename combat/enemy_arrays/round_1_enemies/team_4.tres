@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://bb5vk5cjocn75" path="res://heroes/resources/murloc/murloc.tres" id="2_mkj83"]
 [ext_resource type="Resource" uid="uid://dbbb8w85p2dlm" path="res://heroes/resources/martyr/martyr.tres" id="3_i8myb"]
 [ext_resource type="Resource" uid="uid://dfmclsjupq0xu" path="res://heroes/resources/knight/knight.tres" id="4_q3010"]
-[ext_resource type="Resource" uid="uid://csfguy4pfjem6" path="res://heroes/resources/tree/tree.tres" id="5_n3iv1"]
+[ext_resource type="Resource" uid="uid://csfguy4pfjem6" path="res://heroes/resources/Uncommon/tree/tree.tres" id="5_n3iv1"]
 
 [resource]
 script = ExtResource("2_7ou0a")
