@@ -101,6 +101,11 @@ func check_default_context() -> bool:
 	if not success_flag:
 		push_error(error_str)
 
+	if success_flag:
+		var effect_owner: Hero = context[ContextBuilder.ContextKey.EFFECT_OWNER]
+		if effect_owner.dying and TriggerType.SELF_DEATH not in triggers:
+			return false
+
 	return success_flag
 
 
@@ -195,7 +200,7 @@ func _get_aoe_target(aoe_target_type: AoETargetType) -> Array[Hero]:
 			return targets
 		AoETargetType.ALL:
 			targets = _add_heroes_from_line(targets, other_side)
-			targets = _add_heroes_from_line(targets, other_side)
+			targets = _add_heroes_from_line(targets, same_side)
 		AoETargetType.SAME_SIDE:
 			targets = _add_heroes_from_line(targets, same_side)
 		AoETargetType.OTHER_SIDE:

@@ -99,6 +99,7 @@ func summon(pos: int, stats: HeroStats) -> void:
 		i -= 1
 
 	var new_hero: Hero = _create_hero(stats, i)
+	update_hero_positions()
 	EventsBus.hero_summoned.emit(new_hero)
 
 

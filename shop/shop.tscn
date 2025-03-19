@@ -91,20 +91,37 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Reroll Shop"
+text = "$2 Reroll Shop"
+
+[node name="IncomeContainer" type="MarginContainer" parent="CanvasLayer"]
+offset_left = -2.0
+offset_right = 330.0
+offset_bottom = 152.0
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 100
+
+[node name="IncomeLabel" type="Label" parent="CanvasLayer/IncomeContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Income:"
 
 [node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer"]
-offset_right = 161.92
-offset_bottom = 161.2
+offset_left = 13.0
+offset_top = 72.0
+offset_right = 173.0
+offset_bottom = 312.0
 mouse_filter = 2
 theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 80
+theme_override_constants/margin_top = 160
 
 [node name="MoneyIcon" type="TextureRect" parent="CanvasLayer/MarginContainer4"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("12_cd0xb")
 expand_mode = 1
+stretch_mode = 4
 
 [node name="RoundCounterContainer" type="MarginContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(400, 500)
@@ -127,8 +144,10 @@ text = "ROUND: 0"
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(200, 200)
-offset_right = 8000.0
-offset_bottom = 800.0
+offset_left = 10.0
+offset_top = 154.0
+offset_right = 8010.0
+offset_bottom = 954.0
 mouse_filter = 2
 theme_override_constants/margin_left = 170
 theme_override_constants/margin_top = 80

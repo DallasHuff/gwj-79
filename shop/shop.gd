@@ -32,6 +32,7 @@ var hero_cost: Dictionary[HeroStats.Rarity, int] = {
 @onready var player_party: HeroLine = %PlayerParty
 @onready var money_display: RichTextLabel = %MoneyDisplay
 @onready var round_counter: RichTextLabel = %RoundCounter
+@onready var income_label: Label = %IncomeLabel
 
 #TEMPORARY - TO BE REPLACED BY DRAG AND DROP
 @onready var bt_buy_hero_1: Button = %BtBuyHero1
@@ -46,6 +47,7 @@ var hero_cost: Dictionary[HeroStats.Rarity, int] = {
 @onready var bt_sell_hero_3: Button = %BtSellHero3
 @onready var bt_sell_hero_4: Button = %BtSellHero4
 @onready var bt_sell_hero_5: Button = %BtSellHero5
+
 
 func _connect_temp_buttons() -> void:
 	bt_buy_hero_1.pressed.connect(func() -> void: buy_hero(0))
@@ -75,16 +77,16 @@ func _ready() -> void:
 		item_positions.append(Vector2(i * dist_between_items, 0) + item_offset)
 	
 	round_counter.text = "Round: " + str(player_stats.round_number)
+	income_label.text = "Income: " + str(player_stats.income)
 
 	_on_reroll_button_pressed()
 	# Have to subtract one here because the initial shop entry will add 1 reroll even though the player didn't press the button
 	player_stats.times_rerolled -= 1
+	# Add one since initial reroll subtracts 2
+	player_stats.money += 2
 	_connect_temp_buttons()
 	player_party.setup(player_stats.heroes)
 	_on_shop_entered()
-
-	# TODO: give this money an animation or something so players can see their income adding to the money
-	player_stats.money += player_stats.income
 	_update_money(0)
 
 
@@ -92,6 +94,7 @@ func _ready() -> void:
 func add_heroes() -> void:
 	var stat_list : Array[HeroStats] = []
 	for i in range(heroes.size()):
+		print(hero_pool)
 		stat_list.append(hero_pool[randi_range(0, hero_pool.size()-1)])
 	
 	var i: int = 0
@@ -109,6 +112,9 @@ func add_heroes() -> void:
 func buy_hero(shop_slot: int) -> Hero:
 	if not is_instance_valid(heroes[shop_slot]):
 		print("Trying to buy hero that was already bought")
+		return
+	if player_stats.money < hero_cost[heroes[shop_slot].stats.rarity]:
+		print("Trying to buy hero without enough money")
 		return
 	print("Buying hero from shop slot ", shop_slot)
 	var rtn: Hero
@@ -161,6 +167,9 @@ func create_item(data: ItemData, i: int) -> Item:
 
 
 func _on_reroll_button_pressed() -> void:
+	if player_stats.money < 2:
+		print("Tried to reroll without enough money")
+		return
 	player_stats.times_rerolled += 1
 	heroes.fill(null) # Adjust later if the option to lock a selection is added
 	for hero in hero_container.get_children():

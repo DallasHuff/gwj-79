@@ -43,6 +43,7 @@ window/stretch/mode="canvas_items"
 
 folder_colors={
 "res://asset_dump/": "red",
+"res://assets/": "red",
 "res://combat/": "purple",
 "res://common/": "teal",
 "res://effects/": "orange",
