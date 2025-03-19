@@ -1,0 +1,195 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg5e7e18xa71k"]
+
+[ext_resource type="Script" uid="uid://v1vm4xxqjeef" path="res://menus/round_finished_screen/round_finished.gd" id="1_fnbbg"]
+[ext_resource type="Texture2D" uid="uid://7366032lwnci" path="res://shop/coin.png" id="2_mg78d"]
+[ext_resource type="Texture2D" uid="uid://cwkkax5nhtycj" path="res://heroes/components/general_art/heart.png" id="3_wxfo1"]
+
+[node name="RoundFinished" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fnbbg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.121569, 0.2, 1)
+
+[node name="NextButtonContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -157.0
+offset_top = -211.0
+offset_right = 158.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 150
+
+[node name="NextButton" type="Button" parent="CanvasLayer/NextButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(425, 150)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Next"
+
+[node name="OutcomeContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -376.5
+offset_right = 376.5
+offset_bottom = 303.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 0
+
+[node name="RoundOutcomeLabel" type="Label" parent="CanvasLayer/OutcomeContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Round WON!"
+
+[node name="RoundsToFinishContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -625.5
+offset_right = 625.5
+offset_bottom = 103.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 250
+
+[node name="RoundsToFinishLabel" type="Label" parent="CanvasLayer/RoundsToFinishContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 50
+text = "5 more wins needed"
+
+[node name="IncomeMarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -151.0
+offset_right = 150.0
+offset_bottom = 151.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 250
+
+[node name="IncomeLabel" type="Label" parent="CanvasLayer/IncomeMarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Income: 0"
+
+[node name="MoneyMarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_top = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MoneyMarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MoneyMarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(850, 0)
+layout_mode = 2
+theme_override_constants/separation = 500
+
+[node name="PreviousMoneyContainer" type="HBoxContainer" parent="CanvasLayer/MoneyMarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MoneyIcon" type="TextureRect" parent="CanvasLayer/MoneyMarginContainer/VBoxContainer/HBoxContainer/PreviousMoneyContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_mg78d")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PreviousMoneyLabel" type="Label" parent="CanvasLayer/MoneyMarginContainer/VBoxContainer/HBoxContainer/PreviousMoneyContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "50"
+
+[node name="NewMoneyContainer" type="HBoxContainer" parent="CanvasLayer/MoneyMarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MoneyIcon" type="TextureRect" parent="CanvasLayer/MoneyMarginContainer/VBoxContainer/HBoxContainer/NewMoneyContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_mg78d")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NewMoneyLabel" type="Label" parent="CanvasLayer/MoneyMarginContainer/VBoxContainer/HBoxContainer/NewMoneyContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "50"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/MoneyMarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(850, 0)
+layout_mode = 2
+theme_override_constants/separation = 530
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/MoneyMarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="HealthIcon" type="TextureRect" parent="CanvasLayer/MoneyMarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("3_wxfo1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PreviousHealthLabel" type="Label" parent="CanvasLayer/MoneyMarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "3"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/MoneyMarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="HealthIcon" type="TextureRect" parent="CanvasLayer/MoneyMarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer3"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("3_wxfo1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NewHealthLabel" type="Label" parent="CanvasLayer/MoneyMarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "3"
+
+[connection signal="pressed" from="CanvasLayer/NextButtonContainer/NextButton" to="." method="_on_next_button_pressed"]
