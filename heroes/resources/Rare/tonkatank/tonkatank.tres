@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=6 format=3 uid="uid://1b3yk5e86wer"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_xsy0n"]
+[ext_resource type="Script" uid="uid://lc8jysx7dkah" path="res://effects/buff_effect/buff_effect.gd" id="2_07xnl"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="3_f7vxp"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="4_tq6p1"]
+
+[sub_resource type="Resource" id="Resource_l0whk"]
+script = ExtResource("2_07xnl")
+aoe_target_type = 2
+single_target_types = Array[int]([])
+include_self = true
+health_buff = 0
+attack_buff = 1
+triggers = Array[int]([4])
+metadata/_custom_type_script = "uid://lc8jysx7dkah"
+
+[resource]
+script = ExtResource("4_tq6p1")
+max_hp = 15
+current_hp = 15
+damage = 1
+rarity = 2
+effects = Array[ExtResource("1_xsy0n")]([SubResource("Resource_l0whk")])
+item_list = Array[ExtResource("3_f7vxp")]([])
+hero_name = "Tonkatank"
+tooltip = "When damaged, give your team +1 attack."
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

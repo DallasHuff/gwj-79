@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=7 format=3 uid="uid://csfguy4pfjem6"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_xr2gr"]
+[ext_resource type="Resource" uid="uid://b1iau2bs47j48" path="res://heroes/resources/Uncommon/tree/effect/damage_on_hit.tres" id="2_pag0h"]
+[ext_resource type="Resource" uid="uid://cnd62bkupt41w" path="res://heroes/resources/Uncommon/tree/effect/heal_on_hit.tres" id="3_8oac4"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="4_4jps6"]
+[ext_resource type="Texture2D" uid="uid://4ybq670l2jgs" path="res://heroes/resources/Uncommon/tree/tree.png" id="5_x82os"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="6_xsnny"]
+
+[resource]
+script = ExtResource("6_xsnny")
+max_hp = 6
+current_hp = 6
+damage = 3
+rarity = 1
+effects = Array[ExtResource("1_xr2gr")]([ExtResource("2_pag0h"), ExtResource("3_8oac4")])
+item_list = Array[ExtResource("4_4jps6")]([])
+hero_name = "Treant"
+tooltip = "When damaged, deal 2 damage to the attacker and heal for 1 hp."
+model = ExtResource("5_x82os")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
