@@ -1,9 +1,142 @@
-[gd_scene load_steps=3 format=3 uid="uid://drmehhc0yi1t3"]
+[gd_scene load_steps=9 format=3 uid="uid://drmehhc0yi1t3"]
 
 [ext_resource type="Script" uid="uid://c74fdf67vbhy1" path="res://common/main/main.gd" id="1_4mqva"]
+[ext_resource type="Shader" uid="uid://ddsdo1jag4k1s" path="res://common/main/shaders/loading_screen.gdshader" id="3_es36h"]
 [ext_resource type="Resource" uid="uid://bd23w3rpn257i" path="res://player/player_stats.tres" id="5_4eugw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gpk2e"]
+shader = ExtResource("3_es36h")
+shader_parameter/progress = 0.0
+shader_parameter/size = 40.0
+shader_parameter/fill = true
+
+[sub_resource type="Animation" id="Animation_es36h"]
+resource_name = "in"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/fill")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"in_finished"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_gpk2e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/fill")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_4eugw"]
+resource_name = "out"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/fill")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5okgu"]
+_data = {
+&"RESET": SubResource("Animation_gpk2e"),
+&"in": SubResource("Animation_es36h"),
+&"out": SubResource("Animation_4eugw")
+}
 
 [node name="Main" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_4mqva")
 player_stats = ExtResource("5_4eugw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="LoadingScreen" type="ColorRect" parent="CanvasLayer"]
+z_index = 100
+material = SubResource("ShaderMaterial_gpk2e")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/LoadingScreen"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_5okgu")
+}
+
+[connection signal="animation_finished" from="CanvasLayer/LoadingScreen/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

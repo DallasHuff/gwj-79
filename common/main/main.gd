@@ -1,6 +1,8 @@
 class_name Main
 extends Node2D
 
+signal transitioned_in
+
 const ARENA_SCENE := preload("res://combat/arena/arena.tscn")
 const SHOP_SCENE := preload("res://shop/shop.tscn")
 const MAIN_MENU_SCENE := preload("res://menus/main_menu/main_menu.tscn")
@@ -14,11 +16,15 @@ const ROUND_FINISHED_SCENE := preload("res://menus/round_finished_screen/round_f
 var shop: Shop
 var arena: Arena
 var arena_settings_menu: ArenaSettingsMenu
+var start_time: float
+
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 
 func _ready() -> void:
 	Global.main = self
-	go_to_main_menu()
+	animation_player.play("out")
+	startup()
 	
 	EventsBus.pause_button_pressed.connect(_on_pause_button_pressed)
 	EventsBus.player_effect_finished.connect(_on_player_effect_finished)
@@ -27,18 +33,34 @@ func _ready() -> void:
 
 func new_game_start() -> void:
 	player_stats.setup_for_new_game()
+	start_time = Time.get_unix_time_from_system()
 	go_to_shop()
+
+
+# It's just go_to_main_menu() but without the await
+func startup() -> void:
+	var menu: MainMenu = MAIN_MENU_SCENE.instantiate()
+	add_child(menu)
+	menu.play_button.pressed.connect(delayed_queue_free.bind(menu))
+	menu.play_button.pressed.connect(new_game_start)
+	menu.settings_button.pressed.connect(delayed_queue_free.bind(menu))
+	menu.settings_button.pressed.connect(go_to_settings_menu)
+	menu.exit_button.pressed.connect(get_tree().quit)
+	menu.credits_button.pressed.connect(go_to_credits_screen)
+	menu.credits_button.pressed.connect(delayed_queue_free.bind(menu))
 
 
 # Arena
 func go_to_arena() -> void:
+	await transitioned_in
 	arena = ARENA_SCENE.instantiate()
 	add_child(arena)
 	arena.exit_button.pressed.connect(go_to_main_menu)
-	arena.exit_button.pressed.connect(arena.queue_free)
+	arena.exit_button.pressed.connect(delayed_queue_free.bind(arena))
 	arena.exit_button.pressed.connect(EffectQueue.clear)
 	arena.settings_button.pressed.connect(_on_arena_settings_button_pressed)
 	arena.combat_finished.connect(go_to_round_finished_screen)
+	arena.combat_finished.connect(func(_b:bool) -> void: delayed_queue_free(arena))
 	arena.start_battle(player_stats)
 
 
@@ -56,11 +78,11 @@ func _on_arena_settings_exit_button_pressed(scene: ArenaSettingsMenu) -> void:
 
 # Round / Game Finished
 func go_to_round_finished_screen(round_win: bool) -> void:
-	arena.queue_free()
+	await transitioned_in
 	EffectQueue.clear()
 	var round_finished: RoundFinishedScreen = ROUND_FINISHED_SCENE.instantiate()
 	round_finished.next_button_pressed.connect(after_round_finished)
-	round_finished.next_button_pressed.connect(round_finished.queue_free)
+	round_finished.next_button_pressed.connect(delayed_queue_free.bind(round_finished))
 	add_child(round_finished)
 	round_finished.setup(round_win, player_stats)
 
@@ -74,45 +96,53 @@ func after_round_finished() -> void:
 
 
 func go_to_game_over_screen() -> void:
+	await transitioned_in
 	var game_over: GameOverScreen = GAME_OVER_SCENE.instantiate()
 	game_over.player_stats = player_stats
 	add_child(game_over)
-	game_over.play_again_button.pressed.connect(new_game_start)
+	game_over.play_again_button.pressed.connect(delayed_queue_free.bind(game_over))
+	game_over.play_again_button.pressed.connect(go_to_main_menu)
 	game_over.exit_button.pressed.connect(get_tree().quit)
 
 
 # Shop
 func go_to_shop() -> void:
+	await transitioned_in
 	shop = SHOP_SCENE.instantiate()
 	shop.player_stats = player_stats
 	add_child(shop)
-	shop.next_round_requested.connect(shop.queue_free)
+	shop.next_round_requested.connect(delayed_queue_free.bind(shop))
 	shop.next_round_requested.connect(go_to_arena)
 
 
 # Main Menu
 func go_to_main_menu() -> void:
+	await transitioned_in
 	var menu: MainMenu = MAIN_MENU_SCENE.instantiate()
 	add_child(menu)
-	menu.play_button.pressed.connect(menu.queue_free)
+	menu.play_button.pressed.connect(delayed_queue_free.bind(menu))
 	menu.play_button.pressed.connect(new_game_start)
-	menu.settings_button.pressed.connect(menu.queue_free)
+	menu.settings_button.pressed.connect(delayed_queue_free.bind(menu))
 	menu.settings_button.pressed.connect(go_to_settings_menu)
 	menu.exit_button.pressed.connect(get_tree().quit)
 	menu.credits_button.pressed.connect(go_to_credits_screen)
+	menu.credits_button.pressed.connect(delayed_queue_free.bind(menu))
 
 
 func go_to_settings_menu() -> void:
+	await transitioned_in
 	var menu: SettingsMenu = SETTINGS_MENU_SCENE.instantiate()
 	add_child(menu)
-	menu.exit_button.pressed.connect(menu.queue_free)
+	menu.exit_button.pressed.connect(delayed_queue_free.bind(menu))
 	menu.exit_button.pressed.connect(go_to_main_menu)
 
 
 func go_to_credits_screen() -> void:
+	await transitioned_in
 	var credits: CreditsScreen = CREDITS_SCENE.instantiate()
 	add_child(credits)
-	credits.back_button.pressed.connect(credits.queue_free)
+	credits.back_button.pressed.connect(delayed_queue_free.bind(credits))
+	credits.back_button.pressed.connect(go_to_main_menu)
 
 
 # EventsBus signals
@@ -131,3 +161,15 @@ func _on_player_effect_finished(eff: Effect) -> void:
 func _on_hero_died(hero: Hero) -> void:
 	if not hero.friendly:
 		player_stats.units_slain += 1
+
+
+# Loading Animation
+func in_finished() -> void:
+	transitioned_in.emit()
+	animation_player.play("out")
+
+
+func delayed_queue_free(scene: Node) -> void:
+	animation_player.play("in")
+	await transitioned_in
+	scene.queue_free()

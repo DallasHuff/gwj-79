@@ -56,6 +56,32 @@ theme_override_constants/margin_right = 40
 layout_mode = 2
 theme_override_constants/separation = 100
 
+[node name="TimeSpentHbox" type="HBoxContainer" parent="CanvasLayer/StatsMargin/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TimeSpentLabel" type="Label" parent="CanvasLayer/StatsMargin/VBoxContainer/TimeSpentHbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Run time:    "
+
+[node name="MinutesLabel" type="Label" parent="CanvasLayer/StatsMargin/VBoxContainer/TimeSpentHbox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "15"
+
+[node name="ColonLabel" type="Label" parent="CanvasLayer/StatsMargin/VBoxContainer/TimeSpentHbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = ":"
+
+[node name="SecondsLabel" type="Label" parent="CanvasLayer/StatsMargin/VBoxContainer/TimeSpentHbox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "45"
+
 [node name="StatsHBox1" type="HBoxContainer" parent="CanvasLayer/StatsMargin/VBoxContainer"]
 layout_mode = 2
 

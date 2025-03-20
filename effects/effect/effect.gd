@@ -116,7 +116,8 @@ func is_finished() -> bool:
 func finish() -> void:
 	finished_flag = true
 	if context.has(ContextBuilder.ContextKey.EFFECT_OWNER):
-		if context[ContextBuilder.ContextKey.EFFECT_OWNER].friendly:
+		var hero: Hero = context[ContextBuilder.ContextKey.EFFECT_OWNER]
+		if is_instance_valid(hero) and hero.friendly:
 			EventsBus.player_effect_finished.emit(self)
 	call_deferred("emit_signal", "finished")
 
