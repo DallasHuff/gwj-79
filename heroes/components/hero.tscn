@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://kq1fxfuwrqut" path="res://heroes/components/hero.gd" id="1_bhrjw"]
 [ext_resource type="Theme" uid="uid://txnhaabb1iib" path="res://themes/default_theme.tres" id="2_rbim2"]
-[ext_resource type="Texture2D" uid="uid://dwygc3evt85wp" path="res://heroes/resources/murloc/murloc.png" id="3_c4el2"]
+[ext_resource type="Texture2D" uid="uid://dwygc3evt85wp" path="res://heroes/resources/Common/cockatrice/murloc.png" id="3_c4el2"]
 [ext_resource type="PackedScene" uid="uid://1ewf4vyq4t01" path="res://heroes/components/tooltip_component/tooltip_component.tscn" id="3_rjlwa"]
 [ext_resource type="Texture2D" uid="uid://d0360qs32cyw3" path="res://heroes/components/general_art/swords_crossed.png" id="3_rwnei"]
 [ext_resource type="Texture2D" uid="uid://cwkkax5nhtycj" path="res://heroes/components/general_art/heart.png" id="4_rbim2"]

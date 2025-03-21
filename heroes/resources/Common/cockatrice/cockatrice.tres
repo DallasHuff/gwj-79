@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=7 format=3 uid="uid://bb5vk5cjocn75"]
+
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="1_7y65v"]
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_bcx6p"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="1_y42v0"]
+[ext_resource type="Script" uid="uid://fcr77u101a5h" path="res://effects/damage_effect/damage_effect.gd" id="2_lkmhh"]
+[ext_resource type="Texture2D" uid="uid://cwsapc13wiy5c" path="res://heroes/resources/Common/cockatrice/chicken.png" id="4_lkmhh"]
+
+[sub_resource type="Resource" id="Resource_h2jsd"]
+script = ExtResource("2_lkmhh")
+aoe_target_type = 1
+single_target_types = Array[int]([])
+include_self = false
+damage = 1
+use_effect_owner_damage = false
+triggers = Array[int]([6])
+metadata/_custom_type_script = "uid://fcr77u101a5h"
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_y42v0")
+max_hp = 2
+current_hp = 2
+damage = 2
+rarity = 0
+effects = Array[ExtResource("1_bcx6p")]([SubResource("Resource_h2jsd")])
+item_list = Array[ExtResource("1_7y65v")]([])
+hero_name = "Cockatrice"
+tooltip = "Deals 1 damage to all heroes when slain"
+model = ExtResource("4_lkmhh")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

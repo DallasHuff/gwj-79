@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="1_154jj"]
 [ext_resource type="Resource" uid="uid://dabx83soglwev" path="res://heroes/resources/Common/void_jelly/void_jelly.tres" id="2_8k8tx"]
 [ext_resource type="Script" uid="uid://cq5o6kamx720a" path="res://combat/hero_array.gd" id="2_nq48o"]
-[ext_resource type="Resource" uid="uid://bb5vk5cjocn75" path="res://heroes/resources/murloc/murloc.tres" id="3_unxrk"]
+[ext_resource type="Resource" uid="uid://bb5vk5cjocn75" path="res://heroes/resources/Common/cockatrice/cockatrice.tres" id="3_unxrk"]
 [ext_resource type="Resource" uid="uid://dowcow3idr6uh" path="res://heroes/resources/Uncommon/void_cat/void_cat.tres" id="4_adp2b"]
 
 [resource]
