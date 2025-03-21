@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=6 format=3 uid="uid://d3g6qwykldrdu"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_tcice"]
+[ext_resource type="Script" uid="uid://xkfno6wtooml" path="res://effects/copy_effect/copy_effect.gd" id="2_cv6sv"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="2_ie2de"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="3_cv6sv"]
+
+[sub_resource type="Resource" id="Resource_efknj"]
+script = ExtResource("2_cv6sv")
+single_target_type = 1
+triggers = Array[int]([0])
+metadata/_custom_type_script = "uid://xkfno6wtooml"
+
+[resource]
+script = ExtResource("3_cv6sv")
+max_hp = 20
+current_hp = 20
+damage = 20
+rarity = 3
+effects = Array[ExtResource("1_tcice")]([SubResource("Resource_efknj")])
+item_list = Array[ExtResource("2_ie2de")]([])
+hero_name = "Dallas"
+tooltip = "Start of battle: Copy the affect of the unit in front of you."
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

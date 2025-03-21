@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cbl5kpt24f7d2"
-path="res://.godot/imported/alien_hound.png-25f8a08745d18a4ec608db7eb977c0e7.ctex"
+path="res://.godot/imported/alien_hound.png-a62f65e7766cc0b16a6eee2d4a2b703b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://heroes/resources/alien_hound/alien_hound.png"
-dest_files=["res://.godot/imported/alien_hound.png-25f8a08745d18a4ec608db7eb977c0e7.ctex"]
+source_file="res://heroes/resources/Legendary/alien_hound/alien_hound.png"
+dest_files=["res://.godot/imported/alien_hound.png-a62f65e7766cc0b16a6eee2d4a2b703b.ctex"]
 
 [params]
 

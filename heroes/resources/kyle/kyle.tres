@@ -17,12 +17,12 @@ metadata/_custom_type_script = "uid://lc8jysx7dkah"
 
 [resource]
 script = ExtResource("3_qsyvx")
-max_hp = 1
-current_hp = null
-damage = 1
+max_hp = 3
+current_hp = 3
+damage = 3
 rarity = 3
 effects = Array[ExtResource("1_l5lnm")]([SubResource("Resource_4moln")])
 item_list = Array[ExtResource("2_gu43d")]([])
 hero_name = "Kyle"
-tooltip = ""
+tooltip = "Give your allies +3/3 each time the hero in front of you attacks."
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

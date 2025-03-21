@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=7 format=3 uid="uid://d38tcuf3fdutc"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_ku05c"]
+[ext_resource type="Script" uid="uid://lc8jysx7dkah" path="res://effects/buff_effect/buff_effect.gd" id="2_iah37"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="2_wjxhe"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="3_iah37"]
+[ext_resource type="Texture2D" uid="uid://cbl5kpt24f7d2" path="res://heroes/resources/Legendary/alien_hound/alien_hound.png" id="4_8j5j2"]
+
+[sub_resource type="Resource" id="Resource_efhva"]
+script = ExtResource("2_iah37")
+aoe_target_type = 0
+single_target_types = Array[int]([0])
+include_self = true
+health_buff = 3
+attack_buff = 3
+triggers = Array[int]([2])
+metadata/_custom_type_script = "uid://lc8jysx7dkah"
+
+[resource]
+script = ExtResource("3_iah37")
+max_hp = 10
+current_hp = 10
+damage = 10
+rarity = 3
+effects = Array[ExtResource("1_ku05c")]([SubResource("Resource_efhva")])
+item_list = Array[ExtResource("2_wjxhe")]([])
+hero_name = "Alien Hound"
+tooltip = "When an ally hero in front of this unit attacks, gain +3/3"
+model = ExtResource("4_8j5j2")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

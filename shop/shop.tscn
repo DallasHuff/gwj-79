@@ -1,15 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://06xr0ip26ljd"]
+[gd_scene load_steps=16 format=3 uid="uid://06xr0ip26ljd"]
 
 [ext_resource type="Script" uid="uid://bq0ols1mg17p8" path="res://shop/shop.gd" id="1_sd7uk"]
-[ext_resource type="Resource" uid="uid://dowcow3idr6uh" path="res://heroes/resources/Uncommon/void_cat/void_cat.tres" id="3_orod7"]
+[ext_resource type="Resource" uid="uid://d3l42d8csm8w0" path="res://heroes/resources/cleavory/cleavory.tres" id="3_orod7"]
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="3_q4g17"]
-[ext_resource type="Resource" uid="uid://csfguy4pfjem6" path="res://heroes/resources/Uncommon/tree/tree.tres" id="5_cd0xb"]
+[ext_resource type="Resource" uid="uid://dbbb8w85p2dlm" path="res://heroes/resources/Uncommon/martyr/martyr.tres" id="4_orod7"]
 [ext_resource type="Script" uid="uid://m8r1oy4pfeq4" path="res://shop/weighted_item.gd" id="5_ljlg5"]
+[ext_resource type="Resource" uid="uid://d3g6qwykldrdu" path="res://heroes/resources/Legendary/dallas/dallas.tres" id="5_mmyc1"]
 [ext_resource type="Resource" uid="uid://dwkg5ckxoo20t" path="res://items/testitem1.tres" id="6_bv5vx"]
-[ext_resource type="Resource" uid="uid://fx7v6wjp0co4" path="res://heroes/resources/frog/frog.tres" id="6_orod7"]
-[ext_resource type="Resource" uid="uid://b0q0e28c4fdsw" path="res://heroes/resources/Rare/otterocious/otterocious.tres" id="7_cd0xb"]
+[ext_resource type="Resource" uid="uid://cqm08ja3ptyyc" path="res://heroes/resources/Rare/sneaky_rat/sneakyrat.tres" id="6_orod7"]
 [ext_resource type="Resource" uid="uid://crvwxum2jiasx" path="res://items/testitem2.tres" id="7_mmyc1"]
-[ext_resource type="Resource" uid="uid://c2yw8lbpo5g78" path="res://heroes/resources/Rare/3_hydra/hydra.tres" id="7_pafut"]
 [ext_resource type="Script" uid="uid://cruwimt38nwr7" path="res://shop/weighted_random_list.gd" id="8_orod7"]
 [ext_resource type="Texture2D" uid="uid://7366032lwnci" path="res://shop/coin.png" id="12_cd0xb"]
 [ext_resource type="PackedScene" uid="uid://5d2tgixtskiy" path="res://combat/hero_line/hero_line.tscn" id="12_orod7"]
@@ -33,7 +32,7 @@ metadata/_custom_type_script = "uid://cruwimt38nwr7"
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_sd7uk")
-hero_pool = Array[ExtResource("3_q4g17")]([ExtResource("3_orod7"), ExtResource("7_pafut"), ExtResource("5_cd0xb"), ExtResource("6_orod7"), ExtResource("7_cd0xb")])
+hero_pool = Array[ExtResource("3_q4g17")]([ExtResource("3_orod7"), ExtResource("4_orod7"), ExtResource("5_mmyc1"), ExtResource("6_orod7")])
 item_pool = SubResource("Resource_pafut")
 hero_offset = Vector2(400, 700)
 item_offset = Vector2(1200, 700)
