@@ -98,6 +98,7 @@ func summon(pos: int, stats: HeroStats) -> void:
 	while i-1 >= 0 and not is_instance_valid(hero_list[i-1]):
 		i -= 1
 
+	SoundManager.summon_effect.play()
 	var new_hero: Hero = _create_hero(stats, i)
 	update_hero_positions()
 	EventsBus.hero_summoned.emit(new_hero)

@@ -26,6 +26,7 @@ EffectQueue="*res://common/autoloads/effect_queue.gd"
 Global="*res://common/autoloads/global.gd"
 Settings="*res://common/autoloads/settings.gd"
 ContextBuilder="*res://common/autoloads/context_builder.gd"
+SoundManager="*res://common/autoloads/sound_manager/sound_manager.tscn"
 
 [debug]
 

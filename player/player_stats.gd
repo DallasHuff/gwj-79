@@ -5,7 +5,7 @@ extends Resource
 @export var money: int = 100
 @export var income: int = 5
 @export var health: int = 3
-@export var round_number: int = 0
+@export var round_number: int = 1
 @export var heroes: HeroArray
 var rounds_required_to_win: int = 5
 var rounds_won: int = 0
@@ -28,7 +28,7 @@ func setup_for_new_game() -> void:
 	money = 10
 	income = 5
 	health = 3
-	round_number = 0
+	round_number = 1
 	rounds_won = 0 
 	times_rerolled = 0
 	units_slain = 0

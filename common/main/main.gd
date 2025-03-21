@@ -13,9 +13,13 @@ const CREDITS_SCENE := preload("res://menus/credits_screen/credits_screen.tscn")
 const ROUND_FINISHED_SCENE := preload("res://menus/round_finished_screen/round_finished.tscn")
 
 @export var player_stats: PlayerStats
+var menu: MainMenu
+var settings_menu: SettingsMenu
+var credits: CreditsScreen
 var shop: Shop
 var arena: Arena
 var arena_settings_menu: ArenaSettingsMenu
+var game_over: GameOverScreen
 var start_time: float
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
@@ -39,7 +43,7 @@ func new_game_start() -> void:
 
 # It's just go_to_main_menu() but without the await
 func startup() -> void:
-	var menu: MainMenu = MAIN_MENU_SCENE.instantiate()
+	menu = MAIN_MENU_SCENE.instantiate()
 	add_child(menu)
 	menu.play_button.pressed.connect(delayed_queue_free.bind(menu))
 	menu.play_button.pressed.connect(new_game_start)
@@ -53,6 +57,8 @@ func startup() -> void:
 # Arena
 func go_to_arena() -> void:
 	await transitioned_in
+	if is_instance_valid(arena):
+		return
 	arena = ARENA_SCENE.instantiate()
 	add_child(arena)
 	arena.exit_button.pressed.connect(go_to_main_menu)
@@ -65,6 +71,8 @@ func go_to_arena() -> void:
 
 
 func _on_arena_settings_button_pressed() -> void:
+	if is_instance_valid(arena_settings_menu):
+		return
 	arena_settings_menu = ARENA_SETTINGS_SCENE.instantiate()
 	add_child(arena_settings_menu)
 	arena_settings_menu.exit_button.pressed.connect(_on_arena_settings_exit_button_pressed.bind(arena_settings_menu))
@@ -97,7 +105,9 @@ func after_round_finished() -> void:
 
 func go_to_game_over_screen() -> void:
 	await transitioned_in
-	var game_over: GameOverScreen = GAME_OVER_SCENE.instantiate()
+	if is_instance_valid(game_over):
+		return
+	game_over = GAME_OVER_SCENE.instantiate()
 	game_over.player_stats = player_stats
 	add_child(game_over)
 	game_over.play_again_button.pressed.connect(delayed_queue_free.bind(game_over))
@@ -108,6 +118,8 @@ func go_to_game_over_screen() -> void:
 # Shop
 func go_to_shop() -> void:
 	await transitioned_in
+	if is_instance_valid(shop):
+		return
 	shop = SHOP_SCENE.instantiate()
 	shop.player_stats = player_stats
 	add_child(shop)
@@ -118,7 +130,9 @@ func go_to_shop() -> void:
 # Main Menu
 func go_to_main_menu() -> void:
 	await transitioned_in
-	var menu: MainMenu = MAIN_MENU_SCENE.instantiate()
+	if is_instance_valid(menu):
+		return
+	menu = MAIN_MENU_SCENE.instantiate()
 	add_child(menu)
 	menu.play_button.pressed.connect(delayed_queue_free.bind(menu))
 	menu.play_button.pressed.connect(new_game_start)
@@ -131,15 +145,19 @@ func go_to_main_menu() -> void:
 
 func go_to_settings_menu() -> void:
 	await transitioned_in
-	var menu: SettingsMenu = SETTINGS_MENU_SCENE.instantiate()
-	add_child(menu)
-	menu.exit_button.pressed.connect(delayed_queue_free.bind(menu))
-	menu.exit_button.pressed.connect(go_to_main_menu)
+	if is_instance_valid(settings_menu):
+		return
+	settings_menu = SETTINGS_MENU_SCENE.instantiate()
+	add_child(settings_menu)
+	settings_menu.exit_button.pressed.connect(delayed_queue_free.bind(settings_menu))
+	settings_menu.exit_button.pressed.connect(go_to_main_menu)
 
 
 func go_to_credits_screen() -> void:
 	await transitioned_in
-	var credits: CreditsScreen = CREDITS_SCENE.instantiate()
+	if is_instance_valid(credits):
+		return
+	credits = CREDITS_SCENE.instantiate()
 	add_child(credits)
 	credits.back_button.pressed.connect(delayed_queue_free.bind(credits))
 	credits.back_button.pressed.connect(go_to_main_menu)

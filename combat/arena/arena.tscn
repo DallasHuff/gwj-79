@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmx2fwumi1ey"]
+[gd_scene load_steps=7 format=3 uid="uid://dmx2fwumi1ey"]
 
 [ext_resource type="Script" uid="uid://b4243wf3yx74g" path="res://combat/arena/arena.gd" id="1_i5doo"]
 [ext_resource type="PackedScene" uid="uid://5d2tgixtskiy" path="res://combat/hero_line/hero_line.tscn" id="2_13g3s"]
 [ext_resource type="Script" uid="uid://d37m7keo2x8vg" path="res://combat/arena/components/enemy_manager/enemy_manager.gd" id="3_sg87e"]
-[ext_resource type="Script" uid="uid://cq5o6kamx720a" path="res://combat/hero_array.gd" id="4_1qt8t"]
-[ext_resource type="Resource" uid="uid://ckv3otg04dki0" path="res://combat/enemy_arrays/round_1_enemies/team_2.tres" id="5_amu2l"]
 [ext_resource type="PackedScene" uid="uid://b076010rnvrtp" path="res://combat/arena/components/battle_speed_controller/battle_speed_controller.tscn" id="6_kxugw"]
 [ext_resource type="Texture2D" uid="uid://cwkkax5nhtycj" path="res://heroes/components/general_art/heart.png" id="7_amu2l"]
 [ext_resource type="Texture2D" uid="uid://7366032lwnci" path="res://shop/coin.png" id="7_yln67"]
@@ -25,7 +23,8 @@ friendly = false
 [node name="EnemyManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_sg87e")
-round_1_list = Array[ExtResource("4_1qt8t")]([ExtResource("5_amu2l")])
+rounds = 4
+teams = 4
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -160,5 +159,7 @@ theme_override_font_sizes/font_size = 50
 text = "0"
 vertical_alignment = 1
 
+[connection signal="pressed" from="CanvasLayer/ExitContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/MarginContainer/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="toggled" from="CanvasLayer/HBoxContainer/MarginContainer/PauseButton" to="." method="_on_pause_button_toggled"]
+[connection signal="pressed" from="CanvasLayer/SettingsContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
