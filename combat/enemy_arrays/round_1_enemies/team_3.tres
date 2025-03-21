@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="HeroArray" load_steps=5 format=3 uid="uid://d4fi0ghc3ie3w"]
+[gd_resource type="Resource" script_class="HeroArray" load_steps=7 format=3 uid="uid://d4fi0ghc3ie3w"]
 
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="1_wosi7"]
 [ext_resource type="Resource" uid="uid://dabx83soglwev" path="res://heroes/resources/Common/void_jelly/void_jelly.tres" id="2_3aika"]
 [ext_resource type="Script" uid="uid://cq5o6kamx720a" path="res://combat/hero_array.gd" id="2_m3ppg"]
-[ext_resource type="Resource" uid="uid://dfmclsjupq0xu" path="res://heroes/resources/knight/knight.tres" id="3_j0a3c"]
+[ext_resource type="Resource" uid="uid://bb5vk5cjocn75" path="res://heroes/resources/Common/cockatrice/cockatrice.tres" id="3_oncyr"]
+[ext_resource type="Resource" uid="uid://ctik5gapejhch" path="res://heroes/resources/Common/1_hydra/single_hydra.tres" id="4_vqnka"]
+[ext_resource type="Resource" uid="uid://c7dbthjpc70vy" path="res://heroes/resources/Common/fox_cat/fox_cat.tres" id="5_2ckvy"]
 
 [resource]
 script = ExtResource("2_m3ppg")
-heroes = Array[ExtResource("1_wosi7")]([ExtResource("2_3aika"), ExtResource("2_3aika"), ExtResource("3_j0a3c"), ExtResource("3_j0a3c"), ExtResource("3_j0a3c")])
+heroes = Array[ExtResource("1_wosi7")]([ExtResource("2_3aika"), ExtResource("3_oncyr"), ExtResource("4_vqnka"), ExtResource("5_2ckvy")])
 metadata/_custom_type_script = "uid://cq5o6kamx720a"

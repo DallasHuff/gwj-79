@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=8 format=3 uid="uid://cqm08ja3ptyyc"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_svp00"]
+[ext_resource type="Script" uid="uid://fcr77u101a5h" path="res://effects/damage_effect/damage_effect.gd" id="2_7qbt5"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="3_k26pe"]
+[ext_resource type="Texture2D" uid="uid://nodv45tquj78" path="res://heroes/resources/Uncommon/sneaky_rat/rat.png" id="4_wy8t5"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="5_8pq8h"]
+
+[sub_resource type="Resource" id="Resource_kp8sk"]
+script = ExtResource("2_7qbt5")
+aoe_target_type = 3
+single_target_types = Array[int]([])
+include_self = false
+damage = 1
+use_effect_owner_damage = true
+triggers = Array[int]([12])
+metadata/_custom_type_script = "uid://fcr77u101a5h"
+
+[sub_resource type="Resource" id="Resource_x7ue7"]
+script = ExtResource("2_7qbt5")
+aoe_target_type = 0
+single_target_types = Array[int]([0])
+include_self = true
+damage = 1
+use_effect_owner_damage = true
+triggers = Array[int]([0])
+metadata/_custom_type_script = "uid://fcr77u101a5h"
+
+[resource]
+script = ExtResource("5_8pq8h")
+max_hp = 7
+current_hp = 7
+damage = 3
+rarity = 1
+effects = Array[ExtResource("1_svp00")]([SubResource("Resource_kp8sk"), SubResource("Resource_x7ue7")])
+item_list = Array[ExtResource("3_k26pe")]([])
+hero_name = "Sneaky Rat"
+tooltip = "Start of battle deal 4 damage to yourself. Whenever an enemy is buffed, deal damage equal to your attack to a random enemy hero. "
+model = ExtResource("4_wy8t5")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

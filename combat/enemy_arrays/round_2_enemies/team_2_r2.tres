@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="HeroArray" load_steps=5 format=3 uid="uid://5c3yyqfyw5w2"]
+
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="1_mrnfl"]
+[ext_resource type="Resource" uid="uid://dbbb8w85p2dlm" path="res://heroes/resources/Uncommon/crab/crab.tres" id="2_bofxf"]
+[ext_resource type="Resource" uid="uid://cqm08ja3ptyyc" path="res://heroes/resources/Uncommon/sneaky_rat/sneakyrat.tres" id="3_pqjo6"]
+[ext_resource type="Script" uid="uid://cq5o6kamx720a" path="res://combat/hero_array.gd" id="4_4ox33"]
+
+[resource]
+script = ExtResource("4_4ox33")
+heroes = Array[ExtResource("1_mrnfl")]([ExtResource("2_bofxf"), ExtResource("2_bofxf"), ExtResource("3_pqjo6"), ExtResource("3_pqjo6")])
+metadata/_custom_type_script = "uid://cq5o6kamx720a"

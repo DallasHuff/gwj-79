@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=7 format=3 uid="uid://dbbb8w85p2dlm"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_le7w3"]
+[ext_resource type="Script" uid="uid://exkip3sg0x71" path="res://effects/heal_effect/heal_effect.gd" id="2_h0p16"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="2_sbilm"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="3_h0p16"]
+[ext_resource type="Texture2D" uid="uid://cnod4vytpkltu" path="res://heroes/resources/Uncommon/crab/crab.png" id="4_bqdar"]
+
+[sub_resource type="Resource" id="Resource_gexmf"]
+script = ExtResource("2_h0p16")
+aoe_target_type = 1
+single_target_types = Array[int]([])
+include_self = false
+heal = 4
+use_effect_owner_damage_as_heal = false
+use_effect_owner_current_health_as_heal = false
+use_effect_owner_max_health_as_heal = false
+triggers = Array[int]([6])
+metadata/_custom_type_script = "uid://exkip3sg0x71"
+
+[resource]
+script = ExtResource("3_h0p16")
+max_hp = 3
+current_hp = 3
+damage = 4
+rarity = 1
+effects = Array[ExtResource("1_le7w3")]([SubResource("Resource_gexmf")])
+item_list = Array[ExtResource("2_sbilm")]([])
+hero_name = "Martyr Crab"
+tooltip = "Once defeated, restore 4 health to all heroes."
+model = ExtResource("4_bqdar")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
