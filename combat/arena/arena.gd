@@ -165,6 +165,7 @@ func _on_attack_completed() -> void:
 
 
 func _on_pause_button_pressed() -> void:
+	SoundManager.play_button()
 	EventsBus.pause_button_pressed.emit()
 
 
@@ -172,3 +173,13 @@ func _on_player_stats_changed(player_stats: PlayerStats) -> void:
 	round_label.text = "Round: " + str(player_stats.round_number)
 	player_health_label.text = str(player_stats.health)
 	money_label.text = str(player_stats.money)
+
+
+func _on_exit_button_pressed() -> void:
+	print("pressed")
+	SoundManager.play_button()
+
+
+func _on_settings_button_pressed() -> void:
+	print("pressed")
+	SoundManager.play_button()

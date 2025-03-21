@@ -23,15 +23,18 @@ func _ready() -> void:
 
 
 func _on_double_speed_button_pressed() -> void:
+	SoundManager.play_button()
 	Settings.battle_speed = 2
 	Settings.battle_speed_indicator = BattleSpeeds.DOUBLE
 
 
 func _on_normal_speed_button_pressed() -> void:
+	SoundManager.play_button()
 	Settings.battle_speed = 1
 	Settings.battle_speed_indicator = BattleSpeeds.NORMAL
 
 
 func _on_half_speed_button_pressed() -> void:
+	SoundManager.play_button()
 	Settings.battle_speed = 0.5
 	Settings.battle_speed_indicator = BattleSpeeds.HALF

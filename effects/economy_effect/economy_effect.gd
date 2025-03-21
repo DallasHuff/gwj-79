@@ -19,6 +19,7 @@ func execute() -> void:
 	effect_owner.add_child(coin_sprite)
 	coin_sprite.global_position = position + Vector2(0, HEIGHT_ABOVE_HERO)
 
+	SoundManager.coins.play()
 	var tween: Tween = effect_owner.create_tween()
 	tween.tween_property(coin_sprite, "global_position:y", position.y + ARC_HEIGHT, flight_time / 2).set_ease(Tween.EASE_OUT)
 	tween.tween_property(coin_sprite, "global_position:y", position.y, flight_time / 2).set_ease(Tween.EASE_OUT)

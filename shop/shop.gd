@@ -94,7 +94,6 @@ func _ready() -> void:
 func add_heroes() -> void:
 	var stat_list : Array[HeroStats] = []
 	for i in range(heroes.size()):
-		print(hero_pool)
 		stat_list.append(hero_pool[randi_range(0, hero_pool.size()-1)])
 	
 	var i: int = 0
