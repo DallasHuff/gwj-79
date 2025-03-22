@@ -94,7 +94,11 @@ func _ready() -> void:
 func add_heroes() -> void:
 	var stat_list : Array[HeroStats] = []
 	for i in range(heroes.size()):
-		stat_list.append(hero_pool[randi_range(0, hero_pool.size()-1)])
+		var random_hero: HeroStats = hero_pool[randi_range(0, hero_pool.size()-1)]
+		# Don't add heroes that the player hasn't unlocked yet
+		while random_hero.rarity > player_stats.level:
+			random_hero = hero_pool[randi_range(0, hero_pool.size()-1)]
+		stat_list.append(random_hero)
 	
 	var i: int = 0
 	for stat: HeroStats in stat_list:

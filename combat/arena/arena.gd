@@ -6,6 +6,9 @@ signal combat_finished(player_win_flag: bool)
 const MOVE_BACK_AMOUNT: float = 40
 const LINE_POSITION_DIFF: float = 1000
 
+var attacks_until_stoftlock: int = 25
+var attack_counter: int
+
 @onready var friendly_line: HeroLine = %FriendlyHeroLine
 @onready var enemy_line: HeroLine = %EnemyHeroLine
 @onready var enemy_manager: EnemyManager = %EnemyManager
@@ -15,9 +18,11 @@ const LINE_POSITION_DIFF: float = 1000
 @onready var round_label: Label = %RoundLabel
 @onready var player_health_label: Label = %PlayerHealthLabel
 @onready var money_label: Label = %MoneyLabel
+@onready var softlock_label: Label = %SoftlockLabel
 
 
 func _ready() -> void:
+	attack_counter = 0
 	EventsBus.hero_summoned.connect(_on_hero_summoned)
 	EventsBus.hero_buffed.connect(_on_hero_buffed)
 	EventsBus.hero_died.connect(_on_hero_died)
@@ -92,11 +97,15 @@ func do_attack() -> void:
 		await effect.finished
 		await get_tree().create_timer(0.5 / Settings.battle_speed, false).timeout
 		if effect is AttackEffect:
+			attack_counter += 1
+			softlock_label.text = "Softlock Protection: " + str(attacks_until_stoftlock - attack_counter)
 			if effect.h1.dying and not effect.h2.dying:
 				effect.h2.on_killed_enemy()
 			elif effect.h2.dying and not effect.h1.dying:
 				effect.h1.on_killed_enemy()			
 
+	if attack_counter > attacks_until_stoftlock:
+		_check_winner()
 	if _check_combat_finished():
 		_check_winner()
 	else:
@@ -106,7 +115,7 @@ func do_attack() -> void:
 func _check_winner() -> void:
 	# Ties have the friendly line winning so there is always a winner
 	var player_win := true
-	if enemy_line.has_alive_hero():
+	if enemy_line.get_hero_count() > friendly_line.get_hero_count():
 		player_win = false
 	
 	print("Combat finished. Did the player win?: ", player_win)
@@ -165,7 +174,6 @@ func _on_attack_completed() -> void:
 
 
 func _on_pause_button_pressed() -> void:
-	SoundManager.play_button()
 	EventsBus.pause_button_pressed.emit()
 
 
@@ -175,11 +183,25 @@ func _on_player_stats_changed(player_stats: PlayerStats) -> void:
 	money_label.text = str(player_stats.money)
 
 
-func _on_exit_button_pressed() -> void:
-	print("pressed")
-	SoundManager.play_button()
+func _on_settings_button_button_up() -> void:
+	SoundManager.release_button()
 
 
-func _on_settings_button_pressed() -> void:
-	print("pressed")
-	SoundManager.play_button()
+func _on_settings_button_button_down() -> void:
+	SoundManager.press_button()
+
+
+func _on_pause_button_button_up() -> void:
+	SoundManager.release_button()
+
+
+func _on_pause_button_button_down() -> void:
+	SoundManager.press_button()
+
+
+func _on_exit_button_button_up() -> void:
+	SoundManager.release_button()
+
+
+func _on_exit_button_button_down() -> void:
+	SoundManager.press_button()

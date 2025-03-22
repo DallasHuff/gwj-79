@@ -45,3 +45,11 @@ func convert_percentage_to_decibels(percent: float) -> float:
 	const _scale: float = 20.0
 	const _divisor: float = 50.0
 	return _scale * log(percent / _divisor) / log(10)
+
+
+func _on_exit_button_button_up() -> void:
+	SoundManager.release_button()
+
+
+func _on_exit_button_button_down() -> void:
+	SoundManager.press_button()

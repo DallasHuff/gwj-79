@@ -1,7 +1,7 @@
 class_name PlayerStats
 extends Resource
 
-@export var level: int = 1
+@export var level: int = 0
 @export var money: int = 100
 @export var income: int = 5
 @export var health: int = 3

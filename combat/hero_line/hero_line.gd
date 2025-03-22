@@ -233,6 +233,14 @@ func has_alive_hero() -> bool:
 	return false
 
 
+func get_hero_count() -> int:
+	var number_of_heroes: int = 0
+	for hero: Hero in hero_list:
+		if is_instance_valid(hero):
+			number_of_heroes += 1
+	return number_of_heroes
+
+
 func damage_all(damage: int) -> void:
 	for i in range(hero_list.size()):
 		if is_instance_valid(hero_list[i]):

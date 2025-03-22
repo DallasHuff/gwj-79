@@ -181,5 +181,9 @@ custom_minimum_size = Vector2(440, 0)
 layout_mode = 2
 text = "Exit Game"
 
+[connection signal="button_down" from="CanvasLayer/ButtonsMargin/ButtonsHBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_button_down"]
+[connection signal="button_up" from="CanvasLayer/ButtonsMargin/ButtonsHBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_button_up"]
 [connection signal="pressed" from="CanvasLayer/ButtonsMargin/ButtonsHBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="button_down" from="CanvasLayer/ButtonsMargin/ButtonsHBoxContainer/ExitButton" to="." method="_on_exit_button_button_down"]
+[connection signal="button_up" from="CanvasLayer/ButtonsMargin/ButtonsHBoxContainer/ExitButton" to="." method="_on_exit_button_button_up"]
 [connection signal="pressed" from="CanvasLayer/ButtonsMargin/ButtonsHBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

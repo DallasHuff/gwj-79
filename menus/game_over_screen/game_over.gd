@@ -45,3 +45,19 @@ func _on_play_again_button_pressed() -> void:
 
 func _on_exit_button_pressed() -> void:
 	queue_free()
+
+
+func _on_exit_button_button_up() -> void:
+	SoundManager.release_button()
+
+
+func _on_exit_button_button_down() -> void:
+	SoundManager.press_button()
+
+
+func _on_play_again_button_button_up() -> void:
+	SoundManager.release_button()
+
+
+func _on_play_again_button_button_down() -> void:
+	SoundManager.press_button()

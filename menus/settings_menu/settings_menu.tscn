@@ -122,3 +122,5 @@ text = "Back"
 [connection signal="toggled" from="CanvasLayer/VBoxContainer/HBoxContainer2/FullscreenButton" to="." method="_on_full_screen_button_toggled"]
 [connection signal="value_changed" from="CanvasLayer/VBoxContainer/MasterVolumeContainer/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/VBoxContainer/SFXVolumeContainer/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="button_down" from="CanvasLayer/MarginContainer/ExitButton" to="." method="_on_exit_button_button_down"]
+[connection signal="button_up" from="CanvasLayer/MarginContainer/ExitButton" to="." method="_on_exit_button_button_up"]

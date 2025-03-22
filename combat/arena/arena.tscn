@@ -159,7 +159,23 @@ theme_override_font_sizes/font_size = 50
 text = "0"
 vertical_alignment = 1
 
-[connection signal="pressed" from="CanvasLayer/ExitContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+
+[node name="SoftlockLabel" type="Label" parent="CanvasLayer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "softlock protection: 25"
+
+[connection signal="button_down" from="CanvasLayer/ExitContainer/ExitButton" to="." method="_on_exit_button_button_down"]
+[connection signal="button_up" from="CanvasLayer/ExitContainer/ExitButton" to="." method="_on_exit_button_button_up"]
+[connection signal="button_down" from="CanvasLayer/HBoxContainer/MarginContainer/PauseButton" to="." method="_on_pause_button_button_down"]
+[connection signal="button_up" from="CanvasLayer/HBoxContainer/MarginContainer/PauseButton" to="." method="_on_pause_button_button_up"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/MarginContainer/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="toggled" from="CanvasLayer/HBoxContainer/MarginContainer/PauseButton" to="." method="_on_pause_button_toggled"]
-[connection signal="pressed" from="CanvasLayer/SettingsContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="button_down" from="CanvasLayer/SettingsContainer/SettingsButton" to="." method="_on_settings_button_button_down"]
+[connection signal="button_up" from="CanvasLayer/SettingsContainer/SettingsButton" to="." method="_on_settings_button_button_up"]
