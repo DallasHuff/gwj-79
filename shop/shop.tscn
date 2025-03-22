@@ -48,7 +48,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.101961, 0.121569, 0.2, 1)
+color = Color(0.545098, 0.368627, 0.235294, 1)
 
 [node name="MarginContainer5" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 6
@@ -138,6 +138,7 @@ theme_override_constants/margin_right = 50
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 50
 text = "ROUND: 0"
 
@@ -156,6 +157,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 80
 text = "50"
 
