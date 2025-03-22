@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://buc06qxwwlr0q"
-path="res://.godot/imported/lava_snail.png-a0ba60da552ee013871ecbe892f16da5.ctex"
+path="res://.godot/imported/lava_snail.png-846fc428474b78d4e7a71c021406168d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/delainey_art/lava_snail.png"
-dest_files=["res://.godot/imported/lava_snail.png-a0ba60da552ee013871ecbe892f16da5.ctex"]
+source_file="res://heroes/resources/Uncommon/lava_snail/lava_snail.png"
+dest_files=["res://.godot/imported/lava_snail.png-846fc428474b78d4e7a71c021406168d.ctex"]
 
 [params]
 
