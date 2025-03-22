@@ -46,6 +46,7 @@ func execute() -> void:
 		y_tween.tween_property(buff_sprite, "global_position:y", target.global_position.y + HEIGHT_ABOVE_HERO, flight_time / 2).set_ease(Tween.EASE_IN)
 		tween.tween_callback(buff_sprite.queue_free).set_delay(flight_time)
 		tween.tween_callback(target.get_buffed.bind(effect_owner).bind(attack_buff).bind(health_buff)).set_delay(flight_time)
+		tween.tween_callback(SoundManager.buff_effect.play).set_delay(flight_time)
 
 	await effect_owner.get_tree().create_timer(flight_time, false).timeout
 	finish()

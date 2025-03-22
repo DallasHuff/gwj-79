@@ -78,3 +78,11 @@ func add_money() -> void:
 
 func _on_next_button_pressed() -> void:
 	next_button_pressed.emit()
+
+
+func _on_next_button_button_up() -> void:
+	SoundManager.release_button()
+
+
+func _on_next_button_button_down() -> void:
+	SoundManager.press_button()

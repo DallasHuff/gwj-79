@@ -8,17 +8,34 @@ extends Control
 
 
 
-func _on_play_button_pressed() -> void:
-	SoundManager.play_button()
+
+func _on_credits_button_button_up() -> void:
+	SoundManager.release_button()
 
 
-func _on_settings_button_pressed() -> void:
-	SoundManager.play_button()
+func _on_exit_button_button_up() -> void:
+	SoundManager.release_button()
 
 
-func _on_exit_button_pressed() -> void:
-	SoundManager.play_button()
+func _on_settings_button_button_up() -> void:
+	SoundManager.release_button()
 
 
-func _on_credits_button_pressed() -> void:
-	SoundManager.play_button()
+func _on_play_button_button_up() -> void:
+	SoundManager.release_button()
+
+
+func _on_credits_button_button_down() -> void:
+	SoundManager.press_button()
+
+
+func _on_exit_button_button_down() -> void:
+	SoundManager.press_button()
+
+
+func _on_settings_button_button_down() -> void:
+	SoundManager.press_button()
+
+
+func _on_play_button_button_down() -> void:
+	SoundManager.press_button()

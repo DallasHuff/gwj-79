@@ -44,6 +44,9 @@ toggle_mode = true
 button_group = ExtResource("2_6yw4s")
 text = "2x"
 
-[connection signal="pressed" from="HBoxContainer/HalfSpeedButton" to="." method="_on_half_speed_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/NormalSpeedButton" to="." method="_on_normal_speed_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/DoubleSpeedButton" to="." method="_on_double_speed_button_pressed"]
+[connection signal="button_down" from="HBoxContainer/HalfSpeedButton" to="." method="_on_half_speed_button_button_down"]
+[connection signal="button_up" from="HBoxContainer/HalfSpeedButton" to="." method="_on_half_speed_button_button_up"]
+[connection signal="button_down" from="HBoxContainer/NormalSpeedButton" to="." method="_on_normal_speed_button_button_down"]
+[connection signal="button_up" from="HBoxContainer/NormalSpeedButton" to="." method="_on_normal_speed_button_button_up"]
+[connection signal="button_down" from="HBoxContainer/DoubleSpeedButton" to="." method="_on_double_speed_button_button_down"]
+[connection signal="button_up" from="HBoxContainer/DoubleSpeedButton" to="." method="_on_double_speed_button_button_up"]

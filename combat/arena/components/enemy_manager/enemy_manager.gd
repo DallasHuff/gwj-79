@@ -23,5 +23,6 @@ func _ready() -> void:
 
 
 func get_list_for_round(round_number: int) -> HeroArray:
+	print("getting enemies for round number: ", round_number)
 	var team_number: int = randi() % enemy_list[round_number-1].size()
 	return enemy_list[round_number-1][team_number]
