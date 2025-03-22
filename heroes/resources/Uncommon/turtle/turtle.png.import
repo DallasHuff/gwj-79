@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://db5ljtfwdmm2n"
-path="res://.godot/imported/turtle.png-cf6a38cb6f408db646e0f0b82fdc32c6.ctex"
+path="res://.godot/imported/turtle.png-206e7b3030878e64244908b0b9915373.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/delainey_art/turtle.png"
-dest_files=["res://.godot/imported/turtle.png-cf6a38cb6f408db646e0f0b82fdc32c6.ctex"]
+source_file="res://heroes/resources/Uncommon/turtle/turtle.png"
+dest_files=["res://.godot/imported/turtle.png-206e7b3030878e64244908b0b9915373.ctex"]
 
 [params]
 

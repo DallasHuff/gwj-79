@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bq0ols1mg17p8" path="res://shop/shop.gd" id="1_sd7uk"]
 [ext_resource type="Resource" uid="uid://d3l42d8csm8w0" path="res://heroes/resources/Rare/flaminosaur/flaminosaur.tres" id="3_orod7"]
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="3_q4g17"]
-[ext_resource type="Resource" uid="uid://csfguy4pfjem6" path="res://heroes/resources/Uncommon/tree/tree.tres" id="4_cd0xb"]
+[ext_resource type="Resource" uid="uid://fx7v6wjp0co4" path="res://heroes/resources/Common/frog/frog.tres" id="4_cd0xb"]
 [ext_resource type="Resource" uid="uid://dbbb8w85p2dlm" path="res://heroes/resources/Uncommon/crab/crab.tres" id="4_orod7"]
 [ext_resource type="Script" uid="uid://m8r1oy4pfeq4" path="res://shop/weighted_item.gd" id="5_ljlg5"]
 [ext_resource type="Resource" uid="uid://dwkg5ckxoo20t" path="res://items/testitem1.tres" id="6_bv5vx"]
