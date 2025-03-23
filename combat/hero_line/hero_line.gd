@@ -164,6 +164,14 @@ func front() -> Hero:
 	return hero
 
 
+func swap_heroes(hero1: Hero, hero2: Hero) -> void:
+	var i: int = find_hero_position(hero1)
+	var j: int = find_hero_position(hero2)
+	hero_list[i] = hero2
+	hero_list[j] = hero1
+	update_hero_positions()
+
+
 func back() -> Hero:
 	var hero : Hero = hero_list[hero_list.size()-1]
 	

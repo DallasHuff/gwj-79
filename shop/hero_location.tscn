@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://6hbp8tnuweg"]
 
-[ext_resource type="Script" path="res://shop/hero_location.gd" id="1_5g2i8"]
+[ext_resource type="Script" uid="uid://b4w00knc1p1wn" path="res://shop/hero_location.gd" id="1_5g2i8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_urvtv"]
 bg_color = Color(0.933333, 0.6, 0.866667, 0.333333)

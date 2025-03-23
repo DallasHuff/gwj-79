@@ -22,4 +22,5 @@ func _on_mouse_exited() -> void:
 
 
 func _on_tooltip_timer_timeout() -> void:
-	tooltip_panel.show()	
+	tooltip_panel.show()
+	print("showing")

@@ -21,6 +21,8 @@ var line_position: int = 0
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		drag_drop.drag_canceled.connect(_on_drag_canceled)
+	drag_drop.mouse_entered.connect(tooltip_component._on_mouse_entered)
+	drag_drop.mouse_exited.connect(tooltip_component._on_mouse_exited)
 
 
 func _set_stats(value: HeroStats) -> void:
