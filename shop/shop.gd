@@ -6,12 +6,14 @@ signal next_round_requested
 const HERO_SCENE := preload("res://heroes/components/hero.tscn")
 const ITEM_SCENE := preload("res://items/components/item.tscn")
 const HERO_LOCATION_SCENE := preload("res://shop/hero_location.tscn")
+const HERO_COST_SCENE := preload("res://shop/hero_cost.tscn")
 
 @export var hero_pool: Array[HeroStats]
 @export var item_pool: WeightedRandomList
 @export var hero_offset: Vector2
 @export var item_offset: Vector2
 var heroes: Array[Hero] = [null, null, null, null]
+var hero_costs: Array[HeroCost] = [null, null, null, null]
 var hero_positions: Array[Vector2] = []
 var dist_between_heroes: int = 180
 var dist_between_items: int = 100
@@ -57,6 +59,10 @@ func _ready() -> void:
 		var hero_location: HeroLocation = HERO_LOCATION_SCENE.instantiate()
 		canvas.add_child(hero_location)
 		hero_location.global_position = global_position + hero_positions[i] + Vector2(0, 60)
+		var hero_cost_scene: HeroCost = HERO_COST_SCENE.instantiate()
+		canvas.add_child(hero_cost_scene)
+		hero_cost_scene.global_position = global_position + hero_positions[i] + Vector2(0, 120)
+		hero_costs[i] = hero_cost_scene
 
 	# Set up party hero locations
 	for i in range(player_party.hero_list.size()):
@@ -104,6 +110,7 @@ func add_heroes() -> void:
 		heroes[i] = _create_hero(stat, i)
 		heroes[i].position = global_position + hero_positions[i]
 		heroes[i].drag_drop.dropped.connect(_on_hero_dropped)
+		hero_costs[i].label.text = str(hero_cost[heroes[i].stats.rarity])
 		hero_buy_spot_dic[heroes[i]] = i
 		i += 1
 
