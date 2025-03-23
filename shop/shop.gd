@@ -167,7 +167,8 @@ func _on_item_dropped(item: CabbageItem, starting_position: Vector2) -> void:
 				print("hero: ", hero.name)
 				hero.eat_item(1, 1)
 				_update_money(-2)
-				item.global_position = starting_position
+				item.queue_free()
+				SoundManager.buff_effect.play()
 				return
 	item.global_position = starting_position
 
@@ -217,12 +218,13 @@ func _create_hero(stats: HeroStats, i: int) -> Hero:
 func _update_money(delta: int) -> void:
 	player_stats.money += delta
 	money_display.text = str(player_stats.money)
+	SoundManager.coins.play()
 
 
 func _on_next_round_button_pressed() -> void:
 	if not player_party.has_alive_hero():
 		return
-	
+		
 	for hero: Hero in player_party.hero_list:
 		if is_instance_valid(hero):
 			hero.on_shop_ended(player_party)
@@ -306,3 +308,20 @@ func _player_party_hovered(hl: HeroLocation) -> void:
 
 func _player_party_not_hovered(hl:HeroLocation) -> void:
 	buy_spots_hovered[hl] = false
+
+
+
+func _on_next_round_button_button_up() -> void:
+	SoundManager.release_button()
+
+
+func _on_next_round_button_button_down() -> void:
+	SoundManager.press_button()
+
+
+func _on_reroll_button_button_up() -> void:
+	SoundManager.release_button()
+
+
+func _on_reroll_button_button_down() -> void:
+	SoundManager.press_button()
