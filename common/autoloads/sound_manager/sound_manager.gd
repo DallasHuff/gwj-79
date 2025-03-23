@@ -5,6 +5,8 @@ var button_releases: Array[AudioStreamPlayer2D]
 
 @onready var attack_effect: AudioStreamPlayer2D = %AttackEffect
 @onready var heal_effect: AudioStreamPlayer2D = %HealEffect
+@onready var battle_music: AudioStreamPlayer2D = %BattleMusic
+@onready var main_menu_music: AudioStreamPlayer2D = %MainMenuMusic
 @onready var summon_effect: AudioStreamPlayer2D = %SummonEffect
 @onready var buff_effect: AudioStreamPlayer2D = %BuffEffect
 @onready var coins: AudioStreamPlayer2D = %Coins

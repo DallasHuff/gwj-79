@@ -70,6 +70,15 @@ func get_buffed(health_buff: int, damage_buff: int, hero: Hero = null) -> void:
 	EventsBus.hero_buffed.emit(self)
 
 
+func eat_item(health_buff: int, damage_buff: int, _hero: Hero = null) -> void:
+	stats.max_hp += health_buff
+	stats.current_hp += health_buff
+	stats.damage += damage_buff
+	_on_stats_changed()
+
+	EventsBus.hero_buffed.emit(self)
+
+
 func get_healed(heal: int, hero: Hero = null) -> void:
 	_check_effects_for_trigger(Effect.TriggerType.SELF_HEALED, hero)
 

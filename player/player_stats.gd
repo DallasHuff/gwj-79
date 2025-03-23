@@ -26,7 +26,7 @@ func get_random_rarity_for_level() -> HeroStats.Rarity:
 func setup_for_new_game() -> void:
 	level = 0
 	money = 10
-	income = 5
+	income = 8
 	health = 3
 	round_number = 1
 	rounds_won = 2
