@@ -1,15 +1,33 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmx2fwumi1ey"]
+[gd_scene load_steps=24 format=3 uid="uid://dmx2fwumi1ey"]
 
 [ext_resource type="Script" uid="uid://b4243wf3yx74g" path="res://combat/arena/arena.gd" id="1_i5doo"]
 [ext_resource type="PackedScene" uid="uid://5d2tgixtskiy" path="res://combat/hero_line/hero_line.tscn" id="2_13g3s"]
+[ext_resource type="PackedScene" uid="uid://h7500fy7nmnd" path="res://assets/delainey_art/plants/plant_sprites/bud.tscn" id="2_y6na2"]
+[ext_resource type="PackedScene" uid="uid://bf6bwia74l3jd" path="res://assets/delainey_art/plants/plant_sprites/bush_1.tscn" id="3_hmo6m"]
 [ext_resource type="Script" uid="uid://d37m7keo2x8vg" path="res://combat/arena/components/enemy_manager/enemy_manager.gd" id="3_sg87e"]
+[ext_resource type="PackedScene" uid="uid://b8wmdbkmr8wd4" path="res://assets/delainey_art/plants/plant_sprites/bush_2.tscn" id="4_gyxot"]
+[ext_resource type="PackedScene" uid="uid://dk30qnmj44jdy" path="res://assets/delainey_art/plants/plant_sprites/purple_flowers.tscn" id="5_6jxrs"]
 [ext_resource type="PackedScene" uid="uid://b076010rnvrtp" path="res://combat/arena/components/battle_speed_controller/battle_speed_controller.tscn" id="6_kxugw"]
+[ext_resource type="PackedScene" uid="uid://dj32rxjsa2snp" path="res://assets/delainey_art/plants/plant_sprites/purple_peas.tscn" id="6_muh58"]
 [ext_resource type="Texture2D" uid="uid://cwkkax5nhtycj" path="res://heroes/components/general_art/heart.png" id="7_amu2l"]
+[ext_resource type="PackedScene" uid="uid://gf8pjou88p0v" path="res://assets/delainey_art/plants/plant_sprites/red_flower.tscn" id="7_g2xuq"]
 [ext_resource type="Texture2D" uid="uid://7366032lwnci" path="res://shop/coin.png" id="7_yln67"]
+[ext_resource type="PackedScene" uid="uid://c8ogje7xusjdk" path="res://assets/delainey_art/plants/plant_sprites/tropical_plant.tscn" id="8_2xmh4"]
+[ext_resource type="PackedScene" uid="uid://v4v88qip326t" path="res://assets/delainey_art/plants/plant_sprites/yellow_rose.tscn" id="9_4bhwq"]
+[ext_resource type="Script" uid="uid://cq5o6kamx720a" path="res://combat/hero_array.gd" id="12_m773u"]
+[ext_resource type="Resource" uid="uid://xnusq6emvqbh" path="res://combat/enemy_arrays/round_1_enemies/team_1.tres" id="13_ehw47"]
+[ext_resource type="Resource" uid="uid://ckv3otg04dki0" path="res://combat/enemy_arrays/round_1_enemies/team_2.tres" id="14_630sf"]
+[ext_resource type="Resource" uid="uid://d4fi0ghc3ie3w" path="res://combat/enemy_arrays/round_1_enemies/team_3.tres" id="15_diwa4"]
+[ext_resource type="Resource" uid="uid://p3dalnuhgmlx" path="res://combat/enemy_arrays/round_1_enemies/team_4.tres" id="16_kh0hm"]
+[ext_resource type="Resource" uid="uid://c318frbkgl615" path="res://combat/enemy_arrays/round_2_enemies/team_1.tres" id="17_dxc3j"]
+[ext_resource type="Resource" uid="uid://5c3yyqfyw5w2" path="res://combat/enemy_arrays/round_2_enemies/team_2.tres" id="18_4h0cm"]
+[ext_resource type="Resource" uid="uid://cqwmbgghiscrg" path="res://combat/enemy_arrays/round_2_enemies/team_3.tres" id="19_evtod"]
+[ext_resource type="Resource" uid="uid://x271lfkmk7gs" path="res://combat/enemy_arrays/round_2_enemies/team_4.tres" id="20_tw4lr"]
 
 [node name="Arena" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_i5doo")
+plants = Array[PackedScene]([ExtResource("2_y6na2"), ExtResource("3_hmo6m"), ExtResource("4_gyxot"), ExtResource("5_6jxrs"), ExtResource("6_muh58"), ExtResource("7_g2xuq"), ExtResource("8_2xmh4"), ExtResource("9_4bhwq")])
 
 [node name="FriendlyHeroLine" parent="." instance=ExtResource("2_13g3s")]
 unique_name_in_owner = true
@@ -25,17 +43,20 @@ unique_name_in_owner = true
 script = ExtResource("3_sg87e")
 rounds = 4
 teams = 4
+references = Array[ExtResource("12_m773u")]([ExtResource("13_ehw47"), ExtResource("14_630sf"), ExtResource("15_diwa4"), ExtResource("16_kh0hm"), ExtResource("17_dxc3j"), ExtResource("18_4h0cm"), ExtResource("19_evtod"), ExtResource("20_tw4lr")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 layer = -1
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = -10
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.101961, 0.121569, 0.2, 1)
+color = Color(0.545098, 0.368627, 0.235294, 1)
 
 [node name="ExitContainer" type="MarginContainer" parent="CanvasLayer"]
 offset_right = 72.0
@@ -121,7 +142,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="HealthIcon" type="TextureRect" parent="CanvasLayer/StatsContainer/HealthMargin/HBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 texture = ExtResource("7_amu2l")
 expand_mode = 1

@@ -5,6 +5,7 @@ signal next_round_requested
 
 const HERO_SCENE := preload("res://heroes/components/hero.tscn")
 const ITEM_SCENE := preload("res://items/components/item.tscn")
+const HERO_LOCATION_SCENE := preload("res://shop/hero_location.tscn")
 
 @export var hero_pool: Array[HeroStats]
 @export var item_pool: WeightedRandomList
@@ -17,6 +18,11 @@ var item_positions: Array[Vector2] = []
 var dist_between_heroes: int = 180
 var dist_between_items: int = 100
 var player_stats: PlayerStats
+var in_sell_portal := false
+var hero_sell_spot_dic: Dictionary[Hero, int] = {}
+var buy_spots: Dictionary[HeroLocation, int] = {}
+var buy_spots_hovered: Dictionary[HeroLocation, bool] = {}
+var hero_buy_spot_dic: Dictionary[Hero, int]
 
 var hero_cost: Dictionary[HeroStats.Rarity, int] = {
 	HeroStats.Rarity.COMMON: 1,
@@ -33,36 +39,7 @@ var hero_cost: Dictionary[HeroStats.Rarity, int] = {
 @onready var money_display: RichTextLabel = %MoneyDisplay
 @onready var round_counter: RichTextLabel = %RoundCounter
 @onready var income_label: Label = %IncomeLabel
-
-#TEMPORARY - TO BE REPLACED BY DRAG AND DROP
-@onready var bt_buy_hero_1: Button = %BtBuyHero1
-@onready var bt_buy_hero_2: Button = %BtBuyHero2
-@onready var bt_buy_hero_3: Button = %BtBuyHero3
-@onready var bt_buy_hero_4: Button = %BtBuyHero4
-@onready var bt_buy_item_1: Button = %BtBuyItem1
-@onready var bt_buy_item_2: Button = %BtBuyItem2
-@onready var bt_buy_item_3: Button = %BtBuyItem3
-@onready var bt_sell_hero_1: Button = %BtSellHero1
-@onready var bt_sell_hero_2: Button = %BtSellHero2
-@onready var bt_sell_hero_3: Button = %BtSellHero3
-@onready var bt_sell_hero_4: Button = %BtSellHero4
-@onready var bt_sell_hero_5: Button = %BtSellHero5
-
-
-func _connect_temp_buttons() -> void:
-	bt_buy_hero_1.pressed.connect(func() -> void: buy_hero(0))
-	bt_buy_hero_2.pressed.connect(func() -> void: buy_hero(1))
-	bt_buy_hero_3.pressed.connect(func() -> void: buy_hero(2))
-	bt_buy_hero_4.pressed.connect(func() -> void: buy_hero(3))
-	bt_buy_item_1.pressed.connect(func() -> void: buy_item(0))
-	bt_buy_item_2.pressed.connect(func() -> void: buy_item(1))
-	bt_buy_item_3.pressed.connect(func() -> void: buy_item(2))
-	bt_sell_hero_1.pressed.connect(func() -> void: sell_hero(0))
-	bt_sell_hero_2.pressed.connect(func() -> void: sell_hero(1))
-	bt_sell_hero_3.pressed.connect(func() -> void: sell_hero(2))
-	bt_sell_hero_4.pressed.connect(func() -> void: sell_hero(3))
-	bt_sell_hero_5.pressed.connect(func() -> void: sell_hero(4))
-#TEMPORARY - TO BE REPLACED BY DRAG AND DROP
+@onready var canvas: CanvasLayer = %CanvasLayer
 
 
 func _ready() -> void:
@@ -79,13 +56,35 @@ func _ready() -> void:
 	round_counter.text = "Round: " + str(player_stats.round_number)
 	income_label.text = "Income: " + str(player_stats.income)
 
+	# Set up buyable hero locations
+	for i in range(hero_positions.size()):
+		var hero_location: HeroLocation = HERO_LOCATION_SCENE.instantiate()
+		canvas.add_child(hero_location)
+		hero_location.global_position = global_position + hero_positions[i] + Vector2(0, 60)
+
+	# Set up party hero locations
+	for i in range(player_party.hero_list.size()):
+		var hero_location: HeroLocation = HERO_LOCATION_SCENE.instantiate()
+		canvas.add_child(hero_location)
+		hero_location.global_position = player_party.global_position + player_party.positions[i] + Vector2(0, 60)
+		hero_location.hovered.connect(_player_party_hovered)
+		hero_location.not_hovered.connect(_player_party_not_hovered)
+		buy_spots[hero_location] = i
+
+
 	_on_reroll_button_pressed()
 	# Have to subtract one here because the initial shop entry will add 1 reroll even though the player didn't press the button
 	player_stats.times_rerolled -= 1
 	# Add one since initial reroll subtracts 2
 	player_stats.money += 2
-	_connect_temp_buttons()
+
 	player_party.setup(player_stats.heroes)
+	for i in range(player_party.hero_list.size()):
+		var hero: Hero = player_party.hero_list[i]
+		if is_instance_valid(hero):
+			hero_sell_spot_dic[hero] = i
+			hero.drag_drop.dropped.connect(_on_hero_dropped)
+
 	_on_shop_entered()
 	_update_money(0)
 
@@ -109,43 +108,35 @@ func add_heroes() -> void:
 			break
 		heroes[i] = _create_hero(stat, i)
 		heroes[i].position = global_position + hero_positions[i]
+		heroes[i].drag_drop.dropped.connect(_on_hero_dropped)
+		hero_buy_spot_dic[heroes[i]] = i
 		i += 1
 
 
-func buy_hero(shop_slot: int) -> Hero:
+func buy_hero(shop_slot: int, party_slot: int) -> void:
 	if not is_instance_valid(heroes[shop_slot]):
 		print("Trying to buy hero that was already bought")
 		return
 	if player_stats.money < hero_cost[heroes[shop_slot].stats.rarity]:
 		print("Trying to buy hero without enough money")
 		return
-	print("Buying hero from shop slot ", shop_slot)
-	var rtn: Hero
-	# Get next available position in party (probably not necessary when drag and drop is implemented)
-	var i: int = 0
-	for hero in player_party.hero_list:
-		if hero == null:
-			break
-		i += 1
-
-	if i >= player_party.hero_list.size(): # Throw error if there are no open slots
-		print("Tried to buy a hero when there are no open party slots.")
-	else: # Proceed with purchase
-		rtn = player_party._create_hero(heroes[shop_slot].stats, i)
-		heroes[shop_slot].queue_free()
-		_update_money(-hero_cost[heroes[shop_slot].stats.rarity])
-	return rtn
-
-
-func sell_hero(party_slot: int) -> void:
-	if not is_instance_valid(player_party.hero_list[party_slot]):
-		print("No hero to sell at slot: ", party_slot, " in line: ", player_party.line_info())
+	if player_party.is_line_full():
+		print("Player party is full")
 		return
-	print("Selling hero from party slot ", party_slot)
-	_update_money(hero_cost[player_party.hero_list[party_slot].stats.rarity])
-	player_party.hero_list[party_slot].queue_free()
-	player_party.hero_list[party_slot] = null
-	player_party.update_hero_positions()
+	print("Buying hero from shop slot ", shop_slot)
+
+	var new_hero: Hero = player_party.buy_hero(party_slot, heroes[shop_slot].stats)
+	new_hero.drag_drop.dropped.connect(_on_hero_dropped)
+	hero_sell_spot_dic[new_hero] = player_party.find_hero_position(new_hero)
+	heroes[shop_slot].queue_free()
+	_update_money(-hero_cost[heroes[shop_slot].stats.rarity])
+
+
+func sell_hero(hero: Hero) -> void:
+	if not is_instance_valid(hero):
+		return
+	_update_money(hero_cost[hero.stats.rarity])
+	player_party.remove_hero(hero)
 
 
 func buy_item(shop_slot: int) -> Item:
@@ -185,6 +176,31 @@ func _on_reroll_button_pressed() -> void:
 	add_heroes()
 	add_items()
 	_update_money(-2)
+
+
+func _on_hero_dropped(hero: Hero, starting_position: Vector2) -> void:
+	# player party heroes
+	print("hero dropped")
+	if player_party.has_hero(hero):
+		# Sell hero
+		if in_sell_portal:
+			sell_hero(hero)
+			return
+		hero.global_position = starting_position
+		return
+		# TODO: swap hero spots
+	# Buy hero
+	else:
+		# Player party is full
+		if player_party.is_line_full():
+			hero.global_position = starting_position
+			return
+		# Find spot
+		for key: HeroLocation in buy_spots_hovered.keys():
+			if buy_spots_hovered[key]:
+				buy_hero(hero_buy_spot_dic[hero], buy_spots[key])
+				return
+	hero.global_position = starting_position
 
 
 func _create_hero(stats: HeroStats, i: int) -> Hero:
@@ -271,3 +287,21 @@ func _heroes_info() -> String:
 	for h: Hero in heroes:
 		rtn += (str(h) + " ")
 	return rtn
+
+
+func _on_sell_portal_area_mouse_exited() -> void:
+	in_sell_portal = false
+	print("sell portal no")
+
+
+func _on_sell_portal_area_mouse_entered() -> void:
+	in_sell_portal = true
+	print("sell portal yes")
+
+
+func _player_party_hovered(hl: HeroLocation) -> void:
+	buy_spots_hovered[hl] = true
+
+
+func _player_party_not_hovered(hl:HeroLocation) -> void:
+	buy_spots_hovered[hl] = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://06xr0ip26ljd"]
+[gd_scene load_steps=17 format=3 uid="uid://06xr0ip26ljd"]
 
 [ext_resource type="Script" uid="uid://bq0ols1mg17p8" path="res://shop/shop.gd" id="1_sd7uk"]
 [ext_resource type="Resource" uid="uid://d3l42d8csm8w0" path="res://heroes/resources/Rare/flaminosaur/flaminosaur.tres" id="3_orod7"]
@@ -30,6 +30,9 @@ script = ExtResource("8_orod7")
 list = Array[ExtResource("5_ljlg5")]([SubResource("Resource_cd0xb"), SubResource("Resource_yrv44")])
 metadata/_custom_type_script = "uid://cruwimt38nwr7"
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_orod7"]
+size = Vector2(220, 219)
+
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_sd7uk")
 hero_pool = Array[ExtResource("3_q4g17")]([ExtResource("4_orod7"), ExtResource("4_cd0xb"), ExtResource("3_orod7"), ExtResource("6_orod7")])
@@ -38,6 +41,7 @@ hero_offset = Vector2(400, 700)
 item_offset = Vector2(1200, 700)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 layer = -1
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
@@ -48,7 +52,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.101961, 0.121569, 0.2, 1)
+color = Color(0.545098, 0.368627, 0.235294, 1)
 
 [node name="MarginContainer5" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 6
@@ -138,6 +142,7 @@ theme_override_constants/margin_right = 50
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 50
 text = "ROUND: 0"
 
@@ -156,6 +161,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 80
 text = "50"
 
@@ -168,93 +174,29 @@ offset_top = -164.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer3"]
-layout_mode = 2
-alignment = 1
+[node name="SellPortal" type="Panel" parent="CanvasLayer"]
+custom_minimum_size = Vector2(200, 200)
+offset_left = 1556.0
+offset_top = 688.0
+offset_right = 1756.0
+offset_bottom = 888.0
+mouse_filter = 2
 
-[node name="BtBuyHero1" type="Button" parent="CanvasLayer/MarginContainer3/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Buy hero 1"
+[node name="SellPortalLabel" type="Label" parent="CanvasLayer/SellPortal"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 47.0
+offset_right = 182.0
+offset_bottom = 154.0
+theme_override_font_sizes/font_size = 50
+text = "Sell 
+Here"
 
-[node name="BtBuyHero2" type="Button" parent="CanvasLayer/MarginContainer3/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Buy hero 2"
+[node name="SellPortalArea" type="Area2D" parent="CanvasLayer/SellPortal"]
 
-[node name="BtBuyHero3" type="Button" parent="CanvasLayer/MarginContainer3/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Buy hero 3"
-
-[node name="BtBuyHero4" type="Button" parent="CanvasLayer/MarginContainer3/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Buy hero 4"
-
-[node name="BtBuyItem1" type="Button" parent="CanvasLayer/MarginContainer3/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Buy item 1"
-
-[node name="BtBuyItem2" type="Button" parent="CanvasLayer/MarginContainer3/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Buy item 2"
-
-[node name="BtBuyItem3" type="Button" parent="CanvasLayer/MarginContainer3/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Buy item 3"
-
-[node name="BtSellHero1" type="Button" parent="CanvasLayer/MarginContainer3/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Sell hero 1"
-
-[node name="BtSellHero2" type="Button" parent="CanvasLayer/MarginContainer3/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Sell hero 2"
-
-[node name="BtSellHero3" type="Button" parent="CanvasLayer/MarginContainer3/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Sell hero 3"
-
-[node name="BtSellHero4" type="Button" parent="CanvasLayer/MarginContainer3/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Sell hero 4"
-
-[node name="BtSellHero5" type="Button" parent="CanvasLayer/MarginContainer3/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Sell hero 5"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/SellPortal/SellPortalArea"]
+position = Vector2(100, 99.5)
+shape = SubResource("RectangleShape2D_orod7")
 
 [node name="ItemContainer" type="Node" parent="."]
 unique_name_in_owner = true
@@ -264,7 +206,9 @@ unique_name_in_owner = true
 
 [node name="PlayerParty" parent="." instance=ExtResource("12_orod7")]
 unique_name_in_owner = true
-position = Vector2(1183, 203)
+position = Vector2(1300, 205)
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer5/NextRoundButton" to="." method="_on_next_round_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/RerollButton" to="." method="_on_reroll_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/SellPortal/SellPortalArea" to="." method="_on_sell_portal_area_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/SellPortal/SellPortalArea" to="." method="_on_sell_portal_area_mouse_exited"]

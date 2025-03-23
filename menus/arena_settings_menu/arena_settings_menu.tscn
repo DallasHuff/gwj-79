@@ -57,7 +57,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-color = Color(0.101961, 0.121569, 0.2, 1)
+color = Color(0.545098, 0.368627, 0.235294, 1)
 
 [node name="ExitButtonContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2

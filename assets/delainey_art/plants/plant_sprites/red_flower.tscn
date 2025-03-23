@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://gf8pjou88p0v"]
+
+[ext_resource type="Texture2D" uid="uid://bvgo7ibarbg7" path="res://assets/delainey_art/plants/red_flower.png" id="1_sc7q4"]
+
+[node name="Bud" type="Node2D"]
+
+[node name="Bud" type="Sprite2D" parent="."]
+z_index = -5
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_sc7q4")

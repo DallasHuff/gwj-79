@@ -3,7 +3,8 @@ extends Node
 
 @export_range(1, 5) var rounds: int
 @export_range(1, 4) var teams: int
-var enemy_list : Array # Array[Array[HeroArray]]
+@export var references: Array[HeroArray] = []
+var enemy_list: Array # Array[Array[HeroArray]]
 var pre_str: String = "res://combat/enemy_arrays/round_"
 var mid_str: String = "_enemies/team_"
 var end_str: String = ".tres"
@@ -20,6 +21,8 @@ func _ready() -> void:
 			else:
 				print("couldn't load heroes at path: " + path_to_enemy_array)
 		enemy_list.append(round_teams)
+	
+	print("references: ", references)
 
 
 func get_list_for_round(round_number: int) -> HeroArray:

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dk30qnmj44jdy"]
+
+[ext_resource type="Texture2D" uid="uid://duwrwew8kfeom" path="res://assets/delainey_art/plants/purple_flowers.png" id="1_0pmtm"]
+
+[node name="Bud" type="Node2D"]
+
+[node name="Bud" type="Sprite2D" parent="."]
+z_index = -5
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_0pmtm")

@@ -29,7 +29,7 @@ func setup_for_new_game() -> void:
 	income = 5
 	health = 3
 	round_number = 1
-	rounds_won = 0 
+	rounds_won = 2
 	times_rerolled = 0
 	units_slain = 0
 	effects_triggered = 0
