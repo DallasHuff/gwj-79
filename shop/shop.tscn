@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://06xr0ip26ljd"]
+[gd_scene load_steps=34 format=3 uid="uid://dqnftk7w55l5m"]
 
 [ext_resource type="Script" uid="uid://bq0ols1mg17p8" path="res://shop/shop.gd" id="1_sd7uk"]
 [ext_resource type="Resource" uid="uid://d3l42d8csm8w0" path="res://heroes/resources/Rare/flaminosaur/flaminosaur.tres" id="3_orod7"]
@@ -28,6 +28,7 @@
 [ext_resource type="Resource" uid="uid://bca4fi4qvie8d" path="res://heroes/resources/Uncommon/lava_snail/lava_snail.tres" id="22_a5fgn"]
 [ext_resource type="Resource" uid="uid://b4p6k7tx3d6kb" path="res://heroes/resources/Uncommon/turtle/turtle.tres" id="23_u3766"]
 [ext_resource type="Resource" uid="uid://dowcow3idr6uh" path="res://heroes/resources/Uncommon/void_cat/void_cat.tres" id="24_8trpf"]
+[ext_resource type="PackedScene" uid="uid://dnypngwwxl5wt" path="res://items/apple/apple.tscn" id="29_7bca8"]
 
 [sub_resource type="Resource" id="Resource_cd0xb"]
 script = ExtResource("5_ljlg5")
@@ -223,6 +224,20 @@ unique_name_in_owner = true
 [node name="PlayerParty" parent="." instance=ExtResource("12_orod7")]
 unique_name_in_owner = true
 position = Vector2(1300, 205)
+
+[node name="Burger" parent="." instance=ExtResource("29_7bca8")]
+unique_name_in_owner = true
+position = Vector2(1376, 716)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 1300.0
+offset_top = 804.0
+offset_right = 1340.0
+offset_bottom = 907.0
+theme_override_font_sizes/font_size = 25
+text = "Burger gives 
++1 +1 
+for 2 gold"
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer5/NextRoundButton" to="." method="_on_next_round_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/RerollButton" to="." method="_on_reroll_button_pressed"]

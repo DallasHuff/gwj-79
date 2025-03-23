@@ -94,7 +94,7 @@ func check_default_context() -> bool:
 		success_flag = false
 
 	if (not context.has(ContextBuilder.ContextKey.OTHER_SIDE_HERO_LINE)
-	or not is_instance_valid(context[ContextBuilder.ContextKey.SAME_SIDE_HERO_LINE])):
+	or not is_instance_valid(context[ContextBuilder.ContextKey.OTHER_SIDE_HERO_LINE])):
 		error_str += " doesn't have other_side_hero_line "
 		success_flag = false
 
