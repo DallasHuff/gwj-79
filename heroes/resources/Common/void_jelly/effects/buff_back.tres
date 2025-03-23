@@ -4,10 +4,10 @@
 
 [resource]
 script = ExtResource("1_dsxgx")
-aoe_target_type = 2
+aoe_target_type = 0
 single_target_types = Array[int]([2])
 include_self = false
-health_buff = 2
+health_buff = 0
 attack_buff = 1
 triggers = Array[int]([1])
 metadata/_custom_type_script = "uid://lc8jysx7dkah"
