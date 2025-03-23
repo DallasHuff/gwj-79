@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qoltixtcwcso"
-path="res://.godot/imported/tropical_plant_1.png-dd9bf3ba29849bdf81cdec9d47a7b243.ctex"
+uid="uid://dv41fqwf7rpxv"
+path="res://.godot/imported/yellow_blossom_flower.png-f806d726652e420e9ba6389e2fe5d5cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/delainey_art/plants/tropical_plant_1.png"
-dest_files=["res://.godot/imported/tropical_plant_1.png-dd9bf3ba29849bdf81cdec9d47a7b243.ctex"]
+source_file="res://assets/delainey_art/item_art/yellow_blossom_flower.png"
+dest_files=["res://.godot/imported/yellow_blossom_flower.png-f806d726652e420e9ba6389e2fe5d5cf.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

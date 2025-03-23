@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qoltixtcwcso"
-path="res://.godot/imported/tropical_plant_1.png-dd9bf3ba29849bdf81cdec9d47a7b243.ctex"
+uid="uid://chb42iupnkirq"
+path="res://.godot/imported/bud.png-93def49710f312a7a7576b83e8d3bca9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/delainey_art/plants/tropical_plant_1.png"
-dest_files=["res://.godot/imported/tropical_plant_1.png-dd9bf3ba29849bdf81cdec9d47a7b243.ctex"]
+source_file="res://assets/delainey_art/plants/bud.png"
+dest_files=["res://.godot/imported/bud.png-93def49710f312a7a7576b83e8d3bca9.ctex"]
 
 [params]
 

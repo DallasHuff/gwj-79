@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://v4v88qip326t"]
+
+[ext_resource type="Texture2D" uid="uid://c0gsnid2uxp7d" path="res://assets/delainey_art/plants/yellow_rose.png" id="1_j7gq7"]
+
+[node name="Bud" type="Node2D"]
+
+[node name="Bud" type="Sprite2D" parent="."]
+z_index = -5
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_j7gq7")

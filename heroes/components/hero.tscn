@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bl5hk0oi4y4a"]
+[gd_scene load_steps=9 format=3 uid="uid://bl5hk0oi4y4a"]
 
 [ext_resource type="Script" uid="uid://kq1fxfuwrqut" path="res://heroes/components/hero.gd" id="1_bhrjw"]
 [ext_resource type="Theme" uid="uid://txnhaabb1iib" path="res://themes/default_theme.tres" id="2_rbim2"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://1ewf4vyq4t01" path="res://heroes/components/tooltip_component/tooltip_component.tscn" id="3_rjlwa"]
 [ext_resource type="Texture2D" uid="uid://d0360qs32cyw3" path="res://heroes/components/general_art/swords_crossed.png" id="3_rwnei"]
 [ext_resource type="Texture2D" uid="uid://cwkkax5nhtycj" path="res://heroes/components/general_art/heart.png" id="4_rbim2"]
+[ext_resource type="Script" uid="uid://ch0343klfts6v" path="res://heroes/components/drag_drop.gd" id="7_l6vuu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbim2"]
+size = Vector2(93, 132)
 
 [node name="Hero" type="Node2D"]
 script = ExtResource("1_bhrjw")
@@ -116,8 +120,6 @@ theme_override_constants/margin_left = 4
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_rbim2")
-theme_override_colors/font_color = Color(0, 0.827451, 0.988235, 1)
-theme_override_colors/font_shadow_color = Color(0, 0.827451, 0.988235, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 text = "1"
@@ -125,3 +127,15 @@ horizontal_alignment = 1
 
 [node name="TooltipComponent" parent="." instance=ExtResource("3_rjlwa")]
 unique_name_in_owner = true
+visible = false
+
+[node name="DragDrop" type="Area2D" parent="." node_paths=PackedStringArray("target")]
+unique_name_in_owner = true
+script = ExtResource("7_l6vuu")
+target = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DragDrop"]
+position = Vector2(-4.5, 6)
+shape = SubResource("RectangleShape2D_rbim2")
+
+[connection signal="input_event" from="DragDrop" to="DragDrop" method="_on_input_event"]

@@ -15,6 +15,12 @@ var line_position: int = 0
 @onready var health_label: Label = %HealthLabel
 @onready var attack_label: Label = %AttackLabel
 @onready var tooltip_component: TooltipComponent = %TooltipComponent
+@onready var drag_drop: DragDrop = %DragDrop
+
+
+func _ready() -> void:
+	if not Engine.is_editor_hint():
+		drag_drop.drag_canceled.connect(_on_drag_canceled)
 
 
 func _set_stats(value: HeroStats) -> void:
@@ -163,6 +169,13 @@ func _check_effects_for_trigger(trigger_type: Effect.TriggerType, trigger_hero: 
 			EffectQueue.push_back(item.effect, 2)
 
 
+func disable_drag_drop() -> void:
+	drag_drop.enabled = false
+
+
+func reset_after_dragging(starting_position: Vector2) -> void:
+	global_position = starting_position
+
 
 func _died() -> void:
 	if dying:
@@ -177,3 +190,7 @@ func _died() -> void:
 func _on_stats_changed() -> void:
 	attack_label.text = str(stats.damage)
 	health_label.text = str(stats.current_hp)
+
+
+func _on_drag_canceled(starting_position: Vector2) -> void:
+	reset_after_dragging(starting_position)

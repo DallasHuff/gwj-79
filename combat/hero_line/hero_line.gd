@@ -104,6 +104,29 @@ func summon(pos: int, stats: HeroStats) -> void:
 	EventsBus.hero_summoned.emit(new_hero)
 
 
+func buy_hero(pos: int, stats: HeroStats) -> Hero:
+	var i := hero_list.size() - 1
+	if pos < 0 or pos > i:
+		push_warning("Tried to summon with invalid position: ", pos)
+		return
+	if is_instance_valid(hero_list[i]):
+		print("Can't summon another hero - hero_list is full ", line_info())
+		return
+
+	# Move heroes back from the summon position
+	while i > pos:
+		hero_list[i] = hero_list[i-1]
+		hero_list[i-1] = null
+		i -= 1
+	# Move i up to be the front-most available position
+	while i-1 >= 0 and not is_instance_valid(hero_list[i-1]):
+		i -= 1
+
+	var new_hero: Hero = _create_hero(stats, i)
+	update_hero_positions()
+	return new_hero
+
+
 func find_hero_position(hero: Hero) -> int:
 	var hero_position : int = -1
 
@@ -185,6 +208,14 @@ func get_hero_at(pos: int) -> Hero:
 		print("Didn't find hero at position: ", pos, " within HeroList: ", line_info())
 	return hero
 
+
+func remove_hero(hero: Hero) -> void:
+	for i in range(hero_list.size()):
+		if is_instance_valid(hero_list[i]) and hero_list[i] == hero:
+			hero_list[i].queue_free()
+			hero_list[i] = null
+			update_hero_positions()
+			return
 
 func get_lowest_hp_hero() -> Hero:
 	var lowest: int = 99

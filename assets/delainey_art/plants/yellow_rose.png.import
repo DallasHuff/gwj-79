@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qoltixtcwcso"
-path="res://.godot/imported/tropical_plant_1.png-dd9bf3ba29849bdf81cdec9d47a7b243.ctex"
+uid="uid://c0gsnid2uxp7d"
+path="res://.godot/imported/yellow_rose.png-88001d1f18193ed596e8f7c2e43bcf68.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/delainey_art/plants/tropical_plant_1.png"
-dest_files=["res://.godot/imported/tropical_plant_1.png-dd9bf3ba29849bdf81cdec9d47a7b243.ctex"]
+source_file="res://assets/delainey_art/plants/yellow_rose.png"
+dest_files=["res://.godot/imported/yellow_rose.png-88001d1f18193ed596e8f7c2e43bcf68.ctex"]
 
 [params]
 

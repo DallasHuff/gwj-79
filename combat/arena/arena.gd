@@ -8,6 +8,7 @@ const LINE_POSITION_DIFF: float = 1000
 
 var attacks_until_stoftlock: int = 25
 var attack_counter: int
+@export var plants: Array[PackedScene] = []
 
 @onready var friendly_line: HeroLine = %FriendlyHeroLine
 @onready var enemy_line: HeroLine = %EnemyHeroLine
@@ -19,6 +20,7 @@ var attack_counter: int
 @onready var player_health_label: Label = %PlayerHealthLabel
 @onready var money_label: Label = %MoneyLabel
 @onready var softlock_label: Label = %SoftlockLabel
+@onready var canvas: CanvasLayer = %CanvasLayer
 
 
 func _ready() -> void:
@@ -35,10 +37,29 @@ func _ready() -> void:
 
 
 func start_battle(player_stats: PlayerStats) -> void:
+	if not is_node_ready():
+		await ready
 	_on_player_stats_changed(player_stats)
+
+	print(player_stats.rounds_won)
+
+	var plant_number: int = (player_stats.rounds_won) * 10
+	for i in range(plant_number):
+		var random_x: int = randi() % DisplayServer.screen_get_size().x
+		var random_y: int = randi() % DisplayServer.screen_get_size().y
+		var plant: Node2D = plants[randi() % plants.size()].instantiate()
+		canvas.add_child(plant)
+		plant.global_position = Vector2(random_x, random_y)
 
 	friendly_line.setup(player_stats.heroes)
 	enemy_line.setup(enemy_manager.get_list_for_round(player_stats.round_number))
+
+	for hero: Hero in friendly_line.hero_list:
+		if is_instance_valid(hero):
+			hero.disable_drag_drop()
+	for hero: Hero in enemy_line.hero_list:
+		if is_instance_valid(hero):
+			hero.disable_drag_drop()
 
 	# Animate the heroes running in
 	var tween := get_tree().create_tween()

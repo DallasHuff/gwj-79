@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8wmdbkmr8wd4"]
+
+[ext_resource type="Texture2D" uid="uid://kih3b4da8w2w" path="res://assets/delainey_art/plants/bush_2.png" id="1_prn07"]
+
+[node name="Bud" type="Node2D"]
+
+[node name="Bud" type="Sprite2D" parent="."]
+z_index = -5
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("1_prn07")
