@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="HeroStats" load_steps=7 format=3 uid="uid://bca4fi4qvie8d"]
+
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_ix3cn"]
+[ext_resource type="Script" uid="uid://0n2c23vthb5o" path="res://effects/economy_effect/economy_effect.gd" id="2_pa4nr"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="3_1xj8u"]
+[ext_resource type="Texture2D" uid="uid://buc06qxwwlr0q" path="res://heroes/resources/Uncommon/lava_snail/lava_snail.png" id="4_h1p1r"]
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="5_lartw"]
+
+[sub_resource type="Resource" id="Resource_8nmka"]
+script = ExtResource("2_pa4nr")
+money_change_amount = 0
+income_change_amount = 1
+triggers = Array[int]([15])
+metadata/_custom_type_script = "uid://0n2c23vthb5o"
+
+[resource]
+script = ExtResource("5_lartw")
+max_hp = 2
+current_hp = 2
+damage = 2
+rarity = 1
+effects = Array[ExtResource("1_ix3cn")]([SubResource("Resource_8nmka")])
+item_list = Array[ExtResource("3_1xj8u")]([])
+hero_name = "Lava Snail"
+tooltip = "When an enemy hero is healed, increase your maximum income by +1."
+model = ExtResource("4_h1p1r")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
