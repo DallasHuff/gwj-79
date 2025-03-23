@@ -15,6 +15,7 @@ const DMG_SPRITE := preload("res://effects/damage_effect/damage_sprite.tscn")
 @onready var income_label: Label = %IncomeLabel
 @onready var previous_health: Label = %PreviousHealthLabel
 @onready var new_health: Label = %NewHealthLabel
+@onready var level_label: Label = %LevelUpLabel
 
 
 func setup(round_won: bool, player_stats: PlayerStats) -> void:
@@ -25,7 +26,9 @@ func setup(round_won: bool, player_stats: PlayerStats) -> void:
 	previous_money.text = str(player_stats.money)
 	new_money.text = str(player_stats.money)
 	player_stats.money += player_stats.income
-
+	if player_stats.round_number % 2 != 0:
+		player_stats.level += 1
+		level_label.show()
 	if round_won:
 		player_stats.rounds_won += 1
 		round_outcome_label.text = "Round Won!"

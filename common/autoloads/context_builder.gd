@@ -41,6 +41,7 @@ func build_from_shop(effect_owner: Hero, player_party: HeroLine) -> Dictionary[C
 
 	context[ContextKey.EFFECT_OWNER] = effect_owner
 	context[ContextKey.SAME_SIDE_HERO_LINE] = player_party
+	context[ContextKey.OTHER_SIDE_HERO_LINE] = player_party
 	context[ContextKey.PLAYER_STATS] = player_stats
 
 	return context

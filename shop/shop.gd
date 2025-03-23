@@ -12,9 +12,7 @@ const HERO_LOCATION_SCENE := preload("res://shop/hero_location.tscn")
 @export var hero_offset: Vector2
 @export var item_offset: Vector2
 var heroes: Array[Hero] = [null, null, null, null]
-var items: Array[Item] = [null, null, null]
 var hero_positions: Array[Vector2] = []
-var item_positions: Array[Vector2] = []
 var dist_between_heroes: int = 180
 var dist_between_items: int = 100
 var player_stats: PlayerStats
@@ -50,8 +48,6 @@ func _ready() -> void:
 
 	for i in range(heroes.size()):
 		hero_positions.append(Vector2(i * dist_between_heroes, 0) + hero_offset)
-	for i in range(items.size()):
-		item_positions.append(Vector2(i * dist_between_items, 0) + item_offset)
 	
 	round_counter.text = "Round: " + str(player_stats.round_number)
 	income_label.text = "Income: " + str(player_stats.income)
@@ -89,7 +85,6 @@ func _ready() -> void:
 	_update_money(0)
 
 
-
 func add_heroes() -> void:
 	var stat_list : Array[HeroStats] = []
 	for i in range(heroes.size()):
@@ -113,16 +108,16 @@ func add_heroes() -> void:
 		i += 1
 
 
-func buy_hero(shop_slot: int, party_slot: int) -> void:
+func buy_hero(shop_slot: int, party_slot: int) -> bool:
 	if not is_instance_valid(heroes[shop_slot]):
 		print("Trying to buy hero that was already bought")
-		return
+		return false
 	if player_stats.money < hero_cost[heroes[shop_slot].stats.rarity]:
 		print("Trying to buy hero without enough money")
-		return
+		return false
 	if player_party.is_line_full():
 		print("Player party is full")
-		return
+		return false
 	print("Buying hero from shop slot ", shop_slot)
 
 	var new_hero: Hero = player_party.buy_hero(party_slot, heroes[shop_slot].stats)
@@ -130,6 +125,7 @@ func buy_hero(shop_slot: int, party_slot: int) -> void:
 	hero_sell_spot_dic[new_hero] = player_party.find_hero_position(new_hero)
 	heroes[shop_slot].queue_free()
 	_update_money(-hero_cost[heroes[shop_slot].stats.rarity])
+	return true
 
 
 func sell_hero(hero: Hero) -> void:
@@ -137,27 +133,6 @@ func sell_hero(hero: Hero) -> void:
 		return
 	_update_money(hero_cost[hero.stats.rarity])
 	player_party.remove_hero(hero)
-
-
-func buy_item(shop_slot: int) -> Item:
-	print("Buying hero from shop slot ", shop_slot)
-	return null
-
-
-func add_items() -> void:
-	for i in range(items.size()):
-		items[i] = create_item(item_pool.get_random(), i)
-		items[i].global_position = global_position + item_positions[i]
-
-
-func create_item(data: ItemData, i: int) -> Item:
-	var new_item : Item = ITEM_SCENE.instantiate()
-	item_container.add_child(new_item)
-	new_item.global_position = global_position + item_positions[i]
-	new_item.get_node("ItemTexture").texture = data.model
-	
-	items[i] = new_item
-	return new_item
 
 
 func _on_reroll_button_pressed() -> void:
@@ -168,13 +143,8 @@ func _on_reroll_button_pressed() -> void:
 	heroes.fill(null) # Adjust later if the option to lock a selection is added
 	for hero in hero_container.get_children():
 		hero.queue_free()
-	
-	items.fill(null) # Adjust later if the option to lock a selection is added
-	for item in item_container.get_children():
-		item.queue_free()
-	
+		
 	add_heroes()
-	add_items()
 	_update_money(-2)
 
 
@@ -205,8 +175,8 @@ func _on_hero_dropped(hero: Hero, starting_position: Vector2) -> void:
 		# Find spot
 		for key: HeroLocation in buy_spots_hovered.keys():
 			if buy_spots_hovered[key]:
-				buy_hero(hero_buy_spot_dic[hero], buy_spots[key])
-				return
+				if not buy_hero(hero_buy_spot_dic[hero], buy_spots[key]):
+					hero.global_position = starting_position
 	hero.global_position = starting_position
 
 

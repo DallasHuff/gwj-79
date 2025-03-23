@@ -68,7 +68,7 @@ offset_left = -625.5
 offset_right = 625.5
 offset_bottom = 103.0
 grow_horizontal = 2
-theme_override_constants/margin_top = 250
+theme_override_constants/margin_top = 220
 
 [node name="RoundsToFinishLabel" type="Label" parent="CanvasLayer/RoundsToFinishContainer"]
 unique_name_in_owner = true
@@ -89,7 +89,7 @@ offset_right = 150.0
 offset_bottom = 151.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_bottom = 250
+theme_override_constants/margin_bottom = 180
 
 [node name="IncomeLabel" type="Label" parent="CanvasLayer/IncomeMarginContainer"]
 unique_name_in_owner = true
@@ -191,6 +191,27 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "3"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -514.5
+offset_top = -26.0
+offset_right = 514.5
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 380
+
+[node name="LevelUpLabel" type="Label" parent="CanvasLayer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Level up - new heroes unlocked!"
 
 [connection signal="button_down" from="CanvasLayer/NextButtonContainer/NextButton" to="." method="_on_next_button_button_down"]
 [connection signal="button_up" from="CanvasLayer/NextButtonContainer/NextButton" to="." method="_on_next_button_button_up"]
