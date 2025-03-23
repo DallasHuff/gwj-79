@@ -40,6 +40,7 @@ var hero_cost: Dictionary[HeroStats.Rarity, int] = {
 @onready var round_counter: RichTextLabel = %RoundCounter
 @onready var income_label: Label = %IncomeLabel
 @onready var canvas: CanvasLayer = %CanvasLayer
+@onready var burger: CabbageItem = %Burger
 
 
 func _ready() -> void:
@@ -47,6 +48,7 @@ func _ready() -> void:
 	EventsBus.hero_buffed.connect(_on_hero_buffed)
 	EventsBus.hero_died.connect(_on_hero_died)
 	EventsBus.hero_healed.connect(_on_hero_healed)
+	burger.drag_drop.dropped.connect(_on_item_dropped)
 
 	for i in range(heroes.size()):
 		hero_positions.append(Vector2(i * dist_between_heroes, 0) + hero_offset)
@@ -72,7 +74,6 @@ func _ready() -> void:
 		hero_location.hovered.connect(_player_party_hovered)
 		hero_location.not_hovered.connect(_player_party_not_hovered)
 		buy_spots[hero_location] = i
-
 
 	_on_reroll_button_pressed()
 	# Have to subtract one here because the initial shop entry will add 1 reroll even though the player didn't press the button
@@ -153,6 +154,22 @@ func _on_reroll_button_pressed() -> void:
 		
 	add_heroes()
 	_update_money(-2)
+
+
+func _on_item_dropped(item: CabbageItem, starting_position: Vector2) -> void:
+	if player_stats.money < 2:
+		item.global_position = starting_position
+		return
+	for key: HeroLocation in buy_spots_hovered.keys():
+		if buy_spots_hovered[key]:
+			var hero: Hero = player_party.hero_list[buy_spots[key]]
+			if is_instance_valid(hero):
+				print("hero: ", hero.name)
+				hero.get_buffed(1, 1)
+				_update_money(-2)
+				item.global_position = starting_position
+				return
+	item.global_position = starting_position
 
 
 func _on_hero_dropped(hero: Hero, starting_position: Vector2) -> void:
