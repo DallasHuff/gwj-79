@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bsbnqlf3dos6d"]
+[gd_scene load_steps=17 format=3 uid="uid://bsbnqlf3dos6d"]
 
 [ext_resource type="Script" uid="uid://cjm8pownfnsn6" path="res://common/autoloads/sound_manager/sound_manager.gd" id="1_t6vpl"]
 [ext_resource type="AudioStream" uid="uid://cc3sj3mjxthna" path="res://assets/sounds/attack effect.wav" id="1_y453o"]
@@ -7,7 +7,9 @@
 [ext_resource type="AudioStream" uid="uid://dy3gmopfwdb62" path="res://assets/sounds/main menu.wav" id="4_3dops"]
 [ext_resource type="AudioStream" uid="uid://s724066f1lly" path="res://assets/sounds/game lost.wav" id="4_ofrrg"]
 [ext_resource type="AudioStream" uid="uid://djqpr7etvpo67" path="res://assets/sounds/buff effect.wav" id="4_wqn81"]
+[ext_resource type="AudioStream" uid="uid://bahy2xv4txtaw" path="res://assets/sounds/heal effect.wav" id="5_7cpq1"]
 [ext_resource type="AudioStream" uid="uid://c58dm43xxawb6" path="res://assets/sounds/coins.wav" id="5_qi06l"]
+[ext_resource type="AudioStream" uid="uid://bfoxt8rbq5jgm" path="res://assets/sounds/victory.wav" id="7_3dops"]
 [ext_resource type="AudioStream" uid="uid://cpmo6mnp60t4w" path="res://assets/sounds/button press 3.wav" id="7_eg2hb"]
 [ext_resource type="AudioStream" uid="uid://bdgh1s2qwobw3" path="res://assets/sounds/button press 2.wav" id="7_igpht"]
 [ext_resource type="AudioStream" uid="uid://dkmdfx13p4ure" path="res://assets/sounds/button release 2.wav" id="8_8yhf3"]
@@ -35,6 +37,11 @@ unique_name_in_owner = true
 stream = ExtResource("4_3dops")
 bus = &"Music"
 
+[node name="HealEffect" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_7cpq1")
+bus = &"SFX"
+
 [node name="SummonEffect" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("3_drmbr")
@@ -46,10 +53,14 @@ unique_name_in_owner = true
 stream = ExtResource("4_wqn81")
 bus = &"SFX"
 
-[node name="RoundLost" type="AudioStreamPlayer2D" parent="."]
+[node name="GameOver" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("4_ofrrg")
 bus = &"SFX"
+
+[node name="Victory" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_3dops")
 
 [node name="Coins" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true

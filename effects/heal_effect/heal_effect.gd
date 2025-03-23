@@ -55,6 +55,7 @@ func execute() -> void:
 		y_tween.tween_property(heal_sprite, "global_position:y", target.global_position.y + HEIGHT_ABOVE_HERO, flight_time / 2).set_ease(Tween.EASE_IN)
 		tween.tween_callback(heal_sprite.queue_free).set_delay(flight_time / 2)
 		tween.tween_callback(target.get_healed.bind(effect_owner).bind(heal))
+		tween.tween_callback(SoundManager.heal_effect.play)
 	
 	finish()
 
