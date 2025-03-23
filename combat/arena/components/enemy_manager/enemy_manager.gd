@@ -1,7 +1,7 @@
 class_name EnemyManager
 extends Node
 
-@export_range(1, 5) var rounds: int
+@export_range(1, 10) var rounds: int
 @export_range(1, 4) var teams: int
 @export var references: Array[HeroArray] = []
 var enemy_list: Array # Array[Array[HeroArray]]

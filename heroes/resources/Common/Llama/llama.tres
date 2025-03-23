@@ -11,20 +11,20 @@ script = ExtResource("2_02071")
 aoe_target_type = 0
 single_target_types = Array[int]([0])
 include_self = true
-health_buff = 2
-attack_buff = 2
+health_buff = 1
+attack_buff = 0
 triggers = Array[int]([18])
 metadata/_custom_type_script = "uid://lc8jysx7dkah"
 
 [resource]
 script = ExtResource("3_02071")
-max_hp = 2
-current_hp = 2
+max_hp = 1
+current_hp = 1
 damage = 1
 rarity = 0
 effects = Array[ExtResource("1_gh68o")]([SubResource("Resource_af2yx")])
 item_list = Array[ExtResource("2_dnynj")]([])
 hero_name = "Llama"
-tooltip = "Each time you enter the shop, give this unit +2/2."
+tooltip = "Each time you enter the shop, give this unit +1 HP"
 model = ExtResource("4_02071")
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
