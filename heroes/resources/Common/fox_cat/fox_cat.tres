@@ -7,9 +7,9 @@
 
 [resource]
 script = ExtResource("3_k2h4m")
-max_hp = 2
-current_hp = 2
-damage = 3
+max_hp = 1
+current_hp = 1
+damage = 2
 rarity = 0
 effects = Array[ExtResource("1_sddx3")]([])
 item_list = Array[ExtResource("2_i1n1c")]([])

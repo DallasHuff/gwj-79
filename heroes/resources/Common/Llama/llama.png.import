@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://23qdyn74073x"
-path="res://.godot/imported/void_hawk.png-3c6cfb87e09755bcdc7b65461c3b1341.ctex"
+uid="uid://cr0akffybmx3r"
+path="res://.godot/imported/llama.png-d4a6a795b82b62f7b4d787652cf6240a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/delainey_art/void_hawk.png"
-dest_files=["res://.godot/imported/void_hawk.png-3c6cfb87e09755bcdc7b65461c3b1341.ctex"]
+source_file="res://heroes/resources/Common/Llama/llama.png"
+dest_files=["res://.godot/imported/llama.png-d4a6a795b82b62f7b4d787652cf6240a.ctex"]
 
 [params]
 

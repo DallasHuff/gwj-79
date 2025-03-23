@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="HeroStats" load_steps=6 format=3 uid="uid://dfmclsjupq0xu"]
+[gd_resource type="Resource" script_class="HeroStats" load_steps=7 format=3 uid="uid://dfmclsjupq0xu"]
 
 [ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="1_gh68o"]
 [ext_resource type="Script" uid="uid://lc8jysx7dkah" path="res://effects/buff_effect/buff_effect.gd" id="2_02071"]
 [ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="2_dnynj"]
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="3_02071"]
+[ext_resource type="Texture2D" uid="uid://cr0akffybmx3r" path="res://heroes/resources/Common/Llama/llama.png" id="4_02071"]
 
 [sub_resource type="Resource" id="Resource_af2yx"]
 script = ExtResource("2_02071")
@@ -25,4 +26,5 @@ effects = Array[ExtResource("1_gh68o")]([SubResource("Resource_af2yx")])
 item_list = Array[ExtResource("2_dnynj")]([])
 hero_name = "Llama"
 tooltip = "Each time you enter the shop, give this unit +2/2."
+model = ExtResource("4_02071")
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
