@@ -7,6 +7,11 @@ extends Control
 @onready var credits_button: Button = %CreditsButton
 
 
+func _ready() -> void:
+	SoundManager.main_menu_music.play()
+	
+	if SoundManager.battle_music.is_playing():
+		SoundManager.battle_music.stop()
 
 
 func _on_credits_button_button_up() -> void:
