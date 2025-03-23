@@ -20,10 +20,16 @@ func _ready() -> void:
 	if not is_instance_valid(player_stats):
 		return
 
+	SoundManager.battle_music.stop()
+
 	if player_stats.health <= 0:
 		game_result_label.text = "run lost on Round " + str(player_stats.round_number) + "!!"
+		SoundManager.game_over.play()
+
 	else:
 		game_result_label.text = "run won on Round " + str(player_stats.round_number) + "!!"
+		SoundManager.victory.play()
+
 
 	money_label.text = str(player_stats.money)
 	health_label.text = str(player_stats.health)

@@ -37,7 +37,7 @@ func setup(round_won: bool, player_stats: PlayerStats) -> void:
 		rounds_to_finish.text = str(player_stats.rounds_required_to_win - player_stats.rounds_won) + " more wins needed"
 		round_outcome_label.text = "Round Lost!"
 		player_stats.health -= 1
-		SoundManager.round_lost.play()
+		# SoundManager.round_lost.play()
 		await get_tree().create_timer(0.5).timeout
 		play_heart_animation()
 		await get_tree().create_timer(0.7).timeout

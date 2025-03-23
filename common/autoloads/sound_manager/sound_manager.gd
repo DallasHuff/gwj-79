@@ -4,6 +4,7 @@ var button_presses: Array[AudioStreamPlayer2D]
 var button_releases: Array[AudioStreamPlayer2D]
 
 @onready var attack_effect: AudioStreamPlayer2D = %AttackEffect
+@onready var heal_effect: AudioStreamPlayer2D = %HealEffect
 @onready var summon_effect: AudioStreamPlayer2D = %SummonEffect
 @onready var buff_effect: AudioStreamPlayer2D = %BuffEffect
 @onready var coins: AudioStreamPlayer2D = %Coins
@@ -13,7 +14,8 @@ var button_releases: Array[AudioStreamPlayer2D]
 @onready var button_release_4: AudioStreamPlayer2D = %ButtonRelease4
 @onready var button_release_2: AudioStreamPlayer2D = %ButtonRelease2
 @onready var button_release_3: AudioStreamPlayer2D = %ButtonRelease3
-@onready var round_lost: AudioStreamPlayer2D = %RoundLost
+@onready var game_over: AudioStreamPlayer2D = %GameOver
+@onready var victory: AudioStreamPlayer2D = %Victory
 
 
 func _ready() -> void:
