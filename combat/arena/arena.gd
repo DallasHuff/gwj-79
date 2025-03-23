@@ -35,6 +35,10 @@ func _ready() -> void:
 	friendly_line.position.x = friendly_line.position.x - LINE_POSITION_DIFF
 	enemy_line.position.x = enemy_line.position.x + LINE_POSITION_DIFF
 
+	if SoundManager.main_menu_music.is_playing():
+		SoundManager.main_menu_music.stop()
+		SoundManager.battle_music.play()
+
 
 func start_battle(player_stats: PlayerStats) -> void:
 	if not is_node_ready():

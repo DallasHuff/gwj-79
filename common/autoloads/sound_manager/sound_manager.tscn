@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bsbnqlf3dos6d"]
+[gd_scene load_steps=15 format=3 uid="uid://bsbnqlf3dos6d"]
 
 [ext_resource type="Script" uid="uid://cjm8pownfnsn6" path="res://common/autoloads/sound_manager/sound_manager.gd" id="1_t6vpl"]
 [ext_resource type="AudioStream" uid="uid://cc3sj3mjxthna" path="res://assets/sounds/attack effect.wav" id="1_y453o"]
 [ext_resource type="AudioStream" uid="uid://cxhycx2g2khtn" path="res://assets/sounds/summon effect.wav" id="3_drmbr"]
+[ext_resource type="AudioStream" uid="uid://cdsdypv751apu" path="res://assets/sounds/battle.wav" id="3_vayir"]
+[ext_resource type="AudioStream" uid="uid://dy3gmopfwdb62" path="res://assets/sounds/main menu.wav" id="4_3dops"]
 [ext_resource type="AudioStream" uid="uid://s724066f1lly" path="res://assets/sounds/game lost.wav" id="4_ofrrg"]
 [ext_resource type="AudioStream" uid="uid://djqpr7etvpo67" path="res://assets/sounds/buff effect.wav" id="4_wqn81"]
 [ext_resource type="AudioStream" uid="uid://c58dm43xxawb6" path="res://assets/sounds/coins.wav" id="5_qi06l"]
@@ -20,6 +22,14 @@ script = ExtResource("1_t6vpl")
 [node name="AttackEffect" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("1_y453o")
+
+[node name="BattleMusic" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_vayir")
+
+[node name="MainMenuMusic" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_3dops")
 
 [node name="SummonEffect" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
