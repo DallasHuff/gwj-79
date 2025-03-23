@@ -127,10 +127,10 @@ horizontal_alignment = 1
 
 [node name="TooltipComponent" parent="." instance=ExtResource("3_rjlwa")]
 unique_name_in_owner = true
-visible = false
 
 [node name="DragDrop" type="Area2D" parent="." node_paths=PackedStringArray("target")]
 unique_name_in_owner = true
+z_index = 40
 script = ExtResource("7_l6vuu")
 target = NodePath("..")
 

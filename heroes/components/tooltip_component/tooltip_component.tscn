@@ -15,10 +15,11 @@ shape = SubResource("RectangleShape2D_7u3sd")
 [node name="TooltipPanel" type="Panel" parent="."]
 unique_name_in_owner = true
 visible = false
+z_index = 50
 custom_minimum_size = Vector2(200, 100)
-offset_left = -104.0
-offset_top = -175.0
-offset_right = 96.0
+offset_left = -126.0
+offset_top = -225.0
+offset_right = 117.0
 offset_bottom = -75.0
 mouse_filter = 2
 

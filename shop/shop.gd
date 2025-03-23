@@ -186,9 +186,16 @@ func _on_hero_dropped(hero: Hero, starting_position: Vector2) -> void:
 		if in_sell_portal:
 			sell_hero(hero)
 			return
+		for key: HeroLocation in buy_spots_hovered.keys():
+			if buy_spots_hovered[key]:
+				var other_hero: Hero = player_party.get_hero_at(buy_spots[key])
+				if not is_instance_valid(other_hero):
+					hero.global_position = starting_position
+					return
+				player_party.swap_heroes(hero, other_hero)
+				return
 		hero.global_position = starting_position
 		return
-		# TODO: swap hero spots
 	# Buy hero
 	else:
 		# Player party is full
