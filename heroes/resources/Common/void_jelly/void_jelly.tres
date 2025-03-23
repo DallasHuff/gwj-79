@@ -10,11 +10,11 @@
 script = ExtResource("3_i1lfm")
 max_hp = 1
 current_hp = 1
-damage = 1
+damage = 2
 rarity = 0
 effects = Array[ExtResource("1_k6jsb")]([ExtResource("2_d6s4g")])
 item_list = Array[ExtResource("2_qap27")]([])
 hero_name = "Void Jelly"
-tooltip = "Buffs all heroes behind this one (+1, +1) before attacking."
+tooltip = "Buffs hero behind this one (+1, +1) before attacking."
 model = ExtResource("4_3ydd0")
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
