@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dqnftk7w55l5m"]
+[gd_scene load_steps=39 format=3 uid="uid://dqnftk7w55l5m"]
 
 [ext_resource type="Script" uid="uid://bq0ols1mg17p8" path="res://shop/shop.gd" id="1_sd7uk"]
 [ext_resource type="Resource" uid="uid://d3l42d8csm8w0" path="res://heroes/resources/Rare/flaminosaur/flaminosaur.tres" id="3_orod7"]
@@ -9,9 +9,12 @@
 [ext_resource type="Resource" uid="uid://dwkg5ckxoo20t" path="res://items/testitem1.tres" id="6_bv5vx"]
 [ext_resource type="Resource" uid="uid://cqm08ja3ptyyc" path="res://heroes/resources/Uncommon/sneaky_rat/sneakyrat.tres" id="6_orod7"]
 [ext_resource type="Resource" uid="uid://crvwxum2jiasx" path="res://items/testitem2.tres" id="7_mmyc1"]
+[ext_resource type="Script" uid="uid://2dtwwmb36wip" path="res://effects/effect/effect.gd" id="7_y5wjr"]
 [ext_resource type="Script" uid="uid://cruwimt38nwr7" path="res://shop/weighted_random_list.gd" id="8_orod7"]
-[ext_resource type="Resource" uid="uid://bb5vk5cjocn75" path="res://heroes/resources/Common/cockatrice/cockatrice.tres" id="8_w4ohc"]
+[ext_resource type="Script" uid="uid://fcr77u101a5h" path="res://effects/damage_effect/damage_effect.gd" id="8_wxm6m"]
+[ext_resource type="Script" uid="uid://d142wudbd8l8" path="res://items/components/item_data.gd" id="9_543nj"]
 [ext_resource type="Resource" uid="uid://c7dbthjpc70vy" path="res://heroes/resources/Common/fox_cat/fox_cat.tres" id="9_y5wjr"]
+[ext_resource type="Texture2D" uid="uid://cwsapc13wiy5c" path="res://heroes/resources/Common/cockatrice/chicken.png" id="10_bw3qq"]
 [ext_resource type="Resource" uid="uid://dfmclsjupq0xu" path="res://heroes/resources/Common/Llama/llama.tres" id="10_wxm6m"]
 [ext_resource type="Resource" uid="uid://dabx83soglwev" path="res://heroes/resources/Common/void_jelly/void_jelly.tres" id="12_bw3qq"]
 [ext_resource type="Texture2D" uid="uid://7366032lwnci" path="res://shop/coin.png" id="12_cd0xb"]
@@ -29,6 +32,30 @@
 [ext_resource type="Resource" uid="uid://b4p6k7tx3d6kb" path="res://heroes/resources/Uncommon/turtle/turtle.tres" id="23_u3766"]
 [ext_resource type="Resource" uid="uid://dowcow3idr6uh" path="res://heroes/resources/Uncommon/void_cat/void_cat.tres" id="24_8trpf"]
 [ext_resource type="PackedScene" uid="uid://dnypngwwxl5wt" path="res://items/apple/apple.tscn" id="29_7bca8"]
+
+[sub_resource type="Resource" id="Resource_2xqhl"]
+script = ExtResource("8_wxm6m")
+aoe_target_type = 0
+single_target_types = Array[int]([12])
+include_self = false
+damage = 1
+use_effect_owner_damage = false
+triggers = Array[int]([1])
+metadata/_custom_type_script = "uid://fcr77u101a5h"
+
+[sub_resource type="Resource" id="Resource_y5wjr"]
+resource_local_to_scene = true
+script = ExtResource("3_q4g17")
+max_hp = 2
+current_hp = 2
+damage = 1
+rarity = 0
+effects = Array[ExtResource("7_y5wjr")]([SubResource("Resource_2xqhl")])
+item_list = Array[ExtResource("9_543nj")]([])
+hero_name = "Cockatrice"
+tooltip = "Deals 1 damage to the last hero on the enemy team"
+model = ExtResource("10_bw3qq")
+metadata/_custom_type_script = "uid://be1yqgwhd7gu0"
 
 [sub_resource type="Resource" id="Resource_cd0xb"]
 script = ExtResource("5_ljlg5")
@@ -52,7 +79,7 @@ size = Vector2(220, 219)
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_sd7uk")
-hero_pool = Array[ExtResource("3_q4g17")]([ExtResource("4_orod7"), ExtResource("4_cd0xb"), ExtResource("3_orod7"), ExtResource("6_orod7"), ExtResource("8_w4ohc"), ExtResource("9_y5wjr"), ExtResource("10_wxm6m"), ExtResource("12_bw3qq"), ExtResource("13_d48m4"), ExtResource("14_xkhv5"), ExtResource("15_rtgv4"), ExtResource("16_0r6bs"), ExtResource("17_ho0xx"), ExtResource("3_orod7"), ExtResource("18_cydj4"), ExtResource("19_wdj1g"), ExtResource("20_hkfu5"), ExtResource("21_aa5xb"), ExtResource("4_orod7"), ExtResource("22_a5fgn"), ExtResource("6_orod7"), ExtResource("23_u3766"), ExtResource("24_8trpf")])
+hero_pool = Array[ExtResource("3_q4g17")]([ExtResource("4_orod7"), ExtResource("4_cd0xb"), ExtResource("3_orod7"), ExtResource("6_orod7"), SubResource("Resource_y5wjr"), ExtResource("9_y5wjr"), ExtResource("10_wxm6m"), ExtResource("12_bw3qq"), ExtResource("13_d48m4"), ExtResource("14_xkhv5"), ExtResource("15_rtgv4"), ExtResource("16_0r6bs"), ExtResource("17_ho0xx"), ExtResource("3_orod7"), ExtResource("18_cydj4"), ExtResource("19_wdj1g"), ExtResource("20_hkfu5"), ExtResource("21_aa5xb"), ExtResource("4_orod7"), ExtResource("22_a5fgn"), ExtResource("6_orod7"), ExtResource("23_u3766"), ExtResource("24_8trpf")])
 item_pool = SubResource("Resource_pafut")
 hero_offset = Vector2(400, 700)
 item_offset = Vector2(1200, 700)
@@ -239,7 +266,11 @@ text = "Burger gives
 +1 +1 
 for 2 gold"
 
+[connection signal="button_down" from="CanvasLayer/MarginContainer5/NextRoundButton" to="." method="_on_next_round_button_button_down"]
+[connection signal="button_up" from="CanvasLayer/MarginContainer5/NextRoundButton" to="." method="_on_next_round_button_button_up"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer5/NextRoundButton" to="." method="_on_next_round_button_pressed"]
+[connection signal="button_down" from="CanvasLayer/MarginContainer/RerollButton" to="." method="_on_reroll_button_button_down"]
+[connection signal="button_up" from="CanvasLayer/MarginContainer/RerollButton" to="." method="_on_reroll_button_button_up"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/RerollButton" to="." method="_on_reroll_button_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer/SellPortal/SellPortalArea" to="." method="_on_sell_portal_area_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/SellPortal/SellPortalArea" to="." method="_on_sell_portal_area_mouse_exited"]
