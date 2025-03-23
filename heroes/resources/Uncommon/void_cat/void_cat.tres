@@ -18,9 +18,9 @@ metadata/_custom_type_script = "uid://dwsiqp6snmngd"
 
 [resource]
 script = ExtResource("5_bgw87")
-max_hp = 5
-current_hp = 5
-damage = 5
+max_hp = 2
+current_hp = 2
+damage = 4
 rarity = 1
 effects = Array[ExtResource("1_d3brf")]([SubResource("Resource_mpvjl")])
 item_list = Array[ExtResource("3_068lv")]([])

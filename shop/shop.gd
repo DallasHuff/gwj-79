@@ -165,7 +165,7 @@ func _on_item_dropped(item: CabbageItem, starting_position: Vector2) -> void:
 			var hero: Hero = player_party.hero_list[buy_spots[key]]
 			if is_instance_valid(hero):
 				print("hero: ", hero.name)
-				hero.get_buffed(1, 1)
+				hero.eat_item(1, 1)
 				_update_money(-2)
 				item.global_position = starting_position
 				return

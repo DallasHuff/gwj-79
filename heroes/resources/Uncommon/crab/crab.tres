@@ -11,7 +11,7 @@ script = ExtResource("2_h0p16")
 aoe_target_type = 1
 single_target_types = Array[int]([])
 include_self = false
-heal = 4
+heal = 2
 use_effect_owner_damage_as_heal = false
 use_effect_owner_current_health_as_heal = false
 use_effect_owner_max_health_as_heal = false
@@ -20,13 +20,13 @@ metadata/_custom_type_script = "uid://exkip3sg0x71"
 
 [resource]
 script = ExtResource("3_h0p16")
-max_hp = 3
-current_hp = 3
-damage = 4
+max_hp = 4
+current_hp = 4
+damage = 2
 rarity = 1
 effects = Array[ExtResource("1_le7w3")]([SubResource("Resource_gexmf")])
 item_list = Array[ExtResource("2_sbilm")]([])
 hero_name = "Martyr Crab"
-tooltip = "Once defeated, restore 4 health to all heroes."
+tooltip = "Once defeated, restore 2 health to all heroes."
 model = ExtResource("4_bqdar")
 metadata/_custom_type_script = "uid://be1yqgwhd7gu0"

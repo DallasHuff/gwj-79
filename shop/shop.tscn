@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://06xr0ip26ljd"]
+[gd_scene load_steps=34 format=3 uid="uid://dqnftk7w55l5m"]
 
 [ext_resource type="Script" uid="uid://bq0ols1mg17p8" path="res://shop/shop.gd" id="1_sd7uk"]
 [ext_resource type="Resource" uid="uid://d3l42d8csm8w0" path="res://heroes/resources/Rare/flaminosaur/flaminosaur.tres" id="3_orod7"]
@@ -10,9 +10,25 @@
 [ext_resource type="Resource" uid="uid://cqm08ja3ptyyc" path="res://heroes/resources/Uncommon/sneaky_rat/sneakyrat.tres" id="6_orod7"]
 [ext_resource type="Resource" uid="uid://crvwxum2jiasx" path="res://items/testitem2.tres" id="7_mmyc1"]
 [ext_resource type="Script" uid="uid://cruwimt38nwr7" path="res://shop/weighted_random_list.gd" id="8_orod7"]
+[ext_resource type="Resource" uid="uid://bb5vk5cjocn75" path="res://heroes/resources/Common/cockatrice/cockatrice.tres" id="8_w4ohc"]
+[ext_resource type="Resource" uid="uid://c7dbthjpc70vy" path="res://heroes/resources/Common/fox_cat/fox_cat.tres" id="9_y5wjr"]
+[ext_resource type="Resource" uid="uid://dfmclsjupq0xu" path="res://heroes/resources/Common/Llama/llama.tres" id="10_wxm6m"]
+[ext_resource type="Resource" uid="uid://dabx83soglwev" path="res://heroes/resources/Common/void_jelly/void_jelly.tres" id="12_bw3qq"]
 [ext_resource type="Texture2D" uid="uid://7366032lwnci" path="res://shop/coin.png" id="12_cd0xb"]
 [ext_resource type="PackedScene" uid="uid://5d2tgixtskiy" path="res://combat/hero_line/hero_line.tscn" id="12_orod7"]
-[ext_resource type="PackedScene" uid="uid://dnypngwwxl5wt" path="res://items/apple/apple.tscn" id="13_cd0xb"]
+[ext_resource type="Resource" uid="uid://b8q7kehli42mv" path="res://heroes/resources/Legendary/griffin/griffin.tres" id="13_d48m4"]
+[ext_resource type="Resource" uid="uid://d38tcuf3fdutc" path="res://heroes/resources/Legendary/alien_hound/alien_hound.tres" id="14_xkhv5"]
+[ext_resource type="Resource" uid="uid://d3g6qwykldrdu" path="res://heroes/resources/Legendary/vulpin/vulpin.tres" id="15_rtgv4"]
+[ext_resource type="Resource" uid="uid://chs85ig07i25n" path="res://heroes/resources/Legendary/winged_serpent/winged_serpent.tres" id="16_0r6bs"]
+[ext_resource type="Resource" uid="uid://c2yw8lbpo5g78" path="res://heroes/resources/Rare/3_hydra/hydra.tres" id="17_ho0xx"]
+[ext_resource type="Resource" uid="uid://dq7mae38pex25" path="res://heroes/resources/Rare/hermit_crab/hermit_crab.tres" id="18_cydj4"]
+[ext_resource type="Resource" uid="uid://1b3yk5e86wer" path="res://heroes/resources/Rare/long_neck/long_neck.tres" id="19_wdj1g"]
+[ext_resource type="Resource" uid="uid://b0q0e28c4fdsw" path="res://heroes/resources/Rare/otterocious/otterocious.tres" id="20_hkfu5"]
+[ext_resource type="Resource" uid="uid://bws0hye01iju" path="res://heroes/resources/Rare/void_hawk/void_hawk.tres" id="21_aa5xb"]
+[ext_resource type="Resource" uid="uid://bca4fi4qvie8d" path="res://heroes/resources/Uncommon/lava_snail/lava_snail.tres" id="22_a5fgn"]
+[ext_resource type="Resource" uid="uid://b4p6k7tx3d6kb" path="res://heroes/resources/Uncommon/turtle/turtle.tres" id="23_u3766"]
+[ext_resource type="Resource" uid="uid://dowcow3idr6uh" path="res://heroes/resources/Uncommon/void_cat/void_cat.tres" id="24_8trpf"]
+[ext_resource type="PackedScene" uid="uid://dnypngwwxl5wt" path="res://items/apple/apple.tscn" id="29_7bca8"]
 
 [sub_resource type="Resource" id="Resource_cd0xb"]
 script = ExtResource("5_ljlg5")
@@ -36,7 +52,7 @@ size = Vector2(220, 219)
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_sd7uk")
-hero_pool = Array[ExtResource("3_q4g17")]([ExtResource("4_orod7"), ExtResource("4_cd0xb"), ExtResource("3_orod7"), ExtResource("6_orod7")])
+hero_pool = Array[ExtResource("3_q4g17")]([ExtResource("4_orod7"), ExtResource("4_cd0xb"), ExtResource("3_orod7"), ExtResource("6_orod7"), ExtResource("8_w4ohc"), ExtResource("9_y5wjr"), ExtResource("10_wxm6m"), ExtResource("12_bw3qq"), ExtResource("13_d48m4"), ExtResource("14_xkhv5"), ExtResource("15_rtgv4"), ExtResource("16_0r6bs"), ExtResource("17_ho0xx"), ExtResource("3_orod7"), ExtResource("18_cydj4"), ExtResource("19_wdj1g"), ExtResource("20_hkfu5"), ExtResource("21_aa5xb"), ExtResource("4_orod7"), ExtResource("22_a5fgn"), ExtResource("6_orod7"), ExtResource("23_u3766"), ExtResource("24_8trpf")])
 item_pool = SubResource("Resource_pafut")
 hero_offset = Vector2(400, 700)
 item_offset = Vector2(1200, 700)
@@ -209,9 +225,9 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 position = Vector2(1300, 205)
 
-[node name="Burger" parent="." instance=ExtResource("13_cd0xb")]
+[node name="Burger" parent="." instance=ExtResource("29_7bca8")]
 unique_name_in_owner = true
-position = Vector2(1365, 735)
+position = Vector2(1376, 716)
 
 [node name="Label" type="Label" parent="."]
 offset_left = 1300.0
