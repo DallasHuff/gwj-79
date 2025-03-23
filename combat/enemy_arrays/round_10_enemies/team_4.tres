@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HeroArray" load_steps=7 format=3 uid="uid://c0eav6i80q3jn"]
+
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="1_etgnl"]
+[ext_resource type="Resource" uid="uid://dabx83soglwev" path="res://heroes/resources/Common/void_jelly/void_jelly.tres" id="2_7g334"]
+[ext_resource type="Resource" uid="uid://d3g6qwykldrdu" path="res://heroes/resources/Legendary/vulpin/vulpin.tres" id="3_etgnl"]
+[ext_resource type="Resource" uid="uid://b0q0e28c4fdsw" path="res://heroes/resources/Rare/otterocious/otterocious.tres" id="4_rhn2s"]
+[ext_resource type="Resource" uid="uid://b8q7kehli42mv" path="res://heroes/resources/Legendary/griffin/griffin.tres" id="4_tdfa1"]
+[ext_resource type="Script" uid="uid://cq5o6kamx720a" path="res://combat/hero_array.gd" id="7_iw2ut"]
+
+[resource]
+script = ExtResource("7_iw2ut")
+heroes = Array[ExtResource("1_etgnl")]([ExtResource("2_7g334"), ExtResource("3_etgnl"), ExtResource("4_tdfa1"), ExtResource("4_rhn2s"), ExtResource("4_rhn2s")])
+metadata/_custom_type_script = "uid://cq5o6kamx720a"

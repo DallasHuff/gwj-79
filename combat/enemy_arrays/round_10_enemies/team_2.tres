@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HeroArray" load_steps=7 format=3 uid="uid://r2bcmw57e83x"]
+
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="1_1fn7h"]
+[ext_resource type="Resource" uid="uid://c2yw8lbpo5g78" path="res://heroes/resources/Rare/3_hydra/hydra.tres" id="2_aen5w"]
+[ext_resource type="Script" uid="uid://cq5o6kamx720a" path="res://combat/hero_array.gd" id="3_8swnh"]
+[ext_resource type="Resource" uid="uid://d38tcuf3fdutc" path="res://heroes/resources/Legendary/alien_hound/alien_hound.tres" id="3_bfwt1"]
+[ext_resource type="Resource" uid="uid://fx7v6wjp0co4" path="res://heroes/resources/Common/frog/frog.tres" id="4_lxlu8"]
+[ext_resource type="Resource" uid="uid://dq7mae38pex25" path="res://heroes/resources/Rare/hermit_crab/hermit_crab.tres" id="5_ryf8g"]
+
+[resource]
+script = ExtResource("3_8swnh")
+heroes = Array[ExtResource("1_1fn7h")]([ExtResource("2_aen5w"), ExtResource("3_bfwt1"), ExtResource("4_lxlu8"), ExtResource("3_bfwt1"), ExtResource("5_ryf8g")])
+metadata/_custom_type_script = "uid://cq5o6kamx720a"

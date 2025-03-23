@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HeroArray" load_steps=8 format=3 uid="uid://ih0425y4gse8"]
+
+[ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="1_l38hi"]
+[ext_resource type="Resource" uid="uid://1b3yk5e86wer" path="res://heroes/resources/Rare/long_neck/long_neck.tres" id="2_hxlqu"]
+[ext_resource type="Script" uid="uid://cq5o6kamx720a" path="res://combat/hero_array.gd" id="3_mworm"]
+[ext_resource type="Resource" uid="uid://dbbb8w85p2dlm" path="res://heroes/resources/Uncommon/crab/crab.tres" id="3_tw17s"]
+[ext_resource type="Resource" uid="uid://b0q0e28c4fdsw" path="res://heroes/resources/Rare/otterocious/otterocious.tres" id="4_h8f57"]
+[ext_resource type="Resource" uid="uid://d3l42d8csm8w0" path="res://heroes/resources/Rare/flaminosaur/flaminosaur.tres" id="5_0yui5"]
+[ext_resource type="Resource" uid="uid://chs85ig07i25n" path="res://heroes/resources/Legendary/winged_serpent/winged_serpent.tres" id="6_hv81y"]
+
+[resource]
+script = ExtResource("3_mworm")
+heroes = Array[ExtResource("1_l38hi")]([ExtResource("2_hxlqu"), ExtResource("3_tw17s"), ExtResource("4_h8f57"), ExtResource("5_0yui5"), ExtResource("6_hv81y")])
+metadata/_custom_type_script = "uid://cq5o6kamx720a"

@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="HeroArray" load_steps=6 format=3 uid="uid://bm3p3pj8neeij"]
 
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="1_iq131"]
-[ext_resource type="Resource" uid="uid://b4p6k7tx3d6kb" path="res://heroes/resources/Uncommon/turtle/turtle.tres" id="2_hunkx"]
-[ext_resource type="Resource" uid="uid://c7dbthjpc70vy" path="res://heroes/resources/Common/fox_cat/fox_cat.tres" id="3_msvw2"]
-[ext_resource type="Resource" uid="uid://dowcow3idr6uh" path="res://heroes/resources/Uncommon/void_cat/void_cat.tres" id="3_opraa"]
+[ext_resource type="Resource" uid="uid://dbbb8w85p2dlm" path="res://heroes/resources/Uncommon/crab/crab.tres" id="2_hunkx"]
+[ext_resource type="Resource" uid="uid://cqm08ja3ptyyc" path="res://heroes/resources/Uncommon/sneaky_rat/sneakyrat.tres" id="3_opraa"]
+[ext_resource type="Resource" uid="uid://dfmclsjupq0xu" path="res://heroes/resources/Common/Llama/llama.tres" id="4_vbmgv"]
 [ext_resource type="Script" uid="uid://cq5o6kamx720a" path="res://combat/hero_array.gd" id="5_lm1cc"]
 
 [resource]
 script = ExtResource("5_lm1cc")
-heroes = Array[ExtResource("1_iq131")]([ExtResource("2_hunkx"), ExtResource("3_opraa"), ExtResource("3_msvw2"), ExtResource("3_msvw2")])
+heroes = Array[ExtResource("1_iq131")]([ExtResource("2_hunkx"), ExtResource("3_opraa"), ExtResource("3_opraa"), ExtResource("4_vbmgv")])
 metadata/_custom_type_script = "uid://cq5o6kamx720a"
