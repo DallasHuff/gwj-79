@@ -14,9 +14,9 @@ metadata/_custom_type_script = "uid://xkfno6wtooml"
 
 [resource]
 script = ExtResource("3_cv6sv")
-max_hp = 20
-current_hp = 20
-damage = 20
+max_hp = 7
+current_hp = 7
+damage = 3
 rarity = 3
 effects = Array[ExtResource("1_tcice")]([SubResource("Resource_efknj")])
 item_list = Array[ExtResource("2_ie2de")]([])

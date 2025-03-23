@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HeroArray" load_steps=6 format=3 uid="uid://cidu2p0luwgfd"]
+[gd_resource type="Resource" script_class="HeroArray" load_steps=6 format=3 uid="uid://m3gx7v1l20kr"]
 
 [ext_resource type="Script" uid="uid://be1yqgwhd7gu0" path="res://heroes/components/hero_stats.gd" id="1_2m4rw"]
 [ext_resource type="Resource" uid="uid://ctik5gapejhch" path="res://heroes/resources/Common/1_hydra/single_hydra.tres" id="2_u2rua"]
