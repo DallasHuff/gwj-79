@@ -33,12 +33,12 @@ func _on_master_volume_slider_value_changed(value: float) -> void:
 
 func _on_sfx_volume_slider_value_changed(value: float) -> void:
 	Settings.sfx_volume = value
-	AudioServer.set_bus_volume_db(1, convert_percentage_to_decibels(value))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), convert_percentage_to_decibels(value))
 
 
 func _on_music_volume_slider_value_changed(value: float) -> void:
 	Settings.music_volume = value
-	AudioServer.set_bus_volume_db(2, convert_percentage_to_decibels(value))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), convert_percentage_to_decibels(value))
 
 
 func convert_percentage_to_decibels(percent: float) -> float:
